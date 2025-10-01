@@ -11,3 +11,4 @@ public class LauginProjectPlannerApplication {
 	}
 
 }
+// Min første commit, testing testing
