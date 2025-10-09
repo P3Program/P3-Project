@@ -10,5 +10,6 @@ public class LauginProjectPlannerApplication {
 		SpringApplication.run(LauginProjectPlannerApplication.class, args);
 	}
 
+
 }
 // Min første commit, testing testing
