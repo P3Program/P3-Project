@@ -137,25 +137,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function saveTasks() {
-        const tasks = [];
-        document.querySelectorAll('.task').forEach(taskElement => {
-            tasks.push({
-                title: taskElement.dataset.title,
-                name: taskElement.dataset.name,
-                date: taskElement.dataset.date,
-                caldera: taskElement.dataset.caldera,
-                warranty: taskElement.dataset.warranty,
-                ssn: taskElement.dataset.ssn,
-                phone: taskElement.dataset.phone,
-                address: taskElement.dataset.address,
-                email: taskElement.dataset.email,
-                estTime: taskElement.dataset.estTime,
-                dueDate: taskElement.dataset.dueDate,
-                desc: taskElement.dataset.desc
-            });
+    const tasks = [];
+    document.querySelectorAll('.task').forEach(taskElement => {
+        tasks.push({
+            title: taskElement.dataset.title,
+            name: taskElement.dataset.name,
+            date: taskElement.dataset.date,
+            caldera: taskElement.dataset.caldera,
+            warranty: taskElement.dataset.warranty,
+            ssn: taskElement.dataset.ssn,
+            phone: taskElement.dataset.phone,
+            address: taskElement.dataset.address,
+            email: taskElement.dataset.email,
+            estTime: taskElement.dataset.estTime,
+            dueDate: taskElement.dataset.dueDate,
+            desc: taskElement.dataset.desc,
+            container: taskElement.parentElement.id
         });
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-    }
+    });
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
 
     function loadTasks() {
         const savedTasks = localStorage.getItem('tasks');
@@ -168,17 +169,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function createTaskElement(taskData) {
-        const newTask = document.createElement('div');
-        newTask.className = 'task';
-        newTask.innerHTML = `
-            <div style="font-weight: bold;">${taskData.title}</div>
-            <div style="font-size: 0.9em;">Customer: ${taskData.name}</div>
-            <div style="font-size: 0.9em;">Date: ${taskData.date}</div>
-        `;
-    
+    const newTask = document.createElement('div');
+    newTask.className = 'task';
+    newTask.innerHTML = `
+        <div style="font-weight: bold;">${taskData.title}</div>
+        <div style="font-size: 0.9em;">Customer: ${taskData.name}</div>
+        <div style="font-size: 0.9em;">Date: ${taskData.date}</div>
+        <div style="font-size: 0.9em;">Addr: ${taskData.address}</div>
+    `;
+
         Object.assign(newTask.dataset, taskData);
         newTask.addEventListener('click', () => showTaskDetails(newTask));
-        container.appendChild(newTask);
+    
+ 
+        const targetContainer = document.getElementById(taskData.container) || document.getElementById('task-container');
+    
+        targetContainer.appendChild(newTask);
     }
 
     const editTaskBtn = document.getElementById('edit-task');
@@ -203,6 +209,30 @@ document.addEventListener('DOMContentLoaded', () => {
         formModal.style.display = 'flex';
         }
     });
+
+    const deleteTaskBtn = document.getElementById('delete-task');
+    deleteTaskBtn.addEventListener('click', () => {
+    
+    const confirmDelete = confirm("Are you sure you want to delete this task?");
+    
+        if (confirmDelete && currentTaskElement) {
+            currentTaskElement.remove();
+            saveTasks();
+            document.getElementById('task-detail-modal').style.display = 'none';
+            console.log("Task deleted");
+        }
+    });
+
+    const moveToReviewBtn = document.getElementById('move-to-review');
+    moveToReviewBtn.addEventListener('click', () => {
+        if (currentTaskElement) {
+            const reviewContainer = document.getElementById('review-container');
+            reviewContainer.appendChild(currentTaskElement);
+        
+            saveTasks();
+            document.getElementById('task-detail-modal').style.display = 'none';
+        }
+});
 
 
 });
