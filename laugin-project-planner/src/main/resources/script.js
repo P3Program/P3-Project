@@ -20,25 +20,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
   
     submitTaskBtn.addEventListener('click', () => {
-     
-        const title = document.getElementById('task-title').value.trim();
-        const name = document.getElementById('task-name').value.trim();
-        const date = document.getElementById('task-date').value;
-        const caldera = document.getElementById('task-caldera').value;
-        const warranty = document.getElementById('task-warranty').value;
-        const ssn = document.getElementById('task-ssn').value.trim();
-        const phone = document.getElementById('task-phone').value.trim();
-        const address = document.getElementById('task-address').value.trim();
-        const email = document.getElementById('task-email').value.trim();
-        const estTime = document.getElementById('task-est-time').value.trim();
-        const dueDate = document.getElementById('task-due-date').value;
-        const desc = document.getElementById('task-desc').value.trim();
+    const title = document.getElementById('task-title').value.trim();
+    const name = document.getElementById('task-name').value.trim();
+    const date = document.getElementById('task-date').value;
+    const caldera = document.getElementById('task-caldera').value;
+    const warranty = document.getElementById('task-warranty').value;
+    const ssn = document.getElementById('task-ssn').value.trim();
+    const phone = document.getElementById('task-phone').value.trim();
+    const address = document.getElementById('task-address').value.trim();
+    const email = document.getElementById('task-email').value.trim();
+    const estTime = document.getElementById('task-est-time').value.trim();
+    const dueDate = document.getElementById('task-due-date').value;
+    const desc = document.getElementById('task-desc').value.trim();
 
-        if (!title) {
-            alert("Task title is required");
-            return;
-        }
+    if (!title) {
+        alert("Task title is required");
+        return;
+    }
 
+   
+    if (submitTaskBtn.dataset.editMode === 'true' && currentTaskElement) {
+        currentTaskElement.innerHTML = `
+            <div style="font-weight: bold;">${title}</div>
+            <div style="font-size: 0.9em;">Customer: ${name}</div>
+            <div style="font-size: 0.9em;">Created: ${date}</div>
+            <div style="font-size: 0.9em;">Addr: ${address}</div>
+        `;
+        
+        currentTaskElement.dataset.title = title;
+        currentTaskElement.dataset.name = name;
+        currentTaskElement.dataset.date = date;
+        currentTaskElement.dataset.caldera = caldera;
+        currentTaskElement.dataset.warranty = warranty;
+        currentTaskElement.dataset.ssn = ssn;
+        currentTaskElement.dataset.phone = phone;
+        currentTaskElement.dataset.address = address;
+        currentTaskElement.dataset.email = email;
+        currentTaskElement.dataset.estTime = estTime;
+        currentTaskElement.dataset.dueDate = dueDate;
+        currentTaskElement.dataset.desc = desc;
+        
+        submitTaskBtn.dataset.editMode = 'false';
+        currentTaskElement = null;
+    } else {
+        
         const newTask = document.createElement('div');
         newTask.className = 'task';
         newTask.innerHTML = `
@@ -48,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <div style="font-size: 0.9em;">Addr: ${address}</div>
         `;
         
-       
         newTask.dataset.title = title;
         newTask.dataset.name = name;
         newTask.dataset.date = date;
@@ -66,26 +90,25 @@ document.addEventListener('DOMContentLoaded', () => {
             showTaskDetails(newTask);
         });
 
-       
         container.appendChild(newTask);
-        saveTasks();
+    }
 
-        
-        document.getElementById('task-title').value = '';
-        document.getElementById('task-name').value = '';
-        document.getElementById('task-date').value = '';
-        document.getElementById('task-caldera').value = 'yes';
-        document.getElementById('task-warranty').value = 'yes';
-        document.getElementById('task-ssn').value = '';
-        document.getElementById('task-phone').value = '';
-        document.getElementById('task-address').value = '';
-        document.getElementById('task-email').value = '';
-        document.getElementById('task-est-time').value = '';
-        document.getElementById('task-due-date').value = '';
-        document.getElementById('task-desc').value = '';
+    document.getElementById('task-title').value = '';
+    document.getElementById('task-name').value = '';
+    document.getElementById('task-date').value = '';
+    document.getElementById('task-caldera').value = 'yes';
+    document.getElementById('task-warranty').value = 'yes';
+    document.getElementById('task-ssn').value = '';
+    document.getElementById('task-phone').value = '';
+    document.getElementById('task-address').value = '';
+    document.getElementById('task-email').value = '';
+    document.getElementById('task-est-time').value = '';
+    document.getElementById('task-due-date').value = '';
+    document.getElementById('task-desc').value = '';
 
-        formModal.style.display = 'none';
-    });
+    saveTasks();
+    formModal.style.display = 'none';
+});
 
 
     function showTaskDetails(taskElement) {
@@ -173,11 +196,13 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('task-est-time').value = currentTaskElement.dataset.estTime;
             document.getElementById('task-due-date').value = currentTaskElement.dataset.dueDate;
             document.getElementById('task-desc').value = currentTaskElement.dataset.desc;
-            
-            document.getElementById('task-detail-modal').style.display = 'none';
-            formModal.style.display = 'flex';
-            
-            currentTaskElement.remove();
+        
+        submitTaskBtn.dataset.editMode = 'true';
+        
+        document.getElementById('task-detail-modal').style.display = 'none';
+        formModal.style.display = 'flex';
         }
     });
+
+
 });
