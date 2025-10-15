@@ -3,6 +3,8 @@ package com.p3program.laugin_project_planner.projects;
 import jakarta.persistence.*;
 import jakarta.persistence.Column;
 
+import java.sql.Date;
+
 
 @Entity
 @Table(name = "projects_test")
@@ -13,21 +15,59 @@ public class Project {
     private long id;
 
     @Column(length = 45)
+    private String title;
+
+    @Column(length = 45)
     private String name;
+
+    @Column
+    private java.sql.Date date;
+
+    @Column
+    private boolean caldera;
+
+    @Column
+    private boolean warranty;
+
+    @Column
+    private String ssn;
+
+    @Column
+    private String phoneNum;
 
     @Column(length = 45)
     private String address;
 
-    @Column(length = 16)
-    private String phoneNum;
+    @Column
+    private String email;
 
-    public Project(){}
+    @Column
+    private int hours;
 
-    public Project(long id, String name, String address, String phoneNum) {
+    @Column
+    private Date estDueDate;
+
+    @Column
+    private String description;
+
+    public Project() {
+    }
+
+
+    public Project(long id, String title, String name, Date date, boolean caldera, boolean warranty, String ssn, String phoneNum, String address, String email, int hours, Date estDueDate, String description) {
         this.id = id;
+        this.title = title;
         this.name = name;
-        this.address = address;
+        this.date = date;
+        this.caldera = caldera;
+        this.warranty = warranty;
+        this.ssn = ssn;
         this.phoneNum = phoneNum;
+        this.address = address;
+        this.email = email;
+        this.hours = hours;
+        this.estDueDate = estDueDate;
+        this.description = description;
     }
 
     public long getId() {
@@ -38,12 +78,60 @@ public class Project {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public boolean isCaldera() {
+        return caldera;
+    }
+
+    public void setCaldera(boolean caldera) {
+        this.caldera = caldera;
+    }
+
+    public boolean isWarranty() {
+        return warranty;
+    }
+
+    public void setWarranty(boolean warranty) {
+        this.warranty = warranty;
+    }
+
+    public String getSsn() {
+        return ssn;
+    }
+
+    public void setSsn(String ssn) {
+        this.ssn = ssn;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
 
     public String getAddress() {
@@ -54,11 +142,35 @@ public class Project {
         this.address = address;
     }
 
-    public String getPhoneNum() {
-        return phoneNum;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public void setHours(int hours) {
+        this.hours = hours;
+    }
+
+    public Date getEstDueDate() {
+        return estDueDate;
+    }
+
+    public void setEstDueDate(Date estDueDate) {
+        this.estDueDate = estDueDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

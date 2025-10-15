@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Laugin</title>
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+</head>
+<body>
+<nav class="navbar">
+    <h1 class="logo">LAUGIN</h1>
+    <ul>
+        <li><a href="projects.html">Dashboard</a></li>
+        <li><a href="">Team</a></li>
+        <li><a href="">Data</a></li>
+        <li><a href="">KPI</a></li>
+    </ul>
+</nav>
+
+<div class="status"></div>
+
+<div class="container-wrapper">
+    <div class="container-column">
+        <h2> All tasks </h2>
+        <div id="task-container" class="container"></div>
+        <button id="addtask" class="addtask">ADD TASK</button>
+    </div>
+
+    <div class="container-column">
+        <h2> Needs review </h2>
+        <div id="review-container" class="container"></div>
+    </div>
+
+    <div class="container-column">
+        <h2> In progress </h2>
+        <div id="progress-container" class="container"></div>
+    </div>
+
+    <div class="container-column">
+        <h2> Needs billing </h2>
+        <div id="billing-container" class="container"></div>
+    </div>
+</div>
+
+<div id="task-form-modal" class="modal" style="display: none;">
+    <form th:action="@{/projects/save}" th:object="${project}" method="post">
+
+        <div class="modal-content">
+            <h2>Create Task</h2>
+            <label>Task Title:</label>
+            <input type="text" th:field="*{title}"
+                   placeholder="Short title for the project"
+                   required />
+
+            <label>Name:</label>
+            <input type="text" th:field="*{name}"
+                   placeholder="Name of Customer"
+                   required />
+
+            <label>Date (Creation):</label>
+            <input type="date" th:field="*{date}" required />
+
+            <label>Caldera:</label>
+            <select class="form-control" th:field="*{caldera}">
+                <option th:value="0">No</option>
+                <option th:value="1">yes</option>
+            </select>
+
+            <label>If Caldera, Warranty:</label>
+            <select class="form-control" th:field="*{warranty}">
+                <option th:value="0">No</option>
+                <option th:value="1">yes</option>
+            </select>
+
+            <label>Social Security Number:</label>
+            <input type="text" th:field="*{ssn}"
+                   placeholder="dd/mm/yy/serial number"
+                   oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                   maxlength="10"
+                   minlength="10"
+                   required />
+
+            <label>Phone Number:</label>
+            <input type="text" th:field="*{phoneNum}"
+                   placeholder="Phone number on customer"
+                   oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                   maxlength="7"
+                   minlength="7"
+                   required />
+
+            <label>Address:</label>
+            <input type="text" th:field="*{address}"
+            required />
+
+            <label>Email:</label>
+            <input type="email" th:field="*{email}"
+                   required />
+
+            <label>Estimated Time In Hours:</label>
+            <input type="number" th:field="*{hours}"
+                   required />
+
+            <label>To be done by:</label>
+            <input type="date" th:field="*{estDueDate}" required />
+
+            <label>Description of the problem:</label>
+            <textarea id="task-desc" th:field="*{description}"
+                      rows="5"
+                      placeholder="Describe the project"
+                      required>
+            </textarea>
+
+            <button type="submit" id="submit-task">Create Task</button>
+            <button id="close-form">Cancel</button>
+    </form>
+</div>
+
+<div id="task-detail-modal" class="modal" style="display: none;">
+
+    <div class="modal-content">
+        <h2>Task Details</h2>
+        <p><strong>Task Title:</strong> <span id="detail-title"></span></p>
+        <p><strong>Name:</strong> <span id="detail-name"></span></p>
+        <p><strong>Date Created:</strong> <span id="detail-date"></span></p>
+        <p><strong>Caldera:</strong> <span id="detail-caldera"></span></p>
+        <p><strong>Warranty:</strong> <span id="detail-warranty"></span></p>
+        <p><strong>Social Security Number:</strong> <span id="detail-ssn"></span></p>
+        <p><strong>Phone Number:</strong> <span id="detail-phone"></span></p>
+        <p><strong>Address:</strong> <span id="detail-address"></span></p>
+        <p><strong>Email:</strong> <span id="detail-email"></span></p>
+        <p><strong>Estimated Time:</strong> <span id="detail-est-time"></span></p>
+        <p><strong>Due Date:</strong> <span id="detail-due-date"></span></p>
+        <p><strong>Description:</strong> <span id="detail-desc"></span></p>
+
+        <button id="close-detail">Close</button>
+        <button id="edit-task">Edit</button>
+        <button id="delete-task">Delete</button>
+        <button id="move-to-review">Move to Review</button>
+    </div>
+</div>
+
+<script th:src="@{/scripts/script.js}"></script>
+</body>
+</html>
