@@ -232,7 +232,29 @@ document.addEventListener('DOMContentLoaded', () => {
             saveTasks();
             document.getElementById('task-detail-modal').style.display = 'none';
         }
-});
+    });
+
+    const moveToProgressBtn = document.getElementById('move-to-in-progress');
+    moveToProgressBtn.addEventListener('click', () => {
+        if (currentTaskElement) {
+            const reviewContainer = document.getElementById('progress-container');
+            reviewContainer.appendChild(currentTaskElement);
+        
+            saveTasks();
+            document.getElementById('task-detail-modal').style.display = 'none';
+        }
+    });
+
+    const moveToBillingBtn = document.getElementById('move-to-billing');
+    moveToBillingBtn.addEventListener('click', () => {
+        if (currentTaskElement) {
+            const reviewContainer = document.getElementById('billing-container');
+            reviewContainer.appendChild(currentTaskElement);
+        
+            saveTasks();
+            document.getElementById('task-detail-modal').style.display = 'none';
+        }
+    });
 
 
 });

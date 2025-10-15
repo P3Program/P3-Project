@@ -1,178 +1,299 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-    margin: 0;
-    background-color: #fff;
-    font-family: sans-serif;
+  margin: 0;
+  background-color: #fff;
+  font-family: sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .navbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #144A96;
-    padding: 30px 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #144A96;
+  padding: 30px 60px;
+  position: relative;
+  flex-shrink: 0;
 }
 
 .logo {
-    position: absolute;
-    left: 100px;
-    color: white;
-    margin: 0;
-    font-size: xx-large;
+  position: absolute;
+  left: 60px;
+  color: white;
+  margin: 0;
+  font-size: 2rem;
 }
 
 .navbar ul {
-    list-style: none;
-    display: flex;
-    gap: 120px;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 120px;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: x-large;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+  transition: color 0.3s;
 }
 
 .navbar a:hover {
-    color: #00bfff;
+  color: #00bfff;
 }
 
 .container-wrapper {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    padding: 40px 60px;
-    gap: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 60px;
+  gap: 30px;
+  flex: 1;
+  max-width: 1920px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .container-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  max-width: 350px;
+  min-width: 280px;
+}
+
+.column-header {
+  width: 100%;
+  background: linear-gradient(135deg, #144A96 0%, #1a5bb8 100%);
+  color: white;
+  text-align: center;
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 6px rgba(20, 74, 150, 0.3);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.column-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.column-header:hover::before {
+  left: 100%;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 300px;
-    height: 700px;
-    background-color: lightblue;
-    border-radius: 10px;
-    padding: 15px;
-    overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  height: calc(100vh - 340px);
+  min-height: 450px;
+  background-color: lightblue;
+  border-radius: 10px;
+  padding: 15px;
+  overflow-y: auto;
 }
 
 .task {
-    height: auto;
-    width: 100%;
-    background-color: #144A96;
-    color: white;
-    padding: 15px;
-    border-radius: 5px;
-    display: block;
-    flex-shrink: 0;
-    cursor: pointer;
-    box-sizing: border-box;
+  height: auto;
+  width: 100%;
+  background-color: #144A96;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  display: block;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .task:hover {
-    background-color: #1a5bb8;
+  background-color: #1a5bb8;
 }
 
 #addtask {
-    margin-top: 15px;
-    background-color: #00bfff;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: x-large;
-    border: none;
-    cursor: pointer;
+  margin-top: 15px;
+  background-color: #00bfff;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1.25rem;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
 }
 
 #addtask:hover {
-    background-color: #009fcc;
+  background-color: #009fcc;
 }
 
 .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 101;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 101;
 }
 
 .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 500px;
-    width: 90%;
-    max-height: 90%;
-    overflow-y: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
 }
 
 .modal-content h2 {
-    margin-top: 0;
+  margin-top: 0;
+  color: #144A96;
 }
 
 .modal-content label {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
 }
 
 .modal-content input,
 .modal-content select,
 .modal-content textarea {
-    width: 100%;
-    margin-top: 5px;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+  width: 100%;
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: sans-serif;
+}
+
+.modal-content textarea {
+  resize: vertical;
 }
 
 .modal-content button {
-    margin-top: 15px;
-    margin-right: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
+  margin-top: 15px;
+  margin-right: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: opacity 0.3s;
+}
+
+.modal-content button:hover {
+  opacity: 0.9;
 }
 
 #submit-task {
-    background-color: #144A96;
-    color: white;
+  background-color: #144A96;
+  color: white;
 }
 
 #close-form,
 #close-detail {
-    background-color: #ccc;
+  background-color: #ccc;
 }
 
 #edit-task {
-    background-color: #00bfff;
-    color: white;
+  background-color: #00bfff;
+  color: white;
 }
 
 #delete-task {
-    background-color: #ff4444;
-    color: white;
+  background-color: #ff4444;
+  color: white;
 }
 
 #move-to-review {
+  background-color: #28a745;
+  color: white;
+}
+
+#move-to-in-progress{
     background-color: #28a745;
     color: white;
+}
+
+#move-to-billing{
+    background-color: #28a745;
+    color: white;
+}
+
+/* DO NOT CHANGE IT CONTOLS THE SIZE*/
+@media (max-width: 1600px) {
+  .navbar ul {
+    gap: 80px;
+  }
+  
+  .container-wrapper {
+    gap: 20px;
+    padding: 30px 40px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .navbar ul {
+    gap: 60px;
+  }
+  
+  .navbar a {
+    font-size: 1.25rem;
+  }
+  
+  .container-column {
+    max-width: 300px;
+    min-width: 250px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .logo {
+    left: 40px;
+    font-size: 1.5rem;
+  }
+  
+  .navbar ul {
+    gap: 40px;
+  }
+  
+  .navbar a {
+    font-size: 1.1rem;
+  }
+  
+  .container-wrapper {
+    padding: 20px 30px;
+  }
 }
