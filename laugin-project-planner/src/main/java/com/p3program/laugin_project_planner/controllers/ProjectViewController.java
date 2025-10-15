@@ -20,6 +20,8 @@ public class ProjectViewController {
     @GetMapping("/")
     public String viewProjects(Model model) {
         model.addAttribute("projects", projectService.getAllProjects());
+        model.addAttribute("project", new Project());
+
         return "projects";
     }
 

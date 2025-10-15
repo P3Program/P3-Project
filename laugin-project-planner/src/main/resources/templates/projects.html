@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Laugin</title>
-    <link rel="stylesheet" th:href="@{/styles/styles/style.css}">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
 </head>
 <body>
 <nav class="navbar">
@@ -56,11 +56,11 @@
             <input type="date" th:field="*{date}" required /> -
 
             <label>Caldera:</label>
-            <select class="form-control" th:field="*{caldera}">
+            <!-- <select class="form-control" th:field="*{caldera}">
                 <option th:field="no">false</option>
                 <option th:field="yes">false</option>
                 <option th:field="no">true</option>
-            </select>
+            </select> -->
 
             <label>If Caldera, Warranty:</label>
             <select id="task-warranty">
