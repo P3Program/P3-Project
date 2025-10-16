@@ -155,7 +155,14 @@ body {
 }
 
 #addtask:hover {
-    background-color: #009fcc;
+    background: linear-gradient(135deg, #009fcc 0%, #0088bb 100%);
+    box-shadow: 0 6px 10px rgba(0, 191, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+#addtask:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 191, 255, 0.3);
 }
 
 .modal {
