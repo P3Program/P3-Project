@@ -96,7 +96,7 @@ body {
     flex-direction: column;
     gap: 10px;
     width: 300px;
-    height: 700px;
+    height: calc(100vh - 280px); /* Dynamic height based on viewport */
     background-color: lightblue;
     border-radius: 10px;
     padding: 15px;
