@@ -1,0 +1,8 @@
+body {
+    margin: 0;
+    background-color: #fff;
+    font-family: sans-serif;
+    padding-right: 0;
+    height: 100vh;
+    overflow-x: hidden;
+}
