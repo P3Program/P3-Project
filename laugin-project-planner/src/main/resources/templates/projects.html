@@ -21,7 +21,16 @@
 <div class="container-wrapper">
     <div class="container-column">
         <div class="column-header">All Tasks</div>
-        <div id="task-container" class="container"></div>
+        <div id="task-container" class="container">
+            <div th:each="project : ${projects}"
+                 th:if="${project.status == 'allProjects'}"
+                 class="project-box">
+                <h3 th:text="${project.title}">Task Title</h3>
+                <p><strong>Customer:</strong> <span th:text="${project.name}">Name</span></p>
+                <p><strong>Phone:</strong> <span th:text="${project.phoneNum}">Phone</span></p>
+                <p><strong>Due:</strong> <span th:text="${project.estDueDate}">Date</span></p>
+            </div>
+        </div>
         <button id="addtask" class="addtask">ADD TASK</button>
     </div>
 
@@ -108,7 +117,8 @@
                       placeholder="Describe the project"
                       required>
             </textarea>
-
+            <!-- New tasks are in "All Tasks" column -->
+            <input type="hidden" th:field="*{status}" value="allProjects" />
             <button type="submit" id="submit-task">Create Task</button>
             <button id="close-form">Cancel</button>
         </div>

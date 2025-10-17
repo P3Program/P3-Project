@@ -50,11 +50,18 @@ public class Project {
     @Column
     private String description;
 
+    @Column
+    private String status;
+
     public Project() {
+        // Make sure the default status value is allProjects
+        if (this.status == null) {
+            this.status = "allProjects";
+        }
     }
 
 
-    public Project(long id, String title, String name, Date date, boolean caldera, boolean warranty, String ssn, String phoneNum, String address, String email, int hours, Date estDueDate, String description) {
+    public Project(long id, String title, String name, Date date, boolean caldera, boolean warranty, String ssn, String phoneNum, String address, String email, int hours, Date estDueDate, String description, String status) {
         this.id = id;
         this.title = title;
         this.name = name;
@@ -68,8 +75,10 @@ public class Project {
         this.hours = hours;
         this.estDueDate = estDueDate;
         this.description = description;
+        this.status = status;
     }
 
+    //Getters and setter for the values in our DB
     public long getId() {
         return id;
     }
@@ -172,5 +181,12 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
