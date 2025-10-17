@@ -48,6 +48,9 @@ public class Project {
     private Date estDueDate;
 
     @Column
+    private String priority;
+
+    @Column
     private String description;
 
     @Column
@@ -61,7 +64,7 @@ public class Project {
     }
 
 
-    public Project(long id, String title, String name, Date date, boolean caldera, boolean warranty, String ssn, String phoneNum, String address, String email, int hours, Date estDueDate, String description, String status) {
+    public Project(long id, String title, String name, Date date, boolean caldera, boolean warranty, String ssn, String phoneNum, String address, String email, int hours, Date estDueDate, String priority, String description, String status) {
         this.id = id;
         this.title = title;
         this.name = name;
@@ -74,11 +77,11 @@ public class Project {
         this.email = email;
         this.hours = hours;
         this.estDueDate = estDueDate;
+        this.priority = priority;
         this.description = description;
         this.status = status;
     }
 
-    //Getters and setter for the values in our DB
     public long getId() {
         return id;
     }
@@ -175,6 +178,14 @@ public class Project {
         this.estDueDate = estDueDate;
     }
 
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -182,6 +193,7 @@ public class Project {
     public void setDescription(String description) {
         this.description = description;
     }
+
     public String getStatus() {
         return status;
     }

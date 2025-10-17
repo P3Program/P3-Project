@@ -246,3 +246,61 @@ body {
     background-color: #28a745;
     color: white;
 }
+
+.project-box {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.project-box:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.project-box h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+    color: #144A96;
+}
+
+.project-box p {
+    margin: 4px 0;
+    font-size: 0.9em;
+}
+
+#task-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Priority border colors */
+.priority-green {
+    border-left: 5px solid #28a745 !important;
+}
+
+.priority-yellow {
+    border-left: 5px solid #ffc107 !important;
+}
+
+.priority-red {
+    border-left: 5px solid #dc3545 !important;
+}
+
+/* Optional: Add a subtle glow effect on hover */
+.priority-green:hover {
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+}
+
+.priority-yellow:hover {
+    box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
+}
+
+.priority-red:hover {
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+}
