@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Laugin KPI</title>
+    <link rel="stylesheet" th:href="@{/styles/kpi.css}">
+</head>
+<body>
+<nav class="navbar">
+    <h1 class="logo">LAUGIN</h1>
+    <ul>
+        <li><a th:href="@{/}">Dashboard</a></li>
+        <li><a href="">Team</a></li>
+        <li><a href="">Data</a></li>
+        <li><a href="">KPI</a></li>
+    </ul>
+</nav>
+
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Key Performance Indicators</h1>
+        <p>Real-time task status monitoring</p>
+    </div>
+
+    <div class="kpi-section">
+        <div class="task-display">
+            <div class="red">
+                <span class="kpi-label">Critical</span>
+                <span class="kpi-value" th:text="${redCount}">0</span>
+                <span class="kpi-description">High Priority</span>
+            </div>
+
+            <div class="yellow">
+                <span class="kpi-label">Pending</span>
+                <span class="kpi-value" th:text="${yellowCount}">0</span>
+                <span class="kpi-description">Medium Priority</span>
+            </div>
+
+            <div class="green">
+                <span class="kpi-label">Completed</span>
+                <span class="kpi-value" th:text="${greenCount}">0</span>
+                <span class="kpi-description">On Track</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-summary">
+        <h3>Total Tasks</h3>
+        <div class="total-tasks" id="totalTasks">0</div>
+    </div>
+</div>
+
+<script th:src="@{/scripts/kpi.js}"></script>
+</body>
+</html>
