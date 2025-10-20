@@ -246,3 +246,38 @@ body {
     background-color: #28a745;
     color: white;
 }
+.radio-group {
+    display: flex;
+    gap: 16px;
+}
+
+.radio-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 20px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    cursor: pointer;
+    min-width: 170px;
+    transition: all 0.2s ease;
+}
+
+.radio-option:has(input:checked) {
+    border-color: #167adc;
+    background: #f0f7ff;
+}
+
+.radio-option input[type="radio"] {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    accent-color: #1976d2;
+}
+
+.radio-option span {
+    font-size: 16px;
+    color: #333;
+}

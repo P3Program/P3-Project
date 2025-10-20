@@ -68,17 +68,29 @@
             <label>Date (Creation):</label>
             <input type="date" th:field="*{date}" required />
 
-            <label>Caldera:</label>
-            <select class="form-control" th:field="*{caldera}">
-                <option th:value="0">No</option>
-                <option th:value="1">yes</option>
-            </select>
+            <label>Caldera Hot Tub?</label>
+            <div class="radio-group">
+                <label class="radio-option">
+                    <input type="radio" th:field="*{caldera}" value="1">
+                    <span>Yes</span>
+                </label>
+                <label class="radio-option">
+                    <input type="radio" th:field="*{caldera}" value="0">
+                    <span>No</span>
+                </label>
+            </div>
 
-            <label>If Caldera, Warranty:</label>
-            <select class="form-control" th:field="*{warranty}">
-                <option th:value="0">No</option>
-                <option th:value="1">yes</option>
-            </select>
+            <label>Warranty?</label>
+            <div class="radio-group">
+                <label class="radio-option">
+                    <input type="radio" th:field="*{warranty}" value="1">
+                    <span>Yes</span>
+                </label>
+                <label class="radio-option">
+                    <input type="radio" th:field="*{warranty}" value="0">
+                    <span>No</span>
+                </label>
+            </div>
 
             <label>Social Security Number:</label>
             <input type="text" th:field="*{ssn}"
