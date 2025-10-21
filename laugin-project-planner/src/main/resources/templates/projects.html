@@ -21,114 +21,81 @@
 <div class="container-wrapper">
     <div class="container-column">
         <div class="column-header">All Tasks</div>
-        <div id="task-container" class="container">
-            <div th:each="project : ${projects}"
-                 th:if="${project.status == 'allProjects'}"
-                 class="project-box">
-                <h3 th:text="${project.title}">Task Title</h3>
-                <p><strong>Customer:</strong> <span th:text="${project.name}">Name</span></p>
-                <p><strong>Phone:</strong> <span th:text="${project.phoneNum}">Phone</span></p>
-                <p><strong>Due:</strong> <span th:text="${project.estDueDate}">Date</span></p>
-            </div>
-        </div>
-        <button id="addtask" class="addtask">ADD TASK</button>
+        <div id="task-container" class="container droppable"></div>
+        <button id="addtask">ADD TASK</button>
     </div>
 
     <div class="container-column">
         <div class="column-header">Under Review</div>
-        <div id="review-container" class="container"></div>
+        <div id="review-container" class="container droppable"></div>
     </div>
 
     <div class="container-column">
         <div class="column-header">In Progress</div>
-        <div id="progress-container" class="container"></div>
+        <div id="progress-container" class="container droppable"></div>
     </div>
 
     <div class="container-column">
         <div class="column-header">Billing</div>
-        <div id="billing-container" class="container"></div>
+        <div id="billing-container" class="container droppable"></div>
     </div>
 </div>
 
-<div id="task-form-modal" class="modal" style="display: none;">
-    <form th:action="@{/projects/save}" th:object="${project}" method="post">
+<div id="task-form-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <h2>Create / Edit Task</h2>
 
-        <div class="modal-content">
-            <h2>Create Task</h2>
-            <label>Task Title:</label>
-            <input type="text" th:field="*{title}"
-                   placeholder="Short title for the project"
-                   required />
+        <label>Task Title:</label>
+        <input id="task-title" type="text" placeholder="Short title for the project" required>
 
-            <label>Name:</label>
-            <input type="text" th:field="*{name}"
-                   placeholder="Name of Customer"
-                   required />
+        <label>Name:</label>
+        <input id="task-name" type="text" placeholder="Name of Customer" required>
 
-            <label>Date (Creation):</label>
-            <input type="date" th:field="*{date}" required />
+        <label>Date (Creation):</label>
+        <input id="task-date" type="date" required>
 
-            <label>Caldera:</label>
-            <select class="form-control" th:field="*{caldera}">
-                <option th:value="0">No</option>
-                <option th:value="1">yes</option>
-            </select>
+        <label>Caldera:</label>
+        <select id="task-caldera">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
 
-            <label>If Caldera, Warranty:</label>
-            <select class="form-control" th:field="*{warranty}">
-                <option th:value="0">No</option>
-                <option th:value="1">yes</option>
-            </select>
+        <label>Warranty:</label>
+        <select id="task-warranty">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
 
-            <label>Social Security Number:</label>
-            <input type="text" th:field="*{ssn}"
-                   placeholder="dd/mm/yy/serial number"
-                   oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                   maxlength="10"
-                   minlength="10"
-                   required />
+        <label>Social Security Number:</label>
+        <input id="task-ssn" type="text" maxlength="10" placeholder="ddmmååxxxx">
 
-            <label>Phone Number:</label>
-            <input type="text" th:field="*{phoneNum}"
-                   placeholder="Phone number on customer"
-                   oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                   maxlength="7"
-                   minlength="7"
-                   required />
+        <label>Phone Number:</label>
+        <input id="task-phone" type="text" maxlength="8" placeholder="Phone number">
 
-            <label>Address:</label>
-            <input type="text" th:field="*{address}"
-            required />
+        <label>Address:</label>
+        <input id="task-address" type="text" placeholder="Customer address">
 
-            <label>Email:</label>
-            <input type="email" th:field="*{email}"
-                   required />
+        <label>Email:</label>
+        <input id="task-email" type="email" placeholder="customer@mail.com">
 
-            <label>Estimated Time In Hours:</label>
-            <input type="number" th:field="*{hours}"
-                   required />
+        <label>Estimated Time (hours):</label>
+        <input id="task-est-time" type="number" min="0">
 
-            <label>To be done by:</label>
-            <input type="date" th:field="*{estDueDate}" required />
+        <label>Due Date:</label>
+        <input id="task-due-date" type="date">
 
-            <label>Description of the problem:</label>
-            <textarea id="task-desc" th:field="*{description}"
-                      rows="5"
-                      placeholder="Describe the project"
-                      required>
-            </textarea>
-            <!-- New tasks are in "All Tasks" column -->
-            <input type="hidden" th:field="*{status}" value="allProjects" />
-            <button type="submit" id="submit-task">Create Task</button>
-            <button id="close-form">Cancel</button>
-        </div>
-    </form>
+        <label>Description:</label>
+        <textarea id="task-desc" rows="4" placeholder="Describe the project..."></textarea>
+
+        <button id="submit-task" type="button">Save Task</button>
+        <button id="close-form" type="button">Cancel</button>
+    </div>
 </div>
 
-<div id="task-detail-modal" class="modal" style="display: none;">
-
+<div id="task-detail-modal" class="modal" style="display:none;">
     <div class="modal-content">
         <h2>Task Details</h2>
+
         <p><strong>Task Title:</strong> <span id="detail-title"></span></p>
         <p><strong>Name:</strong> <span id="detail-name"></span></p>
         <p><strong>Date Created:</strong> <span id="detail-date"></span></p>
@@ -142,13 +109,14 @@
         <p><strong>Due Date:</strong> <span id="detail-due-date"></span></p>
         <p><strong>Description:</strong> <span id="detail-desc"></span></p>
 
-        <button id="close-detail">Close</button>
-        <button id="edit-task">Edit</button>
-        <button id="delete-task">Delete</button>
-        <button id="move-to-review">Move to Review</button>
+        <button id="close-detail" type="button">Close</button>
+        <button id="edit-task" type="button">Edit</button>
+        <button id="delete-task" type="button">Delete</button>
+        <button id="move-to-review" type="button">Move to Review</button>
     </div>
 </div>
 
-<script th:src="@{/scripts/script.js}"></script>
+<script th:src="@{/scripts/script.js}" defer></script>
+
 </body>
 </html>

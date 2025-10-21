@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitTaskBtn = document.getElementById('submit-task');
     const container = document.getElementById('task-container');
     let currentTaskElement = null;
+    let draggingEl = null;
+    let suppressClick = false;
+
+    const droppables = [...document.querySelectorAll('.droppable')];
+    setupDroppableColumns(droppables);
 
     loadTasks();
 
@@ -13,11 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
         formModal.style.display = 'flex';
     });
 
-
     closeFormBtn.addEventListener('click', () => {
         formModal.style.display = 'none';
     });
-
 
     submitTaskBtn.addEventListener('click', () => {
         const title = document.getElementById('task-title').value.trim();
@@ -37,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Task title is required");
             return;
         }
-
 
         if (submitTaskBtn.dataset.editMode === 'true' && currentTaskElement) {
             currentTaskElement.innerHTML = `
@@ -63,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
             submitTaskBtn.dataset.editMode = 'false';
             currentTaskElement = null;
         } else {
-
             const newTask = document.createElement('div');
             newTask.className = 'task';
             newTask.innerHTML = `
@@ -87,8 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
             newTask.dataset.desc = desc;
 
             newTask.addEventListener('click', () => {
+                if (suppressClick) { suppressClick = false; return; }
                 showTaskDetails(newTask);
             });
+
+            makeTaskDraggable(newTask);
 
             container.appendChild(newTask);
         }
@@ -109,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
         saveTasks();
         formModal.style.display = 'none';
     });
-
 
     function showTaskDetails(taskElement) {
         currentTaskElement = taskElement;
@@ -179,11 +182,15 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
         Object.assign(newTask.dataset, taskData);
-        newTask.addEventListener('click', () => showTaskDetails(newTask));
 
+        newTask.addEventListener('click', () => {
+            if (suppressClick) { suppressClick = false; return; }
+            showTaskDetails(newTask);
+        });
+
+        makeTaskDraggable(newTask);
 
         const targetContainer = document.getElementById(taskData.container) || document.getElementById('task-container');
-
         targetContainer.appendChild(newTask);
     }
 
@@ -212,9 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const deleteTaskBtn = document.getElementById('delete-task');
     deleteTaskBtn.addEventListener('click', () => {
-
         const confirmDelete = confirm("Are you sure you want to delete this task?");
-
         if (confirmDelete && currentTaskElement) {
             currentTaskElement.remove();
             saveTasks();
@@ -228,11 +233,73 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentTaskElement) {
             const reviewContainer = document.getElementById('review-container');
             reviewContainer.appendChild(currentTaskElement);
-
             saveTasks();
             document.getElementById('task-detail-modal').style.display = 'none';
         }
     });
 
+
+    function makeTaskDraggable(taskEl) {
+        taskEl.setAttribute('draggable', 'true');
+
+        taskEl.addEventListener('dragstart', (e) => {
+            draggingEl = taskEl;
+            taskEl.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            const img = new Image();
+            img.src =
+                'data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjEiIHdpZHRoPSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciLz4=';
+            e.dataTransfer.setDragImage(img, 0, 0);
+        });
+
+        taskEl.addEventListener('dragend', () => {
+            if (draggingEl) {
+                suppressClick = true;
+            }
+            taskEl.classList.remove('dragging');
+            draggingEl = null;
+            droppables.forEach(d => d.classList.remove('over'));
+            saveTasks();
+        });
+    }
+
+    function setupDroppableColumns(columns) {
+        columns.forEach(col => {
+            col.addEventListener('dragover', (e) => {
+                if (!draggingEl) return;
+                e.preventDefault();
+                const after = getDragAfterElement(col, e.clientY);
+                if (after == null) {
+                    col.appendChild(draggingEl);
+                } else {
+                    col.insertBefore(draggingEl, after);
+                }
+                col.classList.add('over');
+            });
+
+            col.addEventListener('dragleave', () => col.classList.remove('over'));
+
+            col.addEventListener('drop', (e) => {
+                e.preventDefault();
+                col.classList.remove('over');
+                saveTasks();
+            });
+        });
+    }
+
+    function getDragAfterElement(container, y) {
+        const els = [...container.querySelectorAll('.task:not(.dragging)')];
+        let closest = null;
+        let closestOffset = Number.NEGATIVE_INFINITY;
+        els.forEach(el => {
+            const box = el.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+            if (offset < 0 && offset > closestOffset) {
+                closestOffset = offset;
+                closest = el;
+            }
+        });
+        return closest;
+    }
 
 });

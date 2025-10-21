@@ -1,15 +1,12 @@
 package com.p3program.laugin_project_planner.projects;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Column;
-
 import java.sql.Date;
-
 
 @Entity
 @Table(name = "projects_test")
 public class Project {
-    @Column
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -21,7 +18,7 @@ public class Project {
     private String name;
 
     @Column
-    private java.sql.Date date;
+    private Date date;
 
     @Column
     private boolean caldera;
@@ -50,18 +47,24 @@ public class Project {
     @Column
     private String description;
 
-    @Column
-    private String status;
+    @Column(nullable = false)
+    private String status = "allProjects";
 
-    public Project() {
-        // Make sure the default status value is allProjects
-        if (this.status == null) {
-            this.status = "allProjects";
+    @Column(nullable = false)
+    private int position = 0;
+
+    @PrePersist
+    public void prePersist() {
+        if (status == null || status.isBlank()) {
+            status = "allProjects";
         }
     }
 
+    public Project() {}
 
-    public Project(long id, String title, String name, Date date, boolean caldera, boolean warranty, String ssn, String phoneNum, String address, String email, int hours, Date estDueDate, String description, String status) {
+    public Project(long id, String title, String name, Date date, boolean caldera, boolean warranty,
+                   String ssn, String phoneNum, String address, String email,
+                   int hours, Date estDueDate, String description, String status, int position) {
         this.id = id;
         this.title = title;
         this.name = name;
@@ -76,117 +79,51 @@ public class Project {
         this.estDueDate = estDueDate;
         this.description = description;
         this.status = status;
+        this.position = position;
     }
 
-    //Getters and setter for the values in our DB
-    public long getId() {
-        return id;
-    }
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public Date getDate() { return date; }
+    public void setDate(Date date) { this.date = date; }
 
-    public String getName() {
-        return name;
-    }
+    public boolean isCaldera() { return caldera; }
+    public void setCaldera(boolean caldera) { this.caldera = caldera; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public boolean isWarranty() { return warranty; }
+    public void setWarranty(boolean warranty) { this.warranty = warranty; }
 
-    public Date getDate() {
-        return date;
-    }
+    public String getSsn() { return ssn; }
+    public void setSsn(String ssn) { this.ssn = ssn; }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+    public String getPhoneNum() { return phoneNum; }
+    public void setPhoneNum(String phoneNum) { this.phoneNum = phoneNum; }
 
-    public boolean isCaldera() {
-        return caldera;
-    }
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
 
-    public void setCaldera(boolean caldera) {
-        this.caldera = caldera;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public boolean isWarranty() {
-        return warranty;
-    }
+    public int getHours() { return hours; }
+    public void setHours(int hours) { this.hours = hours; }
 
-    public void setWarranty(boolean warranty) {
-        this.warranty = warranty;
-    }
+    public Date getEstDueDate() { return estDueDate; }
+    public void setEstDueDate(Date estDueDate) { this.estDueDate = estDueDate; }
 
-    public String getSsn() {
-        return ssn;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public void setSsn(String ssn) {
-        this.ssn = ssn;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public String getPhoneNum() {
-        return phoneNum;
-    }
-
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getHours() {
-        return hours;
-    }
-
-    public void setHours(int hours) {
-        this.hours = hours;
-    }
-
-    public Date getEstDueDate() {
-        return estDueDate;
-    }
-
-    public void setEstDueDate(Date estDueDate) {
-        this.estDueDate = estDueDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public int getPosition() { return position; }
+    public void setPosition(int position) { this.position = position; }
 }
