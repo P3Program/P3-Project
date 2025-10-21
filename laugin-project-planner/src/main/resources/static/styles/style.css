@@ -177,12 +177,14 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
-    /*align-items: center;*/
+    /*this makes it too big for the screen
+    align-items: center;*/
     z-index: 101;
 }
 
+/* this is the form css */
 .modal-content {
-    background: linear-gradient(135deg, #00bfff 0%, #0099cc 100%);
+    background: #ffffff;
     padding: 20px;
     border-radius: 10px;
     max-width: 500px;
