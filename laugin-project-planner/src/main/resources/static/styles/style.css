@@ -168,6 +168,7 @@ body {
     box-shadow: 0 2px 4px rgba(0, 191, 255, 0.3);
 }
 
+
 .modal {
     display: none;
     position: fixed;
@@ -176,19 +177,31 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
     z-index: 101;
+    overflow-y: auto;
+    /* Add flex centering */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
 .modal-content {
-    background: white;
-    padding: 20px;
+    background: black;
+    padding: 30px;
     border-radius: 10px;
     max-width: 500px;
+    max-height: 80vh;
     width: 90%;
-    max-height: 90%;
+    box-sizing: border-box;
     overflow-y: auto;
+    /* Remove margin since flex is centering it */
+    margin: 0;
+}
+
+#task-form-modal{
+    width: 100%;
+    display: flex;
 }
 
 .modal-content h2 {
