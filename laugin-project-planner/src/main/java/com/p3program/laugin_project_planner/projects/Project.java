@@ -48,13 +48,23 @@ public class Project {
     private Date estDueDate;
 
     @Column
+    private String priority;
+
+    @Column
     private String description;
 
+    @Column
+    private String status;
+
     public Project() {
+        // Make sure the default status value is allProjects
+        if (this.status == null) {
+            this.status = "allProjects";
+        }
     }
 
 
-    public Project(long id, String title, String name, Date date, boolean caldera, boolean warranty, String ssn, String phoneNum, String address, String email, int hours, Date estDueDate, String description) {
+    public Project(long id, String title, String name, Date date, boolean caldera, boolean warranty, String ssn, String phoneNum, String address, String email, int hours, Date estDueDate, String priority, String description, String status) {
         this.id = id;
         this.title = title;
         this.name = name;
@@ -67,7 +77,9 @@ public class Project {
         this.email = email;
         this.hours = hours;
         this.estDueDate = estDueDate;
+        this.priority = priority;
         this.description = description;
+        this.status = status;
     }
 
     public long getId() {
@@ -166,11 +178,27 @@ public class Project {
         this.estDueDate = estDueDate;
     }
 
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

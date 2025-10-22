@@ -177,12 +177,14 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
-    align-items: center;
+    /*this makes it too big for the screen
+    align-items: center;*/
     z-index: 101;
 }
 
+/* this is the form css */
 .modal-content {
-    background: white;
+    background: #ffffff;
     padding: 20px;
     border-radius: 10px;
     max-width: 500px;
@@ -245,4 +247,97 @@ body {
 #move-to-review {
     background-color: #28a745;
     color: white;
+}
+.radio-group {
+    display: flex;
+    gap: 16px;
+}
+
+.radio-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 20px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    cursor: pointer;
+    min-width: 170px;
+    transition: all 0.2s ease;
+}
+
+.radio-option:has(input:checked) {
+    border-color: #167adc;
+    background: #f0f7ff;
+}
+
+.radio-option input[type="radio"] {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    accent-color: #1976d2;
+}
+
+.radio-option span {
+    font-size: 16px;
+    color: #333;
+}
+
+.project-box {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.project-box:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.project-box h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+    color: #144A96;
+}
+
+.project-box p {
+    margin: 4px 0;
+    font-size: 0.9em;
+}
+
+#task-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.priority-green {
+    border-left: 5px solid #28a745 !important;
+}
+
+.priority-yellow {
+    border-left: 5px solid #ffc107 !important;
+}
+
+.priority-red {
+    border-left: 5px solid #dc3545 !important;
+}
+
+/* Optional: Add a subtle glow effect on hover */
+.priority-green:hover {
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+}
+
+.priority-yellow:hover {
+    box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
+}
+
+.priority-red:hover {
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
 }
