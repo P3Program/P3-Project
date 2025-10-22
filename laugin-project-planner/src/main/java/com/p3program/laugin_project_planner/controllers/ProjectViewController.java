@@ -25,12 +25,6 @@ public class ProjectViewController {
         return "projects";
     }
 
-    @GetMapping("/projects/new")
-    public String showCreateForm(Model model) {
-        model.addAttribute("project", new Project());
-        return "create-project";
-    }
-
     @PostMapping("/projects/save")
     public String saveProject(@ModelAttribute("project") Project project) {
         projectService.createProject(project);
