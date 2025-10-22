@@ -1,10 +1,10 @@
 package com.p3program.laugin_project_planner.projects;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Column;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Date;
-
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "projects_test")
@@ -21,7 +21,8 @@ public class Project {
     private String name;
 
     @Column
-    private java.sql.Date date;
+    @CreationTimestamp
+    private LocalDate date;
 
     @Column
     private boolean caldera;
@@ -63,8 +64,7 @@ public class Project {
         }
     }
 
-
-    public Project(long id, String title, String name, Date date, boolean caldera, boolean warranty, String ssn, String phoneNum, String address, String email, int hours, Date estDueDate, String priority, String description, String status) {
+    public Project(long id, String title, String name, LocalDate date, boolean caldera, boolean warranty, String ssn, String phoneNum, String address, String email, int hours, Date estDueDate, String priority, String description, String status) {
         this.id = id;
         this.title = title;
         this.name = name;
@@ -82,6 +82,7 @@ public class Project {
         this.status = status;
     }
 
+    // Getters and setters
     public long getId() {
         return id;
     }
@@ -106,11 +107,11 @@ public class Project {
         this.name = name;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

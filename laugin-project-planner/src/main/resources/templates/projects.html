@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Laugin</title>
     <link rel="stylesheet" th:href="@{/styles/style.css}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
 </head>
 <body>
 <nav class="navbar">
@@ -55,125 +53,112 @@
     </div>
 </div>
 
-<div id="task-form-modal" class="modal">
+<div id="task-form-modal" class="modal" style="display: none;">
     <form th:action="@{/projects/save}" th:object="${project}" method="post">
-
         <div class="modal-content">
             <h2>Create Task</h2>
-            <label>Task Title:</label>
-            <input type="text" th:field="*{title}"
-                   placeholder="Short title for the project"
-                   required />
 
-            <label>Name:</label>
-            <input type="text" th:field="*{name}"
-                   placeholder="Name of Customer"
-                   required />
-
-            <label>Date (Creation):</label>
-            <input type="date" th:field="*{date}" required />
-
-            <label>Caldera Hot Tub?</label>
-            <div class="radio-group">
-                <label class="radio-option">
-                    <input type="radio" th:field="*{caldera}" value="1">
-                    <span>Yes</span>
-                </label>
-                <label class="radio-option">
-                    <input type="radio" th:field="*{caldera}" value="0">
-                    <span>No</span>
-                </label>
+            <!-- Progress indicator -->
+            <div class="form-progress">
+                <div class="step active" data-step="1">1. Personal Info</div>
+                <div class="step" data-step="2">2. Job Details</div>
+                <div class="step" data-step="3">3. Description</div>
             </div>
 
-            <label>Warranty?</label>
-            <div class="radio-group">
-                <label class="radio-option">
-                    <input type="radio" th:field="*{warranty}" value="1">
-                    <span>Yes</span>
-                </label>
-                <label class="radio-option">
-                    <input type="radio" th:field="*{warranty}" value="0">
-                    <span>No</span>
-                </label>
+            <!-- Page 1: Personal Information -->
+            <div id="page-1" class="form-page">
+                <h3>Personal Information</h3>
+
+                <label>Name:</label>
+                <input type="text" th:field="*{name}" placeholder="Name of Customer" required />
+
+                <label>Phone Number:</label>
+                <input type="text" th:field="*{phoneNum}"
+                       placeholder="Phone number on customer"
+                       oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                       maxlength="7" minlength="7" required />
+
+                <label>Address:</label>
+                <input type="text" th:field="*{address}" required />
+
+                <label>Email:</label>
+                <input type="email" th:field="*{email}" required />
+
+                <label>Social Security Number:</label>
+                <input type="text" th:field="*{ssn}"
+                       placeholder="dd/mm/yy/serial number"
+                       oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                       maxlength="10" minlength="10" required />
             </div>
 
-            <label>Social Security Number:</label>
-            <input type="text" th:field="*{ssn}"
-                   placeholder="dd/mm/yy/serial number"
-                   oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                   maxlength="10"
-                   minlength="10"
-                   required />
+            <!-- Page 2: Job Information -->
+            <div id="page-2" class="form-page hidden">
+                <h3>Job Information</h3>
 
-            <label>Phone Number:</label>
-            <input type="text" th:field="*{phoneNum}"
-                   placeholder="Phone number on customer"
-                   oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                   maxlength="7"
-                   minlength="7"
-                   required />
+                <label>Task Title:</label>
+                <input type="text" th:field="*{title}" placeholder="Short title for the project" required />
 
-            <label>Address:</label>
-            <input type="text" th:field="*{address}"
-                   required />
+                <label>Caldera Hot Tub?</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" th:field="*{caldera}" value="1">
+                        <span>Yes</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" th:field="*{caldera}" value="0" checked>
+                        <span>No</span>
+                    </label>
+                </div>
 
-            <label>Email:</label>
-            <input type="email" th:field="*{email}"
-                   required />
+                <label>Warranty?</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" th:field="*{warranty}" value="1">
+                        <span>Yes</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" th:field="*{warranty}" value="0" checked>
+                        <span>No</span>
+                    </label>
+                </div>
 
-            <label>Estimated Time In Hours:</label>
-            <input type="number" th:field="*{hours}"
-                   required />
+                <label>Priority:</label>
+                <select class="form-control" th:field="*{priority}">
+                    <option th:value="'Red'" selected>Red</option>
+                    <option th:value="'Yellow'">Yellow</option>
+                    <option th:value="'Green'">Green</option>
+                </select>
 
-            <label>To be done by:</label>
-            <input type="date" th:field="*{estDueDate}" required />
+                <label>Estimated Time In Hours:</label>
+                <input type="number" th:field="*{hours}" placeholder="Hours it could take" required />
 
-            <label>Priority:</label>
-            <select class="form-control" th:field="*{priority}" required>
-                <option value="">--Select Priority--</option>
-                <option th:value="'Red'">Red</option>
-                <option th:value="'Yellow'">Yellow</option>
-                <option th:value="'Green'">Green</option>
-            </select>
+                <label>To be done by:</label>
+                <input type="date" th:field="*{estDueDate}" required />
+            </div>
 
+            <!-- Page 3: Description -->
+            <div id="page-3" class="form-page hidden">
+                <h3>Problem Description</h3>
 
-            <label>Description of the problem:</label>
-            <textarea id="task-desc" th:field="*{description}"
-                      rows="5"
-                      placeholder="Describe the project"
-                      required>
-            </textarea>
-            <!-- New tasks are in "All Tasks" column -->
+                <label>Description of the problem:</label>
+                <textarea id="task-desc" th:field="*{description}" rows="8"
+                          placeholder="Describe the project in detail..." required></textarea>
+            </div>
+
+            <!-- Hidden fields -->
             <input type="hidden" th:field="*{status}" value="allProjects" />
-            <button type="submit" id="submit-task">Create Task</button>
-            <button id="close-form">Cancel</button>
+
+            <!-- Navigation -->
+            <div class="form-navigation">
+                <button type="button" id="prev-btn" style="display: none;">← Previous</button>
+                <button type="button" id="next-btn">Next →</button>
+                <button type="submit" id="submit-btn" style="display: none;">Create Task</button>
+                <button type="button" id="close-form">Cancel</button>
+            </div>
         </div>
     </form>
 </div>
 
-<div id="task-detail-modal" class="modal">
-
-    <div class="modal-content">
-        <h2>Task Details</h2>
-        <p><strong>Task Title:</strong> <span id="detail-title"></span></p>
-        <p><strong>Name:</strong> <span id="detail-name"></span></p>
-        <p><strong>Date Created:</strong> <span id="detail-date"></span></p>
-        <p><strong>Caldera:</strong> <span id="detail-caldera"></span></p>
-        <p><strong>Warranty:</strong> <span id="detail-warranty"></span></p>
-        <p><strong>Social Security Number:</strong> <span id="detail-ssn"></span></p>
-        <p><strong>Phone Number:</strong> <span id="detail-phone"></span></p>
-        <p><strong>Address:</strong> <span id="detail-address"></span></p>
-        <p><strong>Email:</strong> <span id="detail-email"></span></p>
-        <p><strong>Estimated Time:</strong> <span id="detail-est-time"></span></p>
-        <p><strong>Due Date:</strong> <span id="detail-due-date"></span></p>
-        <p><strong>Description:</strong> <span id="detail-desc"></span></p>
-
-        <button id="close-detail">Close</button>
-        <button id="edit-task">Edit</button>
-        <button id="delete-task">Delete</button>
-        <button id="move-to-review">Move to Review</button>
-    </div>
-</div>
 
 <script th:src="@{/scripts/script.js}"></script>
 </body>
