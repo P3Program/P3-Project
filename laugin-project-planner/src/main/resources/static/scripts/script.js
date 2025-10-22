@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formModal.style.display = 'flex';
         showPage(1);
         updatePriorityImmediately()
+        currentPage = 1;
     });
 
 
