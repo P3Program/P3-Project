@@ -194,9 +194,6 @@ body {
     max-height: 80vh;
     width: 90%;
     box-sizing: border-box;
-    overflow-y: auto;
-    /* Remove margin since flex is centering it */
-    margin: 0;
 }
 
 #task-form-modal{
@@ -274,7 +271,7 @@ body {
     border: 2px solid #e0e0e0;
     border-radius: 12px;
     cursor: pointer;
-    min-width: 170px;
+    min-width: 50px;
     transition: all 0.2s ease;
 }
 
