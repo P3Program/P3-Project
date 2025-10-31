@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeFormBtn = document.getElementById('close-form');
 
     addTaskBtn.addEventListener('click', () => {
+        currentPage = 1;
         formModal.style.display = 'flex';
         showPage(1);
         updatePriorityImmediately()

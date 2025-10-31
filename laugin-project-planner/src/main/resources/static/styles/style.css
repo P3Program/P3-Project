@@ -124,6 +124,9 @@ body {
     background-color: #1a5bb8;
 }
 #addtask {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: 15px;
     background: linear-gradient(135deg, #00bfff 0%, #0099cc 100%);
     color: white;
@@ -140,6 +143,7 @@ body {
     text-transform: uppercase;
     position: relative;
     overflow: hidden;
+    gap: 15px;
 }
 
 #addtask::before {
@@ -413,4 +417,12 @@ body {
 #close-form {
     background: #dc3545;
     color: white;
+}
+
+#plusbtn {
+    position: relative;
+    width: 10%;
+    height: auto;
+    margin-bottom: 0px;
+    margin-left: 5px;
 }
