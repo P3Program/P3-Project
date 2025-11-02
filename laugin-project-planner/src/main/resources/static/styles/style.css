@@ -124,9 +124,6 @@ body {
     background-color: #1a5bb8;
 }
 #addtask {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-top: 15px;
     background: linear-gradient(135deg, #00bfff 0%, #0099cc 100%);
     color: white;
@@ -143,7 +140,25 @@ body {
     text-transform: uppercase;
     position: relative;
     overflow: hidden;
-    gap: 15px;
+}
+
+#addtask::after {
+    content: '';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: 2px solid white;
+    border-radius: 50%;
+    margin-left: 10px;
+    font-size: 20px;
+    line-height: 1;
+    position: relative;
+}
+
+#addtask::after {
+    content: '+';
 }
 
 #addtask::before {
@@ -183,11 +198,13 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 101;
     overflow-y: auto;
-    /* Add flex centering */
-    display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
+}
+
+.modal[style*="display: flex"] {
+    display: flex !important;
 }
 
 .modal-content {
@@ -195,9 +212,11 @@ body {
     padding: 30px;
     border-radius: 10px;
     max-width: 500px;
-    max-height: 80vh;
+    max-height: 85vh;
     width: 90%;
     box-sizing: border-box;
+    overflow-y: auto;
+    margin: 0;
 }
 
 #task-form-modal{
@@ -262,21 +281,25 @@ body {
 }
 .radio-group {
     display: flex;
-    gap: 16px;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .radio-option {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 12px;
-    padding: 8px 20px;
+    gap: 8px;
+    padding: 8px 12px;
     background: white;
     border: 2px solid #e0e0e0;
     border-radius: 12px;
     cursor: pointer;
-    min-width: 50px;
+    flex: 1;
+    min-width: 100px;
+    max-width: 150px;
     transition: all 0.2s ease;
+    box-sizing: border-box;
 }
 
 .radio-option:has(input:checked) {
@@ -285,10 +308,11 @@ body {
 }
 
 .radio-option input[type="radio"] {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
     accent-color: #1976d2;
+    flex-shrink: 0;
 }
 
 .radio-option span {
@@ -304,6 +328,7 @@ body {
     margin-bottom: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     transition: transform 0.2s;
+    cursor: pointer;
 }
 
 .project-box:hover {
@@ -419,10 +444,116 @@ body {
     color: white;
 }
 
-#plusbtn {
-    position: relative;
-    width: 10%;
-    height: auto;
-    margin-bottom: 0px;
-    margin-left: 5px;
+/* Detail Modal Styles */
+.detail-modal-content {
+    max-width: 600px;
+}
+
+.detail-section {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.detail-section:last-of-type {
+    border-bottom: none;
+}
+
+.detail-section h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #144A96;
+    font-size: 1.2em;
+}
+
+.detail-field {
+    margin-bottom: 15px;
+}
+
+.detail-field label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.detail-display {
+    padding: 8px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #666;
+    font-size: 14px;
+}
+
+.detail-field input,
+.detail-field select,
+.detail-field textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+
+.detail-field input[readonly],
+.detail-field textarea[readonly],
+.detail-field select[disabled] {
+    background-color: #f0f0f0;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.detail-field input:not([readonly]),
+.detail-field textarea:not([readonly]),
+.detail-field select:not([disabled]) {
+    background-color: white;
+    border-color: #007bff;
+}
+
+/* Button Styles */
+.btn-edit {
+    background-color: #00bfff;
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #0099cc;
+}
+
+.btn-save {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-save:hover {
+    background-color: #218838;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+/* Confirmation Modal */
+.confirm-modal-content {
+    max-width: 400px;
+    text-align: center;
+}
+
+.confirm-modal-content p {
+    font-size: 16px;
+    margin: 20px 0;
+    color: #333;
+}
+
+.confirm-modal-content .form-navigation {
+    justify-content: center;
+    gap: 10px;
 }

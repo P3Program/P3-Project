@@ -22,31 +22,250 @@
         <p>Real-time task status monitoring</p>
     </div>
 
-    <div class="kpi-section">
-        <div class="task-display">
-            <div class="red">
-                <span class="kpi-label">Critical</span>
-                <span class="kpi-value" th:text="${redCount}">0</span>
-                <span class="kpi-description">High Priority</span>
-            </div>
+    <!-- Summary View (default) -->
+    <div id="summary-view">
+        <div class="kpi-section">
+            <div class="task-display">
+                <div class="red kpi-card" data-priority="red">
+                    <span class="kpi-label">Critical</span>
+                    <span class="kpi-value" th:text="${redCount}">0</span>
+                    <span class="kpi-description">High Priority</span>
+                </div>
 
-            <div class="yellow">
-                <span class="kpi-label">Important</span>
-                <span class="kpi-value" th:text="${yellowCount}">0</span>
-                <span class="kpi-description">Medium Priority</span>
-            </div>
+                <div class="yellow kpi-card" data-priority="yellow">
+                    <span class="kpi-label">Important</span>
+                    <span class="kpi-value" th:text="${yellowCount}">0</span>
+                    <span class="kpi-description">Medium Priority</span>
+                </div>
 
-            <div class="green">
-                <span class="kpi-label">Normal</span>
-                <span class="kpi-value" th:text="${greenCount}">0</span>
-                <span class="kpi-description">Low Priority</span>
+                <div class="green kpi-card" data-priority="green">
+                    <span class="kpi-label">Normal</span>
+                    <span class="kpi-value" th:text="${greenCount}">0</span>
+                    <span class="kpi-description">Low Priority</span>
+                </div>
             </div>
+        </div>
+
+        <div class="stats-summary">
+            <h3>Total Tasks</h3>
+            <div class="total-tasks" id="totalTasks">0</div>
         </div>
     </div>
 
-    <div class="stats-summary">
-        <h3>Total Tasks</h3>
-        <div class="total-tasks" id="totalTasks">0</div>
+    <!-- Project Detail View (hidden by default) -->
+    <div id="detail-view" style="display: none;">
+        <button id="back-btn" class="back-button">← Back to Summary</button>
+
+        <h2 id="detail-title" class="detail-title">Critical Priority Tasks</h2>
+
+        <!-- Red Projects Container -->
+        <div id="red-projects-container" class="projects-grid" style="display: none;">
+            <div th:each="project : ${redProjects}"
+                 class="project-box priority-red"
+                 th:attr="data-project-id=${project.id},
+                          data-project-title=${project.title},
+                          data-project-name=${project.name},
+                          data-project-phone=${project.phoneNum},
+                          data-project-address=${project.address},
+                          data-project-email=${project.email},
+                          data-project-ssn=${project.ssn},
+                          data-project-caldera=${project.caldera},
+                          data-project-warranty=${project.warranty},
+                          data-project-priority=${project.priority},
+                          data-project-hours=${project.hours},
+                          data-project-duedate=${project.estDueDate},
+                          data-project-description=${project.description},
+                          data-project-status=${project.status}"
+                 onclick="openDetailModalKpi(this)">
+                <h3 th:text="${project.title}">Task Title</h3>
+                <p><strong>Customer:</strong> <span th:text="${project.name}">Name</span></p>
+                <p><strong>Phone:</strong> <span th:text="${project.phoneNum}">Phone</span></p>
+                <p><strong>Addr:</strong> <span th:text="${project.address}">Address</span></p>
+                <span class="priority-badge red-badge" th:text="${project.priority}">Red</span>
+            </div>
+        </div>
+
+        <!-- Yellow Projects Container -->
+        <div id="yellow-projects-container" class="projects-grid" style="display: none;">
+            <div th:each="project : ${yellowProjects}"
+                 class="project-box priority-yellow"
+                 th:attr="data-project-id=${project.id},
+                          data-project-title=${project.title},
+                          data-project-name=${project.name},
+                          data-project-phone=${project.phoneNum},
+                          data-project-address=${project.address},
+                          data-project-email=${project.email},
+                          data-project-ssn=${project.ssn},
+                          data-project-caldera=${project.caldera},
+                          data-project-warranty=${project.warranty},
+                          data-project-priority=${project.priority},
+                          data-project-hours=${project.hours},
+                          data-project-duedate=${project.estDueDate},
+                          data-project-description=${project.description},
+                          data-project-status=${project.status}"
+                 onclick="openDetailModalKpi(this)">
+                <h3 th:text="${project.title}">Task Title</h3>
+                <p><strong>Customer:</strong> <span th:text="${project.name}">Name</span></p>
+                <p><strong>Phone:</strong> <span th:text="${project.phoneNum}">Phone</span></p>
+                <p><strong>Addr:</strong> <span th:text="${project.address}">Address</span></p>
+                <span class="priority-badge yellow-badge" th:text="${project.priority}">Yellow</span>
+            </div>
+        </div>
+
+        <!-- Green Projects Container -->
+        <div id="green-projects-container" class="projects-grid" style="display: none;">
+            <div th:each="project : ${greenProjects}"
+                 class="project-box priority-green"
+                 th:attr="data-project-id=${project.id},
+                          data-project-title=${project.title},
+                          data-project-name=${project.name},
+                          data-project-phone=${project.phoneNum},
+                          data-project-address=${project.address},
+                          data-project-email=${project.email},
+                          data-project-ssn=${project.ssn},
+                          data-project-caldera=${project.caldera},
+                          data-project-warranty=${project.warranty},
+                          data-project-priority=${project.priority},
+                          data-project-hours=${project.hours},
+                          data-project-duedate=${project.estDueDate},
+                          data-project-description=${project.description},
+                          data-project-status=${project.status}"
+                 onclick="openDetailModalKpi(this)">
+                <h3 th:text="${project.title}">Task Title</h3>
+                <p><strong>Customer:</strong> <span th:text="${project.name}">Name</span></p>
+                <p><strong>Phone:</strong> <span th:text="${project.phoneNum}">Phone</span></p>
+                <p><strong>Addr:</strong> <span th:text="${project.address}">Address</span></p>
+                <span class="priority-badge green-badge" th:text="${project.priority}">Green</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Task Detail Modal -->
+<div id="task-detail-modal" class="modal" style="display: none;">
+    <div class="modal-content detail-modal-content">
+        <h2>Task Details</h2>
+
+        <form id="detail-form" th:action="@{/projects/update-kpi}" method="post">
+            <input type="hidden" id="detail-id" name="id" />
+            <input type="hidden" id="detail-status" name="status" />
+
+            <div class="detail-section">
+                <h3>Personal Information</h3>
+
+                <div class="detail-field">
+                    <label>Name:</label>
+                    <input type="text" id="detail-name" name="name" readonly />
+                </div>
+
+                <div class="detail-field">
+                    <label>Phone Number:</label>
+                    <input type="text" id="detail-phone" name="phoneNum" readonly />
+                </div>
+
+                <div class="detail-field">
+                    <label>Address:</label>
+                    <input type="text" id="detail-address" name="address" readonly />
+                </div>
+
+                <div class="detail-field">
+                    <label>Email:</label>
+                    <input type="email" id="detail-email" name="email" readonly />
+                </div>
+
+                <div class="detail-field">
+                    <label>Social Security Number:</label>
+                    <input type="text" id="detail-ssn" name="ssn" readonly />
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h3>Job Information</h3>
+
+                <div class="detail-field">
+                    <label>Task Title:</label>
+                    <input type="text" id="detail-title" name="title" readonly />
+                </div>
+
+                <div class="detail-field">
+                    <label>Caldera Hot Tub:</label>
+                    <div class="detail-display" id="caldera-display">No</div>
+                    <div class="radio-group detail-edit" style="display: none;">
+                        <label class="radio-option">
+                            <input type="radio" name="caldera" value="1">
+                            <span>Yes</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="caldera" value="0">
+                            <span>No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="detail-field">
+                    <label>Warranty:</label>
+                    <div class="detail-display" id="warranty-display">No</div>
+                    <div class="radio-group detail-edit" style="display: none;">
+                        <label class="radio-option">
+                            <input type="radio" name="warranty" value="1">
+                            <span>Yes</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="warranty" value="0">
+                            <span>No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="detail-field">
+                    <label>Priority:</label>
+                    <select id="detail-priority" name="priority" disabled>
+                        <option value="Red">Red</option>
+                        <option value="Yellow">Yellow</option>
+                        <option value="Green">Green</option>
+                    </select>
+                </div>
+
+                <div class="detail-field">
+                    <label>Estimated Time (Hours):</label>
+                    <input type="number" id="detail-hours" name="hours" readonly />
+                </div>
+
+                <div class="detail-field">
+                    <label>Due Date:</label>
+                    <input type="date" id="detail-duedate" name="estDueDate" readonly />
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h3>Description</h3>
+
+                <div class="detail-field">
+                    <label>Problem Description:</label>
+                    <textarea id="detail-description" name="description" rows="6" readonly></textarea>
+                </div>
+            </div>
+
+            <div class="form-navigation">
+                <button type="button" id="edit-task-btn" class="btn-edit">Edit</button>
+                <button type="submit" id="save-task-btn" class="btn-save" style="display: none;">Save Changes</button>
+                <button type="button" id="delete-task-btn" class="btn-delete">Delete</button>
+                <button type="button" id="close-detail">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div id="delete-confirm-modal" class="modal" style="display: none;">
+    <div class="modal-content confirm-modal-content">
+        <h2>Confirm Delete</h2>
+        <p>Are you sure you want to delete this task? This action cannot be undone.</p>
+
+        <div class="form-navigation">
+            <button type="button" id="confirm-delete-btn" class="btn-delete">Yes, Delete</button>
+            <button type="button" id="cancel-delete-btn">Cancel</button>
+        </div>
     </div>
 </div>
 
