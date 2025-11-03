@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Laugin</title>
     <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <link rel="stylesheet" th:href="@{/styles/formStyle.css}">
 </head>
 <body>
 <nav class="navbar">
@@ -56,6 +57,7 @@
 <div id="task-form-modal" class="modal" style="display: none;">
     <form th:action="@{/projects/save}" th:object="${project}" method="post">
         <div class="modal-content">
+            <button type="button" id="close-form">X</button>
             <h2>Create Task</h2>
 
             <!-- Progress indicator -->
@@ -67,7 +69,6 @@
 
             <!-- Page 1: Personal Information -->
             <div id="page-1" class="form-page">
-                <h3>Personal Information</h3>
 
                 <label>Name:</label>
                 <input type="text" th:field="*{name}" placeholder="Name of Customer" required />
@@ -79,10 +80,14 @@
                        maxlength="7" minlength="7" required />
 
                 <label>Address:</label>
-                <input type="text" th:field="*{address}" required />
+                <input type="text" th:field="*{address}"
+                       placeholder="Address of the repair"
+                       required />
 
                 <label>Email:</label>
-                <input type="email" th:field="*{email}" required />
+                <input type="email" th:field="*{email}"
+                       placeholder="Customers Email"
+                       required />
 
                 <label>Social Security Number:</label>
                 <input type="text" th:field="*{ssn}"
@@ -93,33 +98,37 @@
 
             <!-- Page 2: Job Information -->
             <div id="page-2" class="form-page hidden">
-                <h3>Job Information</h3>
-
                 <label>Task Title:</label>
                 <input type="text" th:field="*{title}" placeholder="Short title for the project" required />
 
                 <label>Caldera Hot Tub?</label>
                 <div class="radio-group">
+
                     <label class="radio-option">
                         <input type="radio" th:field="*{caldera}" value="1">
                         <span>Yes</span>
                     </label>
+
                     <label class="radio-option">
                         <input type="radio" th:field="*{caldera}" value="0" checked>
                         <span>No</span>
                     </label>
+
                 </div>
 
                 <label>Warranty?</label>
                 <div class="radio-group">
+
                     <label class="radio-option">
                         <input type="radio" th:field="*{warranty}" value="1">
                         <span>Yes</span>
                     </label>
+
                     <label class="radio-option">
                         <input type="radio" th:field="*{warranty}" value="0" checked>
                         <span>No</span>
                     </label>
+
                 </div>
 
                 <label>Priority:</label>
@@ -130,7 +139,10 @@
                 </select>
 
                 <label>Estimated Time In Hours:</label>
-                <input type="number" th:field="*{hours}" placeholder="Hours it could take" required />
+                <input type="number" th:field="*{hours}"
+                       value=""
+                       placeholder="Hours it could take"
+                />
 
                 <label>To be done by:</label>
                 <input type="date" th:field="*{estDueDate}" required />
@@ -138,8 +150,6 @@
 
             <!-- Page 3: Description -->
             <div id="page-3" class="form-page hidden">
-                <h3>Problem Description</h3>
-
                 <label>Description of the problem:</label>
                 <textarea id="task-desc" th:field="*{description}" rows="8"
                           placeholder="Describe the project in detail..." required></textarea>
@@ -153,7 +163,6 @@
                 <button type="button" id="prev-btn" style="display: none;">← Previous</button>
                 <button type="button" id="next-btn">Next →</button>
                 <button type="submit" id="submit-btn" style="display: none;">Create Task</button>
-                <button type="button" id="close-form">Cancel</button>
             </div>
         </div>
     </form>
@@ -161,5 +170,6 @@
 
 
 <script th:src="@{/scripts/script.js}"></script>
+<script th:src="@{/scripts/formFunction.js}"></script>
 </body>
 </html>

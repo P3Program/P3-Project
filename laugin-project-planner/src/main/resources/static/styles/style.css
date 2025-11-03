@@ -51,6 +51,7 @@ body {
     max-width: 100vw;
     box-sizing: border-box;
 }
+
 .column-header {
     width: 300px;
     background: linear-gradient(135deg, #144A96 0%, #1a5bb8 100%);
@@ -123,174 +124,6 @@ body {
 .task:hover {
     background-color: #1a5bb8;
 }
-#addtask {
-    margin-top: 15px;
-    background: linear-gradient(135deg, #00bfff 0%, #0099cc 100%);
-    color: white;
-    padding: 15px 24px;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 1.2rem;
-    border: none;
-    cursor: pointer;
-    width: 300px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 191, 255, 0.3);
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    position: relative;
-    overflow: hidden;
-}
-
-#addtask::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    transition: left 0.5s ease;
-}
-
-#addtask:hover::before {
-    left: 100%;
-}
-
-#addtask:hover {
-    background: linear-gradient(135deg, #009fcc 0%, #0088bb 100%);
-    box-shadow: 0 6px 10px rgba(0, 191, 255, 0.4);
-    transform: translateY(-2px);
-}
-
-#addtask:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 191, 255, 0.3);
-}
-
-
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 101;
-    overflow-y: auto;
-    /* Add flex centering */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.modal-content {
-    background: #F8F7F9;
-    padding: 30px;
-    border-radius: 10px;
-    max-width: 500px;
-    max-height: 80vh;
-    width: 90%;
-    box-sizing: border-box;
-}
-
-#task-form-modal{
-    width: 100%;
-    display: flex;
-}
-
-.modal-content h2 {
-    margin-top: 0;
-}
-
-.modal-content label {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-.modal-content input,
-.modal-content select,
-.modal-content textarea {
-    width: 100%;
-    margin-top: 5px;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-.modal-content button {
-    margin-top: 15px;
-    margin-right: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-#submit-task {
-    background-color: #144A96;
-    color: white;
-}
-
-#close-form,
-#close-detail {
-    background-color: #ccc;
-}
-
-#edit-task {
-    background-color: #00bfff;
-    color: white;
-}
-
-#delete-task {
-    background-color: #ff4444;
-    color: white;
-}
-
-#move-to-review {
-    background-color: #28a745;
-    color: white;
-}
-.radio-group {
-    display: flex;
-    gap: 16px;
-}
-
-.radio-option {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 20px;
-    background: white;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    cursor: pointer;
-    min-width: 50px;
-    transition: all 0.2s ease;
-}
-
-.radio-option:has(input:checked) {
-    border-color: #167adc;
-    background: #f0f7ff;
-}
-
-.radio-option input[type="radio"] {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    accent-color: #1976d2;
-}
-
-.radio-option span {
-    font-size: 16px;
-    color: #333;
-}
 
 .project-box {
     background-color: #f5f5f5;
@@ -337,7 +170,6 @@ body {
     border-left: 5px solid #dc3545 !important;
 }
 
-/* Optional: Add a subtle glow effect on hover */
 .priority-green:hover {
     box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
 }
@@ -350,67 +182,51 @@ body {
     box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
 }
 
+/* ========================================
+   ADD TASK BUTTON
+   ======================================== */
 
-.form-page.hidden {
-    display: none !important;
-}
-
-.form-progress {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    padding: 0 10px;
-}
-
-.step {
-    flex: 1;
-    text-align: center;
-    padding: 8px 4px;
-    background: #f0f0f0;
-    margin: 0 3px;
-    border-radius: 4px;
-    font-size: 12px;
+#addtask {
+    margin-top: 15px;
+    background: linear-gradient(135deg, #00bfff 0%, #0099cc 100%);
+    color: white;
+    padding: 15px 24px;
+    border-radius: 10px;
     font-weight: bold;
-    color: #666;
-}
-
-.step.active {
-    background: #007bff;
-    color: white;
-}
-
-.step.completed {
-    background: #28a745;
-    color: white;
-}
-
-.form-navigation {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid #ddd;
-}
-
-.form-navigation button {
-    padding: 8px 16px;
+    font-size: 1.2rem;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
-    font-size: 14px;
+    width: 300px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 191, 255, 0.3);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
 }
 
-#prev-btn {
-    background: #6c757d;
-    color: white;
+#addtask::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
 }
 
-#next-btn, #submit-btn {
-    background: #007bff;
-    color: white;
+#addtask:hover::before {
+    left: 100%;
 }
 
-#close-form {
-    background: #dc3545;
-    color: white;
+#addtask:hover {
+    background: linear-gradient(135deg, #009fcc 0%, #0088bb 100%);
+    box-shadow: 0 6px 10px rgba(0, 191, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+#addtask:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 191, 255, 0.3);
 }
