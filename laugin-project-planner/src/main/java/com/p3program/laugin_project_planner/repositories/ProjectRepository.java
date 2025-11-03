@@ -17,4 +17,8 @@ public interface ProjectRepository extends JpaRepository<Project, Long>{
 
     @Query("SELECT COALESCE(MAX(p.sortIndex), -1) FROM Project p WHERE p.status = :status")
     int findMaxSortIndexByStatus(@Param("status") String status);
+
+    @Query("SELECT COALESCE(SUM(p.hours), 0) FROM Project p WHERE p.priority = :priority")
+    int sumHoursByPriority(@Param("priority") String priority);
+
 }
