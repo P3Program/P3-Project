@@ -24,11 +24,10 @@
         <div class="column-header">All Tasks</div>
         <div id="task-container" class="container">
             <div th:each="project : ${projects}"
-                 th:if="${project.status == 'allProjects'}"
                  class="project-box"
                  th:classappend="${project.priority == 'Green' ? 'priority-green' : (project.priority == 'Yellow' ? 'priority-yellow' : 'priority-red')}"
                  th:attr="data-id=${project.id}, data-status=${project.status}"
-                 draggable="true">
+                 draggable="false">
                 <h3 th:text="${project.title}">Task Title</h3>
                 <p><strong>Customer:</strong> <span th:text="${project.name}">Name</span></p>
                 <p><strong>Phone:</strong> <span th:text="${project.phoneNum}">Phone</span></p>

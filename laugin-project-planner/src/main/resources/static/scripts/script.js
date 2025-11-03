@@ -72,13 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const containers = {
-        task:     { el: document.getElementById('task-container'),    status: 'allProjects' },
         review:   { el: document.getElementById('review-container'),  status: 'underReview' },
         progress: { el: document.getElementById('progress-container'),status: 'inProgress' },
         billing:  { el: document.getElementById('billing-container'), status: 'billing' }
     };
 
-    document.querySelectorAll('.project-box').forEach(makeDraggable);
+    document.querySelectorAll('#review-container .project-box, #progress-container .project-box, #billing-container .project-box').forEach(makeDraggable);
 
     function makeDraggable(card) {
         card.setAttribute('draggable', 'true');
