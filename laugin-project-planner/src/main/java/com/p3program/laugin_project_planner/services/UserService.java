@@ -1,4 +1,4 @@
-package com.p3program.laugin_project_planner.services;
+/*package com.p3program.laugin_project_planner.services;
 
 import com.p3program.laugin_project_planner.repositories.AppUserRepository;
 import com.p3program.laugin_project_planner.users.AppUser;
@@ -23,3 +23,4 @@ public class UserService {
         return repository.save(user);
     }
 }
+*/

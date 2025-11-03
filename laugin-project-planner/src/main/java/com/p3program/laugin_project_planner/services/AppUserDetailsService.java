@@ -16,22 +16,22 @@ public class AppUserDetailsService implements UserDetailsService {
         this.repository = repository;
     }
 
-   /* @Override
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return repository.findByUsername(username)
                 .map(SecurityUser::new)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return repository.findByUsername(username)
-                .map(user -> {
-                    System.out.println("SUCCESS: Loaded user from DB: " + user.getUsername());
-                    return new SecurityUser(user);
-                })
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    }*/
-   @Override
+}
+
+
+/*
+   This is some debugging code, which might be relevant when more users are implemented. Keep for now
+   -Peter
+ */
+
+
+/* @Override
    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
        return repository.findByUsername(username)
                .map(user -> {
@@ -43,4 +43,4 @@ public class AppUserDetailsService implements UserDetailsService {
                    return new UsernameNotFoundException("User not found");
                });
    }
-}
+} */

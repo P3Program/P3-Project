@@ -7,6 +7,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
 
+/**
+ * This class uses an internal spring UsernamePasswordAuthenticationFilter
+ * to watch for incoming usernames and passwords from the /login form,
+ * and yoinks them. Then creates the user with AppUser appUser with these
+ * credentials.
+ */
+
 public class SecurityUser implements UserDetails {
 
     private final AppUser appUser;

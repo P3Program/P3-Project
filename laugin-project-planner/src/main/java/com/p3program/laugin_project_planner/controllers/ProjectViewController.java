@@ -40,8 +40,13 @@ public class ProjectViewController {
         projectService.deleteProject(id);
         return "redirect:/";
     }
-    /*@GetMapping("/error")
-    public String error() {
-        return "There was an error i guess";
+
+    /* controller for custom login html later
+
+
+    @GetMapping("/login")
+    public String login() {
+        return "login"; // Thymeleaf template for login
     }*/
+
 }

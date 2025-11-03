@@ -10,6 +10,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * This is the configuration class, telling springsecurity how to filter
+ * and handle the security and login behavior.
+ * Basically we allow users to access the /login page without being logged in
+ * else they cannot... login.
+ * It also defines where to route the user on successful or unsuccessful login.
+ */
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -31,7 +39,7 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/login?logout")
+                        .logoutSuccessUrl("/login")
                 )
                 .build();
     }

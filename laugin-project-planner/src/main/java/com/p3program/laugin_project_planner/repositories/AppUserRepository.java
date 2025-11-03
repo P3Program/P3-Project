@@ -5,6 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
+/**
+ * This repo allows spring data jpa to find the username
+ * from the generated table. This query is done in the background
+ * since we are using a specific naming convention/syntax
+ * of method findByUsername.
+ */
+
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     Optional<AppUser> findByUsername(String username);
 }
