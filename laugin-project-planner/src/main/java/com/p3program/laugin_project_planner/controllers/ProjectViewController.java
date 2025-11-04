@@ -1,14 +1,17 @@
 package com.p3program.laugin_project_planner.controllers;
 
+import com.p3program.laugin_project_planner.projects.Note;
+import com.p3program.laugin_project_planner.repositories.NoteRepository;
+import com.p3program.laugin_project_planner.repositories.ProjectRepository;
 import com.p3program.laugin_project_planner.services.ProjectService;
 import com.p3program.laugin_project_planner.projects.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Controller
@@ -16,6 +19,35 @@ public class ProjectViewController {
 
     @Autowired
     private ProjectService projectService;
+
+    @Autowired
+    private ProjectRepository projectRepository;
+
+    @Autowired
+    private NoteRepository noteRepository;
+
+    // Get all notes for a project
+    @GetMapping("/projects/{id}/notes")
+    @ResponseBody
+    public List<Note> getNotes(@PathVariable long id) {
+        return noteRepository.findByProjectIdOrderByTimestampDesc(id);
+    }
+
+    // Add a new note to a project
+    @PostMapping("/projects/{id}/addNote")
+    @ResponseBody
+    public Note addNote(@PathVariable long id, @RequestParam String noteText) {
+        // Find the project
+        Project project = projectRepository.findById(id).orElse(null);
+
+        if (project == null) {
+            return null;
+        }
+
+        // Create and save the note
+        Note note = new Note(project, noteText);
+        return noteRepository.save(note);
+    }
 
     @GetMapping("/")
     public String viewProjects(Model model) {

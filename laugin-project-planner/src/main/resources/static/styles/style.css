@@ -179,7 +179,6 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 101;
     overflow-y: auto;
-    /* Add flex centering */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -194,6 +193,121 @@ body {
     max-height: 80vh;
     width: 90%;
     box-sizing: border-box;
+}
+
+.section-divider {
+    border: none;
+    height: 2px;
+    background-color: #ffffff;
+    margin: 20px 0;
+    border-radius: 2px;
+}
+
+#project-detail-modal .modal-content {
+    background: #F8F7F9;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 1300px;
+    width: 90vw;
+    max-height: 85vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+#project-detail-modal h2 {
+    margin: 0 0 20px 0;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+#project-detail-modal .modal-content > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 25px;
+}
+
+.detail-section {
+    flex: 1;
+    min-width: 280px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+}
+
+.detail-section h3 {
+    margin: 0 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #144A96;
+    font-size: 1.1em;
+}
+
+.detail-section p {
+    margin: 8px 0;
+    line-height: 1.6;
+    font-size: 13px;
+}
+
+.notes-section {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px;
+}
+
+.notes-section h3 {
+    margin: 0 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #144A96;
+    font-size: 1.1em;
+}
+
+#detail-notes {
+    margin-top: 4px;
+    max-height: 400px;
+    overflow-y: scroll;
+    padding-right: 6px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.note-item {
+    background: #f9f9f9;
+    padding: 4px 6px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.note-item p {
+    margin: 1px 0;
+    line-height: 1.2;
+    font-size: 0.9em;
+}
+
+.note-item p:first-child {
+    font-weight: 600;
+    font-size: 0.85em;
+    margin-bottom: 1px;
+}
+
+#detail-notes::-webkit-scrollbar {
+    width: 8px;
+}
+
+#detail-notes::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+#detail-notes::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
 }
 
 #task-form-modal{
