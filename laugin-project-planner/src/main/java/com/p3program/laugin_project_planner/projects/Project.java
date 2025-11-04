@@ -57,6 +57,9 @@ public class Project {
     @Column
     private String status;
 
+    @Column(nullable = false)
+    private int sortIndex = 0;
+
     public Project() {
         // Make sure the default status value is allProjects
         if (this.status == null) {
@@ -201,5 +204,13 @@ public class Project {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getSortIndex() {
+        return sortIndex;
+    }
+
+    public void setSortIndex(int sortIndex) {
+        this.sortIndex = sortIndex;
     }
 }
