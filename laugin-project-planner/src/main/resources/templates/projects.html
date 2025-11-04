@@ -26,6 +26,7 @@
         <div class="column-header">All projects</div>
         <div id="project-container" class="container">
             <div th:each="project : ${projects}"
+                 onclick="openProjectDetail(this)"
                  class="project-box"
                  th:classappend="${project.priority == 'Green' ? 'priority-green' : (project.priority == 'Yellow' ? 'priority-yellow' : 'priority-red')}"
                  th:attr="data-id=${project.id}, data-status=${project.status}"
@@ -45,6 +46,7 @@
         <div class="column-header">Under Review</div>
         <div id="review-container" class="container">
             <div th:each="project : ${projects}"
+                 onclick="openProjectDetail(this)"
                  th:if="${project.status == 'underReview'}"
                  class="project-box"
                  th:classappend="${project.priority == 'Green' ? 'priority-green' : (project.priority == 'Yellow' ? 'priority-yellow' : 'priority-red')}"
@@ -64,6 +66,7 @@
         <div class="column-header">In Progress</div>
         <div id="progress-container" class="container">
             <div th:each="project : ${projects}"
+                 onclick="openProjectDetail(this)"
                  th:if="${project.status == 'inProgress'}"
                  class="project-box"
                  th:classappend="${project.priority == 'Green' ? 'priority-green' : (project.priority == 'Yellow' ? 'priority-yellow' : 'priority-red')}"
@@ -83,6 +86,7 @@
         <div class="column-header">Billing</div>
         <div id="billing-container" class="container">
             <div th:each="project : ${projects}"
+                 onclick="openProjectDetail(this)"
                  th:if="${project.status == 'billing'}"
                  class="project-box"
                  th:classappend="${project.priority == 'Green' ? 'priority-green' : (project.priority == 'Yellow' ? 'priority-yellow' : 'priority-red')}"
