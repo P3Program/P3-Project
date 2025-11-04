@@ -124,6 +124,288 @@ body {
 .task:hover {
     background-color: #1a5bb8;
 }
+#addtask {
+    margin-top: 15px;
+    background: linear-gradient(135deg, #00bfff 0%, #0099cc 100%);
+    color: white;
+    padding: 15px 24px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+    width: 300px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 191, 255, 0.3);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+}
+
+#addtask::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+#addtask:hover::before {
+    left: 100%;
+}
+
+#addtask:hover {
+    background: linear-gradient(135deg, #009fcc 0%, #0088bb 100%);
+    box-shadow: 0 6px 10px rgba(0, 191, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+#addtask:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 191, 255, 0.3);
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 101;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background: #F8F7F9;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    max-height: 80vh;
+    width: 90%;
+    box-sizing: border-box;
+}
+
+.section-divider {
+    border: none;
+    height: 2px;
+    background-color: #ffffff;
+    margin: 20px 0;
+    border-radius: 2px;
+}
+
+#project-detail-modal .modal-content {
+    background: #F8F7F9;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 1300px;
+    width: 90vw;
+    max-height: 85vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+#project-detail-modal h2 {
+    margin: 0 0 20px 0;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+#project-detail-modal .modal-content > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 25px;
+}
+
+.detail-section {
+    flex: 1;
+    min-width: 280px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+}
+
+.detail-section h3 {
+    margin: 0 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #144A96;
+    font-size: 1.1em;
+}
+
+.detail-section p {
+    margin: 8px 0;
+    line-height: 1.6;
+    font-size: 13px;
+}
+
+.notes-section {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px;
+}
+
+.notes-section h3 {
+    margin: 0 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #144A96;
+    font-size: 1.1em;
+}
+
+#detail-notes {
+    margin-top: 4px;
+    max-height: 400px;
+    overflow-y: scroll;
+    padding-right: 6px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.note-item {
+    background: #f9f9f9;
+    padding: 4px 6px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.note-item p {
+    margin: 1px 0;
+    line-height: 1.2;
+    font-size: 0.9em;
+}
+
+.note-item p:first-child {
+    font-weight: 600;
+    font-size: 0.85em;
+    margin-bottom: 1px;
+}
+
+#detail-notes::-webkit-scrollbar {
+    width: 8px;
+}
+
+#detail-notes::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+#detail-notes::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
+}
+
+#task-form-modal{
+    width: 100%;
+    display: flex;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-content label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+    width: 100%;
+    margin-top: 5px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.modal-content button {
+    margin-top: 15px;
+    margin-right: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#submit-task {
+    background-color: #144A96;
+    color: white;
+}
+
+#close-form,
+#close-detail {
+    background-color: #ccc;
+}
+
+#edit-task {
+    background-color: #00bfff;
+    color: white;
+}
+
+#delete-task {
+    background-color: #ff4444;
+    color: white;
+}
+
+#move-to-review {
+    background-color: #28a745;
+    color: white;
+}
+.radio-group {
+    display: flex;
+    gap: 16px;
+}
+
+.radio-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 20px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    cursor: pointer;
+    min-width: 50px;
+    transition: all 0.2s ease;
+}
+
+.radio-option:has(input:checked) {
+    border-color: #167adc;
+    background: #f0f7ff;
+}
+
+.radio-option input[type="radio"] {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    accent-color: #1976d2;
+}
+
+.radio-option span {
+    font-size: 16px;
+    color: #333;
+}
 
 .project-box {
     background-color: #f5f5f5;
