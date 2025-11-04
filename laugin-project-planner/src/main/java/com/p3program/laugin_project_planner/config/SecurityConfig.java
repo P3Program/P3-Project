@@ -3,6 +3,7 @@ package com.p3program.laugin_project_planner.config;
 import com.p3program.laugin_project_planner.services.AppUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
  * It also defines where to route the user on successful or unsuccessful login.
  */
 
+@Profile("prod")
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -27,7 +29,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder(10);
     }
 
-    @Bean
+    @Bean("prodSecurityFilterChain")
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
