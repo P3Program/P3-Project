@@ -14,7 +14,7 @@ target/
 .sts4-cache
 
 ### DB ###
-laugin-project-planner/.env
+.env
 
 ### IntelliJ IDEA ###
 .idea

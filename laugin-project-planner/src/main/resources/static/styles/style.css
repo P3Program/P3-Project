@@ -7,12 +7,21 @@ body {
     overflow-x: hidden;
 }
 
-.navbar {
+.navbar,
+.navbar button
+.navbar form {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #144A96;
     padding: 20px 60px;
+    border: none;
+}
+
+.navbar button {
+    all: unset;
+    background-color: #144A96;
+    border-color: #144A96;
 }
 
 .logo {
@@ -31,14 +40,17 @@ body {
     padding: 0;
 }
 
-.navbar a {
+.navbar a,
+.navbar button,
+.navbar form {
     color: white;
     text-decoration: none;
     font-weight: bold;
     font-size: x-large;
 }
 
-.navbar a:hover {
+.navbar a:hover,
+.navbar button:hover {
     color: #00bfff;
 }
 
