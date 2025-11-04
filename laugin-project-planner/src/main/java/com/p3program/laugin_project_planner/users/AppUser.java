@@ -33,6 +33,7 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
     private String username;
     private String password;
     private String role;
@@ -67,5 +68,13 @@ public class AppUser {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }
