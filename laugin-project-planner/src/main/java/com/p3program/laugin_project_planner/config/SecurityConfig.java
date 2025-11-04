@@ -1,10 +1,8 @@
 package com.p3program.laugin_project_planner.config;
 
-import com.p3program.laugin_project_planner.services.AppUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +15,8 @@ import org.springframework.security.web.SecurityFilterChain;
  * Basically we allow users to access the /login page without being logged in
  * else they cannot... login.
  * It also defines where to route the user on successful or unsuccessful login.
+ * It has been given the profile prod, to differentiate production login feature
+ * and development non-login feature.
  */
 
 @Profile("prod")
@@ -46,7 +46,12 @@ public class SecurityConfig {
                 .build();
     }
 
-    @Bean
+    /*
+    Seems to be deprecated and not needed. Let it sit for now
+    - Peter
+     */
+
+    /*@Bean
     public DaoAuthenticationProvider authenticationProvider(
             AppUserDetailsService userDetailsService,
             PasswordEncoder passwordEncoder) {
@@ -55,5 +60,5 @@ public class SecurityConfig {
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder);
         return provider;
-    }
+    }*/
 }
