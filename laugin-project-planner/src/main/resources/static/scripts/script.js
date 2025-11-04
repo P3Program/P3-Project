@@ -86,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getStatusByContainer(el) {
-        if (el === containers.task.el) return containers.task.status;
         if (el === containers.review.el) return containers.review.status;
         if (el === containers.progress.el) return containers.progress.status;
         if (el === containers.billing.el) return containers.billing.status;
