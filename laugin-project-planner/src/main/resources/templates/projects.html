@@ -26,11 +26,12 @@
 <div class="status"></div>
 
 <div class="container-wrapper">
-    <!-- All Tasks -->
+    <!-- All Projects -->
     <div class="container-column">
-        <div class="column-header">All Tasks</div>
-        <div id="task-container" class="container">
+        <div class="column-header">All projects</div>
+        <div id="project-container" class="container">
             <div th:each="project : ${projects}"
+                 onclick="openProjectDetail(this)"
                  class="project-box"
                  th:classappend="${project.priority == 'Green' ? 'priority-green' : (project.priority == 'Yellow' ? 'priority-yellow' : 'priority-red')}"
                  th:attr="data-id=${project.id}, data-status=${project.status}"
@@ -50,6 +51,7 @@
         <div class="column-header">Under Review</div>
         <div id="review-container" class="container">
             <div th:each="project : ${projects}"
+                 onclick="openProjectDetail(this)"
                  th:if="${project.status == 'underReview'}"
                  class="project-box"
                  th:classappend="${project.priority == 'Green' ? 'priority-green' : (project.priority == 'Yellow' ? 'priority-yellow' : 'priority-red')}"
@@ -69,6 +71,7 @@
         <div class="column-header">In Progress</div>
         <div id="progress-container" class="container">
             <div th:each="project : ${projects}"
+                 onclick="openProjectDetail(this)"
                  th:if="${project.status == 'inProgress'}"
                  class="project-box"
                  th:classappend="${project.priority == 'Green' ? 'priority-green' : (project.priority == 'Yellow' ? 'priority-yellow' : 'priority-red')}"
@@ -88,6 +91,7 @@
         <div class="column-header">Billing</div>
         <div id="billing-container" class="container">
             <div th:each="project : ${projects}"
+                 onclick="openProjectDetail(this)"
                  th:if="${project.status == 'billing'}"
                  class="project-box"
                  th:classappend="${project.priority == 'Green' ? 'priority-green' : (project.priority == 'Yellow' ? 'priority-yellow' : 'priority-red')}"
@@ -103,7 +107,7 @@
     </div>
 </div>
 
-<!-- Modal: Create Task -->
+<!-- Modal: Create Project -->
 <div id="task-form-modal" class="modal" style="display: none;">
     <form th:action="@{/projects/save}" th:object="${project}" method="post">
         <div class="modal-content">
@@ -148,6 +152,8 @@
 
             <!-- Page 2: Job Information -->
             <div id="page-2" class="form-page hidden">
+                <h3>Job Information</h3>
+
                 <label>Task Title:</label>
                 <input type="text" th:field="*{title}" placeholder="Short title for the project" required />
 
@@ -218,7 +224,65 @@
     </form>
 </div>
 
+<!-- Project Detail Modal -->
+<div id="project-detail-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h2 id="detail-title">project Title</h2>
+
+        <div style="display: flex">
+
+            <div class="detail-section">
+
+                <h3>Personal Information</h3>
+                <p><strong>Name:</strong> <span id="detail-name"></span></p>
+                <p><strong>Phone:</strong> <span id="detail-phone"></span></p>
+                <p><strong>Address:</strong> <span id="detail-address"></span></p>
+                <p><strong>Email:</strong> <span id="detail-email"></span></p>
+                <p><strong>SSN:</strong> <span id="detail-ssn"></span></p>
+                <hr class="section-divider">
+                <h3>Job Information</h3>
+                <p><strong>Created:</strong> <span id="detail-date"></span></p>
+                <p><strong>Caldera Hot Tub:</strong> <span id="detail-caldera"></span></p>
+                <p><strong>Warranty:</strong> <span id="detail-warranty"></span></p>
+                <p><strong>Estimated Time:</strong> <span id="detail-est-time"></span></p>
+                <p><strong>Due Date:</strong> <span id="detail-due-date"></span></p>
+            </div>
+
+            <div class="detail-section">
+                <h3>Description</h3>
+                <p id="detail-desc"></p>
+            </div>
+
+            <div class="detail-section notes-section">
+                <h3>Project Notes</h3>
+                <div id="detail-notes"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" onclick="document.getElementById('project-detail-modal').style.display='none'">Close</button>
+            <button type="button" onclick="openAddNoteModal()">Add Note</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for adding notes -->
+<div id="project-note-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h2>Add Project Note</h2>
+
+        <label>Note:</label>
+        <textarea id="note-textarea" rows="6" placeholder="Enter your note here..."></textarea>
+
+        <div class="modal-footer">
+            <button type="button" onclick="closeAddNoteModal()">Cancel</button>
+            <button type="button" onclick="submitNote()">Submit</button>
+        </div>
+    </div>
+</div>
+
+
 <script th:src="@{/scripts/script.js}"></script>
 <script th:src="@{/scripts/formFunction.js}"></script>
+<script th:src="@{/scripts/enlargeProjects.js}" defer></script>
 </body>
 </html>

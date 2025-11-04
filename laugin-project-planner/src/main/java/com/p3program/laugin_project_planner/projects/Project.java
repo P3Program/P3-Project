@@ -1,10 +1,13 @@
 package com.p3program.laugin_project_planner.projects;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "projects_test")
@@ -56,6 +59,11 @@ public class Project {
 
     @Column
     private String status;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference // Prevents infinite loop when converting to JSON (Note->Project->Notes->Project...)
+    // list array to store all the notes that belong to the selected project
+    private List<Note> notes = new ArrayList<>();
 
     @Column(nullable = false)
     private int sortIndex = 0;
@@ -212,5 +220,13 @@ public class Project {
 
     public void setSortIndex(int sortIndex) {
         this.sortIndex = sortIndex;
+    }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
     }
 }
