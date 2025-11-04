@@ -1,14 +1,16 @@
 package com.p3program.laugin_project_planner.controllers;
 
-import com.p3program.laugin_project_planner.services.ProjectService;
 import com.p3program.laugin_project_planner.projects.Project;
+import com.p3program.laugin_project_planner.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
@@ -21,6 +23,8 @@ public class ProjectViewController {
     public String viewProjects(Model model) {
         model.addAttribute("projects", projectService.getAllProjects());
         model.addAttribute("project", new Project());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("User: " + auth.getName() + ", Authorities: " + auth.getAuthorities());
 
         return "projects";
     }
@@ -36,4 +40,13 @@ public class ProjectViewController {
         projectService.deleteProject(id);
         return "redirect:/";
     }
+
+    /* controller for custom login html later
+
+
+    @GetMapping("/login")
+    public String login() {
+        return "login"; // Thymeleaf template for login
+    }*/
+
 }
