@@ -22,6 +22,7 @@ body {
     all: unset;
     background-color: #144A96;
     border-color: #144A96;
+    cursor: pointer;
 }
 
 .logo {
