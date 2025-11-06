@@ -7,54 +7,6 @@ body {
     overflow-x: hidden;
 }
 
-.navbar,
-.navbar button
-.navbar form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #144A96;
-    padding: 20px 60px;
-    border: none;
-}
-
-.navbar button {
-    all: unset;
-    background-color: #144A96;
-    border-color: #144A96;
-    cursor: pointer;
-}
-
-.logo {
-    position: absolute;
-    left: 60px;
-    color: white;
-    margin: 0;
-    font-size: xx-large;
-}
-
-.navbar ul {
-    list-style: none;
-    display: flex;
-    gap: 120px;
-    margin: 0;
-    padding: 0;
-}
-
-.navbar a,
-.navbar button,
-.navbar form {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: x-large;
-}
-
-.navbar a:hover,
-.navbar button:hover {
-    color: #00bfff;
-}
-
 .container-wrapper {
     display: flex;
     justify-content: space-evenly;

@@ -5,22 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Users</title>
     <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <link rel="stylesheet" th:href="@{/styles/navbar.css}">
 </head>
 <body>
-<nav class="navbar">
-    <h1 class="logo">LAUGIN</h1>
-    <ul>
-        <li><a href="/">Dashboard</a></li>
-        <li><a th:href="@{/users}">Users</a></li>
-        <li><a href="">Data</a></li>
-        <li><a th:href="@{/kpi}">KPI</a></li>
-        <li><form th:action="@{/logout}" method="post">
-            <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> -->
-            <button type="submit">Logout</button>
-        </form>
-        </li>
-    </ul>
-</nav>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
 <h2>Create New User</h2>
 
 <form th:action="@{users/create}" method="post">
@@ -46,11 +35,11 @@
                 <option value="PM">Project Manager</option>
             </select >
 
-        <!-- <input type="text" id="role" name="role" required> -->
     </div>
 
     <button type="submit">Create User</button>
 </form>
+
 
 </body>
 </html>
