@@ -1,6 +1,6 @@
 package com.p3program.laugin_project_planner.controllers;
 
-import ch.qos.logback.core.model.Model;
+import org.springframework.ui.Model;
 import com.p3program.laugin_project_planner.repositories.AppUserRepository;
 import com.p3program.laugin_project_planner.users.AppUser;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,6 +24,7 @@ public class UsersController {
 
     @GetMapping("/users")
     public String users(Model model) {
+        model.addAttribute("activePage", "users");
         return "users";
     }
 
