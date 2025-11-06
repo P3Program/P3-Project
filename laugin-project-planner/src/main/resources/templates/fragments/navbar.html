@@ -1,13 +1,13 @@
 <nav th:fragment="navbar" class="navbar">
     <h1 class="logo">LAUGIN</h1>
     <ul>
-        <li><a th:href="@{/}" th:classappend="${activePage == 'projects'} ? 'active' : ''">Dashboard</a></li>
+
+        <li><a th:href="@{/}" th:classappend="${activePage == 'projects'} ? 'active' : ''">Projects</a></li>
         <li><a th:href="@{/users}" th:classappend="${activePage == 'users'} ? 'active' : ''">Users</a></li>
         <li><a th:href="@{/data}" th:classappend="${activePage == 'data'} ? 'active' : ''">Data</a></li>
-        <li><form th:action="@{/logout}" method="post">
-            <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" --> <!-- TODO REMOVE WHEN LOGIN -->
-            <button>Logout</button>     <!-- <button type="submit">Logout</button> TODO REPLACE WITH THIS WHEN LOGIN -->
-        </form>
-        </li>
     </ul>
+    <form th:action="@{/logout}" method="post">
+        <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" --> <!-- TODO REMOVE WHEN LOGIN -->
+        <button>Logout</button>     <!-- <button type="submit">Logout</button> TODO REPLACE WITH THIS WHEN LOGIN -->
+    </form>
 </nav>
