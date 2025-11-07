@@ -7,12 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class KpiController {
+public class DataController {
 
     @Autowired
     private ProjectRepository projectRepository;
 
-    @GetMapping("/kpi")
+    @GetMapping("/data")
     public String viewKpi(Model model) {
         // Count tasks by priority color
         long redCount = projectRepository.countByPriority("Red");
@@ -23,7 +23,8 @@ public class KpiController {
         model.addAttribute("redCount", redCount);
         model.addAttribute("yellowCount", yellowCount);
         model.addAttribute("greenCount", greenCount);
+        model.addAttribute("activePage", "data");
 
-        return "KPI";
+        return "data";
     }
 }

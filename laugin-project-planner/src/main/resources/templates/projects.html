@@ -6,22 +6,10 @@
     <title>Laugin</title>
     <link rel="stylesheet" th:href="@{/styles/style.css}">
     <link rel="stylesheet" th:href="@{/styles/formStyle.css}">
+    <link rel="stylesheet" th:href="@{/styles/navbar.css}">
 </head>
 <body>
-<nav class="navbar">
-    <h1 class="logo">LAUGIN</h1>
-    <ul>
-        <li><a href="/">Projects</a></li>
-        <li><a th:href="@{/users}">Users</a></li>
-        <li><a href="">Data</a></li>
-        <li><a th:href="@{/kpi}">Data</a></li>
-        <li><form th:action="@{/logout}" method="post">
-           <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" --> <!-- TODO REMOVE WHEN LOGIN -->
-            <button>Logout</button>     <!-- <button type="submit">Logout</button> TODO REPLACE WITH THIS WHEN LOGIN -->
-        </form>
-        </li>
-    </ul>
-</nav>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <div class="status"></div>
 

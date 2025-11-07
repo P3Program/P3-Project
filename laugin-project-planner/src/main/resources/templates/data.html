@@ -1,21 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+
 <head>
     <meta charset="UTF-8">
     <title>Laugin KPI</title>
-    <link rel="stylesheet" th:href="@{/styles/kpi.css}">
+    <link rel="stylesheet" th:href="@{/styles/data.css}">
+    <link rel="stylesheet" th:href="@{/styles/navbar.css}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-<nav class="navbar">
-    <h1 class="logo">LAUGIN</h1>
-    <ul>
-        <li><a th:href="@{/}">Dashboard</a></li>
-        <li><a href="">Team</a></li>
-        <li><a href="">Data</a></li>
-        <li><a href="">KPI</a></li>
-    </ul>
-</nav>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
 
 <div class="dashboard-container">
     <div class="dashboard-header">
@@ -57,7 +52,7 @@
 </div>
 
 <script>
-    fetch('/api/kpi/hours-by-priority')
+    fetch('/api/data/hours-by-priority')
         .then(response => response.json())
         .then(data => {
             const ctx = document.getElementById('hoursChart');
