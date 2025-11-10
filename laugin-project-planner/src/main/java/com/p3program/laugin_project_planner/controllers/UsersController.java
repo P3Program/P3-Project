@@ -39,7 +39,7 @@ public class UsersController {
         AppUser newUser = new AppUser();
         newUser.setName(name);
         newUser.setUsername(username);
-        newUser.setPassword(password);
+        newUser.setPassword(encryptedPassword);
         newUser.setRole(role);
 
         appUserRepository.save(newUser);
