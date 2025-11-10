@@ -548,3 +548,8 @@ body {
         text-align: center;
     }
 }
+
+.project-boards-container {
+    display: flex;
+    padding: 1px;
+}

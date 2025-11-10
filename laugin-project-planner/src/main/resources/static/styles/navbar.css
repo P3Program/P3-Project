@@ -18,7 +18,7 @@ nav a.active {
 .navbar {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
     background-color: #144A96;
     padding: 10px 60px;
 }
