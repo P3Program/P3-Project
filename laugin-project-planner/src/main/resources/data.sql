@@ -36,3 +36,6 @@ VALUES
     ('[DEMO] Themyscira Thermal Baths', 'Diana Prince', TRUE, TRUE, '050372-1616', '50110014', 'Temple District, Themyscira', 'diana@amazonwarriors.org', 13, DATE_ADD(CURDATE(), INTERVAL 15 DAY), 'Red', 'Repair and reinforce stonework in royal thermal baths.', 'inProgress', 14),
 
     ('[DEMO] Queens Neighborhood Spa Setup', 'Peter Parker', FALSE, FALSE, '100198-1717', '50110015', '20 Ingram St, Forest Hills', 'peter@dailybugle.com', 6, DATE_ADD(CURDATE(), INTERVAL 9 DAY), 'Green', 'Install new home spa system for Aunt May.', 'underReview', 15);
+
+INSERT INTO `appuser` (`id`, `password`, `role`, `username`, `name`)
+VALUES('1', '$2a$12$Z7K.6g.MwiEAR.p.Le03I.7gftFgzAhjwVVeyZIsTHxBXXyRkA4Vu', 'ADMIN', 'admin', 'admin');
