@@ -15,8 +15,8 @@
 <div class="status"></div>
 <div class="project-boards-container">
     <!-- All Projects -->
-    <div class="container-column" id="allProjects">
-        <div class="column-header" id="allProjectsHeader">All projects</div>
+    <div class="container-column main-column">
+        <div class="column-header main-header">All projects</div>
         <div id="project-container" class="container">
             <div th:each="project : ${allProjects}"
                  onclick="openProjectDetail(this)"
