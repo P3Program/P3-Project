@@ -6,6 +6,7 @@ import com.p3program.laugin_project_planner.repositories.NoteRepository;
 import com.p3program.laugin_project_planner.repositories.ProjectRepository;
 import com.p3program.laugin_project_planner.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 
 @Controller
 public class ProjectViewController {
@@ -27,16 +27,71 @@ public class ProjectViewController {
     @Autowired
     private NoteRepository noteRepository;
 
-
     @GetMapping("/")
-    public String viewProjects(Model model) {
-        model.addAttribute("projects", projectService.getAllProjects());
-        model.addAttribute("project", new Project());
-        model.addAttribute("activePage", "projects");
+    public String viewProjects(
+            @RequestParam(defaultValue = "priority") String sortBy,
+            @RequestParam(defaultValue = "asc") String dir,
+            Model model
+    ) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println("User: " + auth.getName() + ", Authorities: " + auth.getAuthorities());
 
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("dir", dir);
+
+        List<Project> allProjects;
+        List<Project> underReview;
+        List<Project> inProgress;
+        List<Project> billing;
+
+        if ("priority".equalsIgnoreCase(sortBy)) {
+            boolean asc = !"desc".equalsIgnoreCase(dir);
+
+            allProjects = asc ? projectRepository.findAllOrderByPriorityCustomAsc()
+                    : projectRepository.findAllOrderByPriorityCustomDesc();
+
+            underReview = asc ? projectRepository.findByStatusOrderByPriorityCustomAsc("underReview")
+                    : projectRepository.findByStatusOrderByPriorityCustomDesc("underReview");
+
+            inProgress  = asc ? projectRepository.findByStatusOrderByPriorityCustomAsc("inProgress")
+                    : projectRepository.findByStatusOrderByPriorityCustomDesc("inProgress");
+
+            billing     = asc ? projectRepository.findByStatusOrderByPriorityCustomAsc("billing")
+                    : projectRepository.findByStatusOrderByPriorityCustomDesc("billing");
+
+        } else {
+            Sort.Direction direction = "desc".equalsIgnoreCase(dir) ? Sort.Direction.DESC : Sort.Direction.ASC;
+            Sort sort = Sort.by(direction, mapSortField(sortBy))
+                    .and(Sort.by(Sort.Direction.ASC, "estDueDate"))
+                    .and(Sort.by(Sort.Direction.ASC, "date"))
+                    .and(Sort.by(Sort.Direction.ASC, "id"));
+
+            allProjects = projectRepository.findAll(sort);
+            underReview = projectRepository.findByStatus("underReview", sort);
+            inProgress  = projectRepository.findByStatus("inProgress",  sort);
+            billing     = projectRepository.findByStatus("billing",     sort);
+        }
+
+        model.addAttribute("project", new Project());
+        model.addAttribute("allProjects", allProjects);
+        model.addAttribute("underReview", underReview);
+        model.addAttribute("inProgress", inProgress);
+        model.addAttribute("billing", billing);
+
+        model.addAttribute("activePage", "projects");
+
         return "projects";
+    }
+
+    private String mapSortField(String sortBy) {
+        return switch (sortBy.toLowerCase()) {
+            case "due"     -> "estDueDate";
+            case "created" -> "date";
+            case "customer"-> "name";
+            case "hours"   -> "hours";
+            case "priority"-> "priority";
+            default        -> "estDueDate";
+        };
     }
 
     @PostMapping("/projects/save")
@@ -62,14 +117,8 @@ public class ProjectViewController {
     @PostMapping("/projects/{id}/addNote")
     @ResponseBody
     public Note addNote(@PathVariable long id, @RequestParam String noteText) {
-        // Find the project
         Project project = projectRepository.findById(id).orElse(null);
-
-        if (project == null) {
-            return null;
-        }
-
-        // Create and save the note
+        if (project == null) return null;
         Note note = new Note(project, noteText);
         return noteRepository.save(note);
     }
