@@ -11,30 +11,19 @@ nav a {
 
 nav a.active {
     font-weight: bold;
-    color: #007bff;
-    border-bottom: 2px solid #007bff;
+    color: white;
+    border-bottom: 2px solid white;
 }
-.navbar,
-.navbar button
-.navbar form {
+
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #144A96;
-    padding: 20px 60px;
-    border: none;
-}
-
-.navbar button {
-    all: unset;
-    background-color: #144A96;
-    border-color: #144A96;
-    cursor: pointer;
-    margin-left: auto;
+    padding: 10px 60px;
 }
 
 .logo {
-    left: 60px;
     color: white;
     margin: 0;
     font-size: xx-large;
@@ -48,16 +37,81 @@ nav a.active {
     padding: 0;
 }
 
-.navbar a,
-.navbar button,
-.navbar form {
+.navbar a {
     color: white;
     text-decoration: none;
     font-weight: bold;
     font-size: x-large;
 }
 
-.navbar a:hover,
-.navbar button:hover {
+.navbar a:hover {
     color: #00bfff;
+}
+
+.nav-right {
+    color: white;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+/* --- DROPDOWN LOGOUT CSS --- */
+
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: x-large;
+    cursor: pointer;
+    padding: 6px 10px;
+}
+
+.dropdown-toggle:hover {
+    color: #00bfff;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #144A96;
+    color: white;
+    min-width: 140px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 6px;
+    padding: 8px 0;
+    z-index: 9999;
+    margin-top: 0;
+}
+
+.user-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu form {
+    margin: 0;
+    display: block;
+}
+
+.dropdown-menu button {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 10px 15px;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.dropdown-menu button:hover {
+    background-color: rgba(0, 191, 255, 0.3);
+    color: white;
 }
