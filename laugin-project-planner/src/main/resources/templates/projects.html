@@ -114,7 +114,7 @@
 
 <!-- Modal: Create Project -->
 <div id="task-form-modal" class="modal" style="display: none;">
-    <form th:action="@{/projects/save}" th:object="${project}" method="post">
+    <form class="task-form" th:action="@{/projects/save}" th:object="${project}" method="post">
         <div class="modal-content">
             <button type="button" id="close-form">X</button>
             <h2>Create Task</h2>

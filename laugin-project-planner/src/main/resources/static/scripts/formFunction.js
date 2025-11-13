@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close Modal
     closeFormBtn.addEventListener('click', () => {
         formModal.style.display = 'none';
-        document.querySelector('form').reset(); // Clear all fields
+        document.querySelector(".task-form").reset(); // Clear all fields
+
     });
 
     // Listen for changes on Caldera and Warranty radio buttons
