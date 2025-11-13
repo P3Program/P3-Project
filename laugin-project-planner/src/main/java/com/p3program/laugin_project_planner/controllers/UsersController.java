@@ -1,13 +1,15 @@
 package com.p3program.laugin_project_planner.controllers;
 
-import org.springframework.ui.Model;
 import com.p3program.laugin_project_planner.repositories.AppUserRepository;
 import com.p3program.laugin_project_planner.users.AppUser;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 
 @Controller
@@ -24,8 +26,11 @@ public class UsersController {
 
     @GetMapping("/users")
     public String users(Model model) {
+        List<AppUser> users = appUserRepository.findAll();
+        model.addAttribute("users", users);
         model.addAttribute("activePage", "users");
         return "users";
+
     }
 
     @PostMapping("/users/create")

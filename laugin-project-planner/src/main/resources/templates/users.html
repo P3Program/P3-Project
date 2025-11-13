@@ -6,13 +6,15 @@
     <title>Users</title>
     <link rel="stylesheet" th:href="@{/styles/style.css}">
     <link rel="stylesheet" th:href="@{/styles/navbar.css}">
+    <link rel="stylesheet" th:href="@{/styles/users.css}">
+
 </head>
 <body>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <h2>Create New User</h2>
 
-<form th:action="@{users/create}" method="post">
+<form id="createuser" th:action="@{users/create}" method="post">
     <div>
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
@@ -39,13 +41,20 @@
     <button type="submit">Create User</button>
 </form>
 
-<!-- <table>
-    <tr><th>ID</th><th>Name</th></tr>
-    <tr th:each="user : ${user}">
-        <td th:text="${appuser.id}"></td>
-        <td th:text="${appuser.name}"></td>
+<table id="usertable">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Role</th>
     </tr>
-</table> -->
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.role}"></td>
+    </tr>
+</table>
 
 
 
