@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <title>Laugin KPI</title>
     <link rel="stylesheet" th:href="@{/styles/data.css}">
     <link rel="stylesheet" th:href="@{/styles/navbar.css}">
