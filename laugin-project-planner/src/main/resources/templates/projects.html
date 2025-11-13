@@ -38,37 +38,19 @@
     <div class="container-column">
         <div class="column-header">All projects</div>
         <div id="project-container" class="container">
-            <div th:each="project : ${allProjects}"
-                 onclick="openProjectDetail(this)"
-                 class="project-box"
-                 th:classappend="${project.priority == 'Green' ? 'priority-green' : (project.priority == 'Yellow' ? 'priority-yellow' : 'priority-red')}"
-                 th:attr="data-id=${project.id}, data-status=${project.status}"
-                 draggable="false">
-                <h3 th:text="${project.title}">Project Title</h3>
-                <p><strong>Customer:</strong> <span th:text="${project.name}">Name</span></p>
-                <p><strong>Phone:</strong> <span th:text="${project.phoneNum}">Phone</span></p>
-                <p><strong>Addr:</strong> <span th:text="${project.address}">Address</span></p>
-                <span class="priorityBorder" th:text="${project.priority}"></span>
+            <div th:each="project : ${allProjects}">
+                <div th:insert="~{fragments/project-box :: projectBox(${project})}"></div>
             </div>
         </div>
-        <button id="addtask" class="addtask">⊕ ADD Project</button>
+        <button id="addtask" class="addtask">⊕ ADD TASK</button>
     </div>
 
     <!-- Under Review -->
     <div class="container-column">
         <div class="column-header">Under Review</div>
         <div id="review-container" class="container">
-            <div th:each="project : ${underReview}"
-                 onclick="openProjectDetail(this)"
-                 class="project-box"
-                 th:classappend="${project.priority == 'Green' ? 'priority-green' : (project.priority == 'Yellow' ? 'priority-yellow' : 'priority-red')}"
-                 th:attr="data-id=${project.id}, data-status=${project.status}"
-                 draggable="true">
-                <h3 th:text="${project.title}">Project Title</h3>
-                <p><strong>Customer:</strong> <span th:text="${project.name}">Name</span></p>
-                <p><strong>Phone:</strong> <span th:text="${project.phoneNum}">Phone</span></p>
-                <p><strong>Addr:</strong> <span th:text="${project.address}">Address</span></p>
-                <span class="priorityBorder" th:text="${project.priority}"></span>
+            <div th:each="project : ${underReview}">
+                <div th:insert="~{fragments/project-box :: projectBox(${project})}"></div>
             </div>
         </div>
     </div>
@@ -77,17 +59,8 @@
     <div class="container-column">
         <div class="column-header">In Progress</div>
         <div id="progress-container" class="container">
-            <div th:each="project : ${inProgress}"
-                 onclick="openProjectDetail(this)"
-                 class="project-box"
-                 th:classappend="${project.priority == 'Green' ? 'priority-green' : (project.priority == 'Yellow' ? 'priority-yellow' : 'priority-red')}"
-                 th:attr="data-id=${project.id}, data-status=${project.status}"
-                 draggable="true">
-                <h3 th:text="${project.title}">Task Title</h3>
-                <p><strong>Customer:</strong> <span th:text="${project.name}">Name</span></p>
-                <p><strong>Phone:</strong> <span th:text="${project.phoneNum}">Phone</span></p>
-                <p><strong>Addr:</strong> <span th:text="${project.address}">Address</span></p>
-                <span class="priorityBorder" th:text="${project.priority}"></span>
+            <div th:each="project : ${inProgress}">
+                <div th:insert="~{fragments/project-box :: projectBox(${project})}"></div>
             </div>
         </div>
     </div>
@@ -96,17 +69,8 @@
     <div class="container-column">
         <div class="column-header">Billing</div>
         <div id="billing-container" class="container">
-            <div th:each="project : ${billing}"
-                 onclick="openProjectDetail(this)"
-                 class="project-box"
-                 th:classappend="${project.priority == 'Green' ? 'priority-green' : (project.priority == 'Yellow' ? 'priority-yellow' : 'priority-red')}"
-                 th:attr="data-id=${project.id}, data-status=${project.status}"
-                 draggable="true">
-                <h3 th:text="${project.title}">Project Title</h3>
-                <p><strong>Customer:</strong> <span th:text="${project.name}">Name</span></p>
-                <p><strong>Phone:</strong> <span th:text="${project.phoneNum}">Phone</span></p>
-                <p><strong>Addr:</strong> <span th:text="${project.address}">Address</span></p>
-                <span class="priorityBorder" th:text="${project.priority}"></span>
+            <div th:each="project : ${billing}">
+                <div th:insert="~{fragments/project-box :: projectBox(${project})}"></div>
             </div>
         </div>
     </div>
@@ -263,9 +227,10 @@
                 <div id="detail-notes"></div>
             </div>
         </div>
+        <button id="close-detail-modal" onclick="document.getElementById('project-detail-modal').style.display='none'">X</button>
         <div class="modal-footer">
-            <button type="button" onclick="document.getElementById('project-detail-modal').style.display='none'">Close</button>
             <button type="button" onclick="openAddNoteModal()">Add Note</button>
+            <button id="complete-task-btn">Complete Task</button>
         </div>
     </div>
 </div>
