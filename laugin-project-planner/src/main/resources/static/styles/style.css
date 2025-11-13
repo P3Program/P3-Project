@@ -9,6 +9,7 @@ body {
 
 .container-wrapper {
     display: flex;
+    flex-direction: row;
     justify-content: space-evenly;
     align-items: flex-start;
     padding: 20px 60px;
@@ -49,6 +50,11 @@ body {
     left: 100%;
 }
 
+.main-header {
+    border-radius: 0;
+    width: -webkit-fill-available;
+}
+
 .container-column {
     display: flex;
     flex-direction: column;
@@ -60,11 +66,21 @@ body {
     flex-direction: column;
     gap: 10px;
     width: 300px;
-    height: calc(100vh - 320px);
+    height: calc(100vh - 220px);
     background-color: lightblue;
     border-radius: 10px;
     padding: 15px;
     overflow-y: auto;
+}
+
+.main-container{
+    height: calc(100vh - 320px);
+}
+.main-column{
+    border: 1px solid black;
+    border-bottom: none;
+    background-color: lightblue;
+    padding: 0 0 10px;
 }
 
 .task {
@@ -547,4 +563,8 @@ body {
         width: 100%;
         text-align: center;
     }
+}
+
+.project-boards-container {
+    display: flex;
 }
