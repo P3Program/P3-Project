@@ -52,7 +52,7 @@ body {
 
 .main-header {
     border-radius: 0;
-    width: 304px;
+    width: -webkit-fill-available;
 }
 
 .container-column {
