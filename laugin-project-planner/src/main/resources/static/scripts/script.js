@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+const csrfToken = document.querySelector('input[name="_csrf"]').value;
+const csrfHeader = document.querySelector('input[name="_csrf_header"]')?.value || 'X-CSRF-TOKEN';
+
 
     const containers = {
         review:   { el: document.getElementById('review-container'),  status: 'underReview' },
@@ -54,7 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (toStatus !== fromStatus) {
                 try {
                     await fetch(`/api/projects/${id}/move?toStatus=${encodeURIComponent(toStatus)}`, {
-                        method: 'PATCH'
+                        method: 'PATCH',
+                        credentials: 'include', // keep cookies
+                        headers: {
+                            'Content-Type': 'application/json',
+                            [csrfHeader]: csrfToken,
+                        },
                     });
                 } catch (err) {
                     console.error('Kunne ikke flytte projekt', err);
@@ -65,7 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 await fetch(`/api/projects/reorder?status=${encodeURIComponent(toStatus)}`, {
                     method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        [csrfHeader]: csrfToken,
+                    },
                     body: JSON.stringify(orderedIds)
                 });
             } catch (err) {
