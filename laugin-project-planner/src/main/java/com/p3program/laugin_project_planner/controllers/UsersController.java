@@ -47,6 +47,15 @@ public class UsersController {
         newUser.setPassword(encryptedPassword);
         newUser.setRole(role);
 
+        /*List<AppUser> currentusers = appUserRepository.findAll();
+        for(AppUser user : currentusers) {
+            if(equals(user.getUsername(), newUser.getUsername())) {
+                return null;
+            }
+
+
+        }*/
+
         appUserRepository.save(newUser);
 
         System.out.println("User succesfully created: " + username);
