@@ -129,28 +129,28 @@
             <!-- Page 1: Personal Information -->
             <div id="page-1" class="form-page">
 
-                <label>Name:</label>
-                <input type="text" th:field="*{name}" placeholder="Name of Customer" required />
+                <label for="name">Name:</label>
+                <input type="text" id="name" th:field="*{name}" placeholder="Name of Customer" required />
 
-                <label>Phone Number:</label>
-                <input type="text" th:field="*{phoneNum}"
+                <label for="phoneNum">Number:</label>
+                <input type="text" id="phoneNum" th:field="*{phoneNum}"
                        placeholder="Phone number on customer"
                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                        maxlength="15" pattern="\d{7,15}"
                        required />
 
-                <label>Address:</label>
-                <input type="text" th:field="*{address}"
+                <label for="address">Address:</label>
+                <input type="text" id="address" th:field="*{address}"
                        placeholder="Address of the repair"
                        required />
 
-                <label>Email:</label>
-                <input type="email" th:field="*{email}"
+                <label for="email">Email:</label>
+                <input type="email" id="email" th:field="*{email}"
                        placeholder="Customers Email"
                        required />
 
-                <label>Social Security Number:</label>
-                <input type="text" th:field="*{ssn}"
+                <label for="ssn">Social Security Number:</label>
+                <input type="text" id="ssn" th:field="*{ssn}"
                        placeholder="dd/mm/yy/serial number"
                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                        maxlength="10" pattern="\d{10}" required />
@@ -160,8 +160,8 @@
             <div id="page-2" class="form-page hidden">
                 <h3>Job Information</h3>
 
-                <label>Task Title:</label>
-                <input type="text" th:field="*{title}" placeholder="Short title for the project" required />
+                <label for="title">Task Title:</label>
+                <input type="text" id="title" th:field="*{title}" placeholder="Short title for the project" required />
 
                 <label>Caldera Hot Tub?</label>
                 <div class="radio-group">
@@ -193,25 +193,25 @@
 
                 </div>
 
-                <label>Priority:</label>
-                <select class="form-control" th:field="*{priority}">
+                <label for="priority">Priority:</label>
+                <select class="form-control" id="priority" th:field="*{priority}">
                     <option th:value="'Red'" selected>Red</option>
                     <option th:value="'Yellow'">Yellow</option>
                     <option th:value="'Green'">Green</option>
                 </select>
 
-                <label>Estimated Time In Hours:</label>
-                <input type="number" th:field="*{hours}"
+                <label for="hours">Estimated Time In Hours:</label>
+                <input type="number" id="hours" th:field="*{hours}"
                        placeholder="Hours it could take"
                 />
 
-                <label>To be done by:</label>
-                <input type="date" th:field="*{estDueDate}" required />
+                <label for="estDueDate">To be done by:</label>
+                <input type="date" id="estDueDate" th:field="*{estDueDate}" required />
             </div>
 
             <!-- Page 3: Description -->
             <div id="page-3" class="form-page hidden">
-                <label>Description of the problem:</label>
+                <label for="task-desc">Description of the problem:</label>
                 <textarea id="task-desc" th:field="*{description}" rows="8"
                           placeholder="Describe the project in detail..." required></textarea>
             </div>
@@ -275,7 +275,7 @@
     <div class="modal-content">
         <h2>Add Project Note</h2>
 
-        <label>Note:</label>
+        <label for="note-textarea">Note:</label>
         <textarea id="note-textarea" rows="6" placeholder="Enter your note here..."></textarea>
 
         <div class="modal-footer">
