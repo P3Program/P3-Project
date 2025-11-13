@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="eng">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,8 +47,8 @@
                 <h3 th:text="${project.title}">Project Title</h3>
                 <p><strong>Customer:</strong> <span th:text="${project.name}">Name</span></p>
                 <p><strong>Phone:</strong> <span th:text="${project.phoneNum}">Phone</span></p>
-                <p><strong>Addr:</strong> <span th:text="${project.address}">Address</span></p>
-                <span class="priorityBorder" th:text="${project.priority}"></span>
+                <p><strong>Due date:</strong> <span th:text="${project.estDueDate}">Address</span></p>
+                <p><strong>Day created:</strong> <span th:text="${project.date}">Address</span></p>
             </div>
         </div>
         <button id="addtask" class="addtask">⊕ ADD Project</button>
@@ -67,8 +67,8 @@
                 <h3 th:text="${project.title}">Project Title</h3>
                 <p><strong>Customer:</strong> <span th:text="${project.name}">Name</span></p>
                 <p><strong>Phone:</strong> <span th:text="${project.phoneNum}">Phone</span></p>
-                <p><strong>Addr:</strong> <span th:text="${project.address}">Address</span></p>
-                <span class="priorityBorder" th:text="${project.priority}"></span>
+                <p><strong>Due date:</strong> <span th:text="${project.estDueDate}">Address</span></p>
+                <p><strong>Day created:</strong> <span th:text="${project.date}">Address</span></p>
             </div>
         </div>
     </div>
@@ -86,8 +86,8 @@
                 <h3 th:text="${project.title}">Task Title</h3>
                 <p><strong>Customer:</strong> <span th:text="${project.name}">Name</span></p>
                 <p><strong>Phone:</strong> <span th:text="${project.phoneNum}">Phone</span></p>
-                <p><strong>Addr:</strong> <span th:text="${project.address}">Address</span></p>
-                <span class="priorityBorder" th:text="${project.priority}"></span>
+                <p><strong>Due date:</strong> <span th:text="${project.estDueDate}">Address</span></p>
+                <p><strong>Day created:</strong> <span th:text="${project.date}">Address</span></p>
             </div>
         </div>
     </div>
@@ -105,8 +105,8 @@
                 <h3 th:text="${project.title}">Project Title</h3>
                 <p><strong>Customer:</strong> <span th:text="${project.name}">Name</span></p>
                 <p><strong>Phone:</strong> <span th:text="${project.phoneNum}">Phone</span></p>
-                <p><strong>Addr:</strong> <span th:text="${project.address}">Address</span></p>
-                <span class="priorityBorder" th:text="${project.priority}"></span>
+                <p><strong>Due date:</strong> <span th:text="${project.estDueDate}">Due date</span></p>
+                <p><strong>Day created:</strong> <span th:text="${project.date}">Day created</span></p>
             </div>
         </div>
     </div>
@@ -136,7 +136,8 @@
                 <input type="text" th:field="*{phoneNum}"
                        placeholder="Phone number on customer"
                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                       maxlength="7" minlength="7" required />
+                       maxlength="15" pattern="\d{7,15}"
+                       required />
 
                 <label>Address:</label>
                 <input type="text" th:field="*{address}"
@@ -152,7 +153,7 @@
                 <input type="text" th:field="*{ssn}"
                        placeholder="dd/mm/yy/serial number"
                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                       maxlength="10" minlength="10" required />
+                       maxlength="10" pattern="\d{10}" required />
             </div>
 
             <!-- Page 2: Job Information -->
@@ -201,7 +202,6 @@
 
                 <label>Estimated Time In Hours:</label>
                 <input type="number" th:field="*{hours}"
-                       value=""
                        placeholder="Hours it could take"
                 />
 
