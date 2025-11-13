@@ -9,12 +9,10 @@ body {
 
 .container-wrapper {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: flex-start;
-    padding: 20px 60px;
-    gap: 30px;
-    max-width: 100vw;
+    padding: 20px 20px;
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -56,6 +54,7 @@ body {
 }
 
 .container-column {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
