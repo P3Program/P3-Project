@@ -1,0 +1,119 @@
+/* GENERAL LAYOUT */
+body {
+    background: #f5f6fa;
+    color: #333;
+    margin: 0;
+}
+
+h2 {
+    text-align: center;
+    margin: 30px 0;
+    color: #2c3e50;
+}
+
+/* USER CREATION FORM */
+#createuser {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px 40px;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#createuser div {
+    display: flex;
+    flex-direction: column;
+}
+
+#createuser label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+#createuser input,
+#createuser select {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+#createuser input:focus,
+#createuser select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+    outline: none;
+}
+
+#createuser button {
+    margin-top: 10px;
+    align-self: flex-end;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#createuser button:hover {
+    background: #0056b3;
+    transform: translateY(-1px);
+}
+
+/* USER TABLE */
+#usertable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto 60px;
+    max-width: 900px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+#usertable th, #usertable td {
+    padding: 14px 16px;
+    text-align: left;
+}
+
+#usertable thead {
+    background-color: #007bff;
+    color: white;
+    font-weight: 600;
+}
+
+#usertable tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+#usertable tr:hover {
+    background-color: #eaf2ff;
+    transition: background 0.2s ease;
+}
+
+/* OPTIONAL: Make it responsive */
+@media (max-width: 768px) {
+    #createuser, #usertable {
+        width: 95%;
+        padding: 20px;
+    }
+
+    #usertable th, #usertable td {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    #createuser button {
+        width: 100%;
+    }
+}
