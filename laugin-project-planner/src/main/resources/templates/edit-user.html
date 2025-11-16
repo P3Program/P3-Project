@@ -3,71 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Users</title>
+    <title>Edit User</title>
     <link rel="stylesheet" th:href="@{/styles/style.css}">
     <link rel="stylesheet" th:href="@{/styles/navbar.css}">
     <link rel="stylesheet" th:href="@{/styles/users.css}">
-
 </head>
 <body th:data-message="${message}" th:data-message-type="${messageType}">
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<h2>Create New User</h2>
+<h2>Edit User</h2>
 
-<form id="createuser" th:action="@{/users/create}" method="post">
+<form id="edit-user" th:action="@{/users/edit/{id}(id=${user.id})}" method="post">
     <div>
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="name" th:value="${user.name}" required>
     </div>
 
     <div>
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+        <input type="text" id="username" name="username" th:value="${user.username}" required>
     </div>
 
     <div>
-        <label for="password">Password:</label>
-        <input type="text" id="password" name="password" required>
+        <label for="password">Password (leave blank to keep current):</label>
+        <input type="password" id="password" name="password" placeholder="Leave blank to keep current">
     </div>
 
     <div>
         <label for="role">Choose a Role:</label>
-            <select id="role" name="role">
-                <option value="ADMIN">Admin</option>
-                <option value="PM">Project Manager</option>
-            </select >
+        <select id="role" name="role">
+            <option value="ADMIN" th:selected="${user.role == 'ADMIN'}">Admin</option>
+            <option value="PM" th:selected="${user.role == 'PM'}">Project Manager</option>
+        </select>
     </div>
 
-    <button type="submit">Create User</button>
+    <button type="submit">Update User</button>
+    <a th:href="@{/users}" class="btn-cancel">Cancel</a>
 </form>
-
-
-<table id="usertable">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Username</th>
-        <th>Role</th>
-        <th></th>
-    </tr>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.name}"></td>
-        <td th:text="${user.username}"></td>
-        <td th:text="${user.role}"></td>
-        <td>
-            <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn-edit">Edit</a>
-        </td>
-    </tr>
-</table>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         const msg = document.body.dataset.message;
         const type = document.body.dataset.messageType || 'success';
-
-        console.log("Message:", msg);  // DEBUG
-        console.log("Type:", type);     // DEBUG999*---
 
         if (msg) {
             showToast(msg, type);
@@ -83,7 +60,6 @@
         setTimeout(() => toast.remove(), 3000);
     }
 </script>
-
 
 </body>
 </html>
