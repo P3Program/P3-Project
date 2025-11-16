@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 
@@ -37,7 +37,14 @@ public class UsersController {
     public String createUser(@RequestParam String name,
                              @RequestParam String username,
                              @RequestParam String password,
-                             @RequestParam String role) {
+                             @RequestParam String role,
+                             RedirectAttributes redirectAttributes) {
+
+        if(appUserRepository.existsByUsername(username)) {
+            redirectAttributes.addFlashAttribute("message", "Username already exists!");
+            redirectAttributes.addFlashAttribute("messageType", "error");
+            return "redirect:/users";
+        }
 
         String encryptedPassword = passwordEncoder.encode(password);
 
@@ -47,16 +54,9 @@ public class UsersController {
         newUser.setPassword(encryptedPassword);
         newUser.setRole(role);
 
-        /*List<AppUser> currentusers = appUserRepository.findAll();
-        for(AppUser user : currentusers) {
-            if(equals(user.getUsername(), newUser.getUsername())) {
-                return null;
-            }
-
-
-        }*/
-
         appUserRepository.save(newUser);
+        redirectAttributes.addFlashAttribute("message", "user created successfully!");
+        redirectAttributes.addFlashAttribute("messageType", "success");
 
         System.out.println("User succesfully created: " + username);
 
