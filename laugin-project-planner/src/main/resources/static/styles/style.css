@@ -415,15 +415,15 @@ body {
 
 
 .priority-green {
-    border-left: 5px solid #28a745 !important;
+    border-left: 10px solid #28a745 !important;
 }
 
 .priority-yellow {
-    border-left: 5px solid #ffc107 !important;
+    border-left: 10px solid #ffc107 !important;
 }
 
 .priority-red {
-    border-left: 5px solid #dc3545 !important;
+    border-left: 10px solid #dc3545 !important;
 }
 
 .priority-green:hover {
@@ -566,4 +566,124 @@ body {
 
 .project-boards-container {
     display: flex;
+}
+
+/* ========================================
+   PRIORITY FILTER PANEL
+   ======================================== */
+
+.filter-panel {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    z-index: 1000;
+    width: 60px;
+}
+
+.filter-help {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    background: #f0f0f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #666;
+    cursor: help;
+    transition: all 0.3s ease;
+}
+
+.filter-help:hover {
+    background: #e0e0e0;
+    color: #333;
+    transform: scale(1.1);
+}
+
+.filter-tooltip {
+    position: absolute;
+    right: calc(100% + 15px);
+    top: 50%;
+    transform: translateY(-50%);
+    background: #333;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+    width: 250px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.filter-tooltip::after {
+    content: '';
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 8px solid transparent;
+    border-left-color: #333;
+}
+
+.filter-help:hover .filter-tooltip {
+    opacity: 1;
+}
+
+.filter-divider {
+    width: 100%;
+    height: 2px;
+    background: #e0e0e0;
+    margin: 4px 0;
+}
+
+.filter-button {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-button:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.filter-button.active {
+    border-color: #144A96;
+    box-shadow: 0 0 0 3px rgba(20, 74, 150, 0.2);
+    transform: scale(1.1);
+}
+
+.filter-button-red {
+    background: #dc3545;
+}
+
+.filter-button-yellow {
+    background: #ffc107;
+}
+
+.filter-button-green {
+    background: #28a745;
+}
+
+.project-box.hidden {
+    display: none;
 }

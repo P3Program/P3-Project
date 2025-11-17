@@ -114,7 +114,21 @@
     </div>
 </div>
 
+<!-- Priority Filter Panel -->
+<div class="filter-panel">
+    <div class="filter-help">
+        ?
+        <div class="filter-tooltip">
+            Filter the projects by priority by picking a color. All columns will then show only the selected color. To return to the neutral view, click the same color again.
+        </div>
+    </div>
 
+    <div class="filter-divider"></div>
+
+    <button class="filter-button filter-button-red" data-priority="red" title="Filter by Red priority"></button>
+    <button class="filter-button filter-button-yellow" data-priority="yellow" title="Filter by Yellow priority"></button>
+    <button class="filter-button filter-button-green" data-priority="green" title="Filter by Green priority"></button>
+</div>
 
 <!-- Modal: Create Project -->
 <div id="task-form-modal" class="modal" style="display: none;">
@@ -305,5 +319,6 @@
 <script th:src="@{/scripts/script.js}"></script>
 <script th:src="@{/scripts/formFunction.js}"></script>
 <script th:src="@{/scripts/enlargeProjects.js}" defer></script>
+<script th:src="@{/scripts/filterPanel.js}" defer></script>
 </body>
 </html>
