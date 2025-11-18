@@ -38,9 +38,8 @@
     <div class="container-column">
         <div class="column-header">All projects</div>
         <div id="project-container" class="container">
-            <div th:each="project : ${allProjects}">
-                <div th:insert="~{fragments/project-box :: projectBox(${project})}"></div>
-            </div>
+            <div th:each="project : ${allProjects}"
+                 th:insert="~{fragments/project-box :: projectBox(${project})}"></div>
         </div>
         <button id="addtask" class="addtask">⊕ ADD Project</button>
     </div>
@@ -49,9 +48,8 @@
     <div class="container-column">
         <div class="column-header">Under Review</div>
         <div id="review-container" class="container">
-            <div th:each="project : ${underReview}">
-                <div th:insert="~{fragments/project-box :: projectBox(${project})}"></div>
-            </div>
+            <div th:each="project : ${underReview}"
+                 th:insert="~{fragments/project-box :: projectBox(${project})}"></div>
         </div>
     </div>
 
@@ -59,9 +57,8 @@
     <div class="container-column">
         <div class="column-header">In Progress</div>
         <div id="progress-container" class="container">
-            <div th:each="project : ${inProgress}">
-                <div th:insert="~{fragments/project-box :: projectBox(${project})}"></div>
-            </div>
+            <div th:each="project : ${inProgress}"
+                 th:insert="~{fragments/project-box :: projectBox(${project})}"></div>
         </div>
     </div>
 
@@ -69,9 +66,8 @@
     <div class="container-column">
         <div class="column-header">Billing</div>
         <div id="billing-container" class="container">
-            <div th:each="project : ${billing}">
-                <div th:insert="~{fragments/project-box :: projectBox(${project})}"></div>
-            </div>
+            <div th:each="project : ${billing}"
+                 th:insert="~{fragments/project-box :: projectBox(${project})}"></div>
         </div>
     </div>
 </div>

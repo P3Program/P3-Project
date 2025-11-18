@@ -6,37 +6,72 @@ document.addEventListener('DOMContentLoaded', () => {
         billing:  { el: document.getElementById('billing-container'), status: 'billing' }
     };
 
-    document.querySelectorAll('#review-container .project-box, #progress-container .project-box, #billing-container .project-box').forEach(makeDraggable);
+    function initializeDraggableCards() {
+        document.querySelectorAll('.project-box').forEach(card => {
+            // Only make draggable if not in allProjects
+            if (card.dataset.status !== 'allProjects') {
+                makeDraggable(card);
+            }
+        });
+    }
+
+    // Call after delay for fragments to render
+    setTimeout(initializeDraggableCards, 300);
+
 
     function makeDraggable(card) {
         card.setAttribute('draggable', 'true');
+
+        // Remove old listeners
+        card.removeEventListener('dragstart', onDragStart);
+        card.removeEventListener('dragend', onDragEnd);
+
+        // Add new listeners
         card.addEventListener('dragstart', onDragStart);
         card.addEventListener('dragend', onDragEnd);
     }
 
     let dragged = null;
+    let draggedWrapper = null;
 
     function onDragStart(e) {
         dragged = e.currentTarget;
-        dragged.classList.add('dragging');
+        draggedWrapper = dragged.parentElement;
+        draggedWrapper.classList.add('dragging');
         e.dataTransfer.effectAllowed = 'move';
         e.dataTransfer.setData('text/plain', dragged.dataset.id || '');
     }
 
     function onDragEnd() {
-        if (dragged) dragged.classList.remove('dragging');
+        if (draggedWrapper) draggedWrapper.classList.remove('dragging');
         dragged = null;
+        draggedWrapper = null;
     }
 
     Object.values(containers).forEach(({ el }) => {
         el.addEventListener('dragover', (e) => {
             e.preventDefault();
-            const afterEl = getAfterElement(el, e.clientY);
-            if (!dragged) return;
-            if (afterEl == null) el.appendChild(dragged);
-            else el.insertBefore(dragged, afterEl);
-        });
+            e.dataTransfer.dropEffect = 'move';
 
+            if (!draggedWrapper) return;
+
+            const afterEl = getAfterElement(el, e.clientY);
+
+            try {
+                // Only insert if it's actually a different position
+                if (afterEl == null) {
+                    if (draggedWrapper !== el.lastElementChild) {
+                        el.appendChild(draggedWrapper);
+                    }
+                } else {
+                    if (draggedWrapper !== afterEl && draggedWrapper.nextElementSibling !== afterEl) {
+                        el.insertBefore(draggedWrapper, afterEl);
+                    }
+                }
+            } catch (error) {
+                console.error('Error moving element:', error);
+            }
+        });
         el.addEventListener('dragenter', () => el.classList.add('drag-over'));
         el.addEventListener('dragleave', () => el.classList.remove('drag-over'));
 
@@ -50,6 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = dragged.dataset.id;
 
             dragged.dataset.status = toStatus;
+
+            //makeDraggable(dragged);
 
             if (toStatus !== fromStatus) {
                 try {
@@ -75,7 +112,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function getAfterElement(container, y) {
-        const els = [...container.querySelectorAll('.project-box:not(.dragging)')];
+        const els = [...container.children].filter(child =>
+            !child.classList.contains('dragging')
+        );
+
         let closest = { offset: Number.NEGATIVE_INFINITY, el: null };
         for (const el of els) {
             const box = el.getBoundingClientRect();
