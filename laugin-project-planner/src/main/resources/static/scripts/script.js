@@ -19,7 +19,7 @@ const csrfHeader = document.querySelector('input[name="_csrf_header"]')?.value |
     }
 
     // Call after delay for fragments to render
-    setTimeout(initializeDraggableCards, 300);
+    setTimeout(initializeDraggableCards, 50);
 
 
     function makeDraggable(card) {
