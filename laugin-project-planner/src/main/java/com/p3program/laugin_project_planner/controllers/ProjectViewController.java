@@ -122,7 +122,12 @@ public class ProjectViewController {
     public Note addNote(@PathVariable long id, @RequestParam String noteText) {
         Project project = projectRepository.findById(id).orElse(null);
         if (project == null) return null;
-        Note note = new Note(project, noteText);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+
+        Note note;
+        note = new Note(project, noteText, username);
         return noteRepository.save(note);
     }
 }
