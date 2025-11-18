@@ -84,7 +84,7 @@ function loadNotesFromDatabase(projectId) {
 
                 return `
                     <div class="note-item">
-                        <p><strong>${timestamp}</strong></p>
+                        <p><strong>${timestamp} - ${note.user}</strong></p>
                         <p>${note.text}</p>
                     </div>
                 `;
