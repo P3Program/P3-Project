@@ -43,6 +43,9 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login")
                 )
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/projects/*/addNote", "/projects/*/notes")
+                )
                 .build();
     }
 
