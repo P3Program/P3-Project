@@ -11,12 +11,12 @@
     <link rel="stylesheet" th:href="@{/styles/users.css}">
 
 </head>
-<body>
+<body th:data-message="${message}" th:data-message-type="${messageType}">
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <h2>Create New User</h2>
 
-<form id="createuser" th:action="@{users/create}" method="post">
+<form id="createuser" th:action="@{/users/create}" method="post">
     <div>
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
@@ -43,21 +43,48 @@
     <button type="submit">Create User</button>
 </form>
 
+
 <table id="usertable">
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Username</th>
         <th>Role</th>
+        <th></th>
     </tr>
     <tr th:each="user : ${users}">
         <td th:text="${user.id}"></td>
         <td th:text="${user.name}"></td>
         <td th:text="${user.username}"></td>
         <td th:text="${user.role}"></td>
+        <td>
+            <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn-edit">Edit</a>
+        </td>
     </tr>
 </table>
 
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const msg = document.body.dataset.message;
+        const type = document.body.dataset.messageType || 'success';
+
+        console.log("Message:", msg);  // DEBUG
+        console.log("Type:", type);     // DEBUG999*---
+
+        if (msg) {
+            showToast(msg, type);
+        }
+    });
+
+    function showToast(message, type) {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => toast.remove(), 3000);
+    }
+</script>
 
 
 </body>

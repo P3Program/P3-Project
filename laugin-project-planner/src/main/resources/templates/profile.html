@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <link rel="stylesheet" th:href="@{/styles/navbar.css}">
+    <link rel="stylesheet" th:href="@{/styles/users.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<table id="profiletable">
+    <tr>
+        <th>ID</th>
+        <td th:text="${user.id}"></td>
+    </tr>
+    <tr>
+        <th>Name</th>
+        <td th:text="${user.name}"></td>
+    </tr>
+    <tr>
+        <th>Username</th>
+        <td th:text="${user.username}"></td>
+    </tr>
+    <tr>
+        <th>Role</th>
+        <td th:text="${user.role}"></td>
+    </tr>
+</table>
+
+<div>
+    <form id="resetpassword">
+    <button type="button">Reset Password</button>
+    </form>
+</div>
+
+
+</body>
+</html>

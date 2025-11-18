@@ -10,8 +10,14 @@ import java.util.Optional;
  * from the generated table. This query is done in the background
  * since we are using a specific naming convention/syntax
  * of method findByUsername.
+ * It also extends existsByUsername, which queries the database for
+ * duplicate usernames, used in UserController
  */
 
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
+
+    boolean existsByUsername(String username);
+
     Optional<AppUser> findByUsername(String username);
+
 }

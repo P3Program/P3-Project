@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <link rel="stylesheet" th:href="@{/styles/navbar.css}">
+    <link rel="stylesheet" th:href="@{/styles/users.css}">
+</head>
+<body th:data-message="${message}" th:data-message-type="${messageType}">
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<h2>Edit User</h2>
+
+<form id="edit-user" th:action="@{/users/edit/{id}(id=${user.id})}" method="post">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" th:value="${user.name}" required>
+    </div>
+
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" th:value="${user.username}" required>
+    </div>
+
+    <div>
+        <label for="password">Password (leave blank to keep current):</label>
+        <input type="password" id="password" name="password" placeholder="Leave blank to keep current">
+    </div>
+
+    <div>
+        <label for="role">Choose a Role:</label>
+        <select id="role" name="role">
+            <option value="ADMIN" th:selected="${user.role == 'ADMIN'}">Admin</option>
+            <option value="PM" th:selected="${user.role == 'PM'}">Project Manager</option>
+        </select>
+    </div>
+
+    <button type="submit">Update User</button>
+    <a th:href="@{/users}" class="btn-cancel">Cancel</a>
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const msg = document.body.dataset.message;
+        const type = document.body.dataset.messageType || 'success';
+
+        if (msg) {
+            showToast(msg, type);
+        }
+    });
+
+    function showToast(message, type) {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => toast.remove(), 3000);
+    }
+</script>
+
+</body>
+</html>
