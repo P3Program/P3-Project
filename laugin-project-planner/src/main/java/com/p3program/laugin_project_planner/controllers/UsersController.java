@@ -6,8 +6,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -37,7 +39,14 @@ public class UsersController {
     public String createUser(@RequestParam String name,
                              @RequestParam String username,
                              @RequestParam String password,
-                             @RequestParam String role) {
+                             @RequestParam String role,
+                             RedirectAttributes redirectAttributes) {
+
+        if(appUserRepository.existsByUsername(username)) {
+            redirectAttributes.addFlashAttribute("message", "Username already exists!");
+            redirectAttributes.addFlashAttribute("messageType", "error");
+            return "redirect:/users";
+        }
 
         String encryptedPassword = passwordEncoder.encode(password);
 
@@ -47,16 +56,9 @@ public class UsersController {
         newUser.setPassword(encryptedPassword);
         newUser.setRole(role);
 
-        /*List<AppUser> currentusers = appUserRepository.findAll();
-        for(AppUser user : currentusers) {
-            if(equals(user.getUsername(), newUser.getUsername())) {
-                return null;
-            }
-
-
-        }*/
-
         appUserRepository.save(newUser);
+        redirectAttributes.addFlashAttribute("message", "user created successfully!");
+        redirectAttributes.addFlashAttribute("messageType", "success");
 
         System.out.println("User succesfully created: " + username);
 
@@ -67,6 +69,51 @@ public class UsersController {
         System.out.println(encryptedPassword);
         System.out.println(role);
 
+        return "redirect:/users";
+    }
+    @GetMapping("users/edit/{id}")
+    public String editUserForm(@PathVariable Long id, Model model) {
+        AppUser user = appUserRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        model.addAttribute("user", user);
+        model.addAttribute("activePage", "users");
+        return "edit-user";
+    }
+
+    @PostMapping("/users/edit/{id}")
+    public String editUser(@PathVariable Long id,
+                           @RequestParam String name,
+                           @RequestParam String username,
+                           @RequestParam String role,
+                           @RequestParam(required = false) String password,
+                           RedirectAttributes redirectAttributes) {
+
+        AppUser user = appUserRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if(!user.getUsername().equals(username) &&
+            appUserRepository.existsByUsername(username)) {
+            redirectAttributes.addFlashAttribute("message", "Username already exists!");
+            redirectAttributes.addFlashAttribute("messageType", "error");
+            return "redirect:users/edit/" + id;
+        }
+
+        user.setName(name);
+        user.setUsername(username);
+        user.setRole(role);
+
+        // Only update password if provided
+        // TODO dont think this is the way, keeping it here for now. Would maybe rather set a default PW and let the
+        // TODO user change it upon login, and let the user request/set a new password, and not the admin.
+        // TODO must create some profile page then... * sigh *...
+        /* if (password != null && !password.isEmpty()) {
+            user.setPassword(passwordEncoder.encode(password));
+        }*/
+
+        appUserRepository.save(user);
+
+        redirectAttributes.addFlashAttribute("User updated successfully!");
+        redirectAttributes.addFlashAttribute("messageType", "success");
         return "redirect:/users";
     }
 }
