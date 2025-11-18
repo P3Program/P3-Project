@@ -18,6 +18,9 @@ function openProjectDetail(element) {
     const dueDate = element.getAttribute('data-due-date');
     const description = element.getAttribute('data-description');
 
+    console.log('Caldera raw value:', caldera);
+    console.log('Warranty raw value:', warranty);
+
     // Store current project ID
     currentProjectId = id;
 
@@ -25,9 +28,14 @@ function openProjectDetail(element) {
     document.getElementById('detail-title').textContent = title;
     document.getElementById('detail-name').textContent = name;
     document.getElementById('detail-date').textContent = date;
-    document.getElementById('detail-caldera').textContent = caldera === '1' ? 'Yes' : 'No';
-    document.getElementById('detail-warranty').textContent = warranty === '1' ? 'Yes' : 'No';
-    document.getElementById('detail-ssn').textContent = ssn
+
+    // Check for multiple possible values (1, '1', true, 'true')
+    document.getElementById('detail-caldera').textContent =
+        (caldera === '1' || caldera === 1 || caldera === 'true' || caldera === true) ? 'Yes' : 'No';
+    document.getElementById('detail-warranty').textContent =
+        (warranty === '1' || warranty === 1 || warranty === 'true' || warranty === true) ? 'Yes' : 'No';
+
+    document.getElementById('detail-ssn').textContent = ssn;
     document.getElementById('detail-phone').textContent = phone;
     document.getElementById('detail-address').textContent = address;
     document.getElementById('detail-email').textContent = email;
@@ -40,7 +48,6 @@ function openProjectDetail(element) {
 
     // Show the modal
     document.getElementById('project-detail-modal').style.display = 'flex';
-
     /* Close modal by clicking outside
     window.onclick = function(event) {
         const detailModal = document.getElementById('project-detail-modal');

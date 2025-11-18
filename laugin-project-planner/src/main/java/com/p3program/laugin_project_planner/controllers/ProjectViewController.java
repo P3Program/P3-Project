@@ -32,7 +32,10 @@ public class ProjectViewController {
             @RequestParam(defaultValue = "priority") String sortBy,
             @RequestParam(defaultValue = "asc") String dir,
             Model model
+
     ) {
+        List<Project> projects = projectService.getAllProjects();
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println("User: " + auth.getName() + ", Authorities: " + auth.getAuthorities());
 
@@ -79,7 +82,7 @@ public class ProjectViewController {
         model.addAttribute("billing", billing);
 
         model.addAttribute("activePage", "projects");
-
+        System.out.println("DEBUG: Fetched " + projects.size() + " projects");
         return "projects";
     }
 
