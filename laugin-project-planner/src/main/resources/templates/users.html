@@ -60,6 +60,13 @@
         <td>
             <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn-edit">Edit</a>
         </td>
+        <td>
+            <form id="deleteuser" th:action="@{/users/delete}" method="post">
+                <input type="hidden" th:name="userId" th:value="${user.id}"/>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <button type="submit">Delete user</button>
+            </form>
+        </td>
     </tr>
 </table>
 
@@ -82,7 +89,7 @@
         toast.textContent = message;
         document.body.appendChild(toast);
 
-        setTimeout(() => toast.remove(), 3000);
+        setTimeout(() => toast.remove(), 5000);
     }
 </script>
 

@@ -2,6 +2,7 @@ package com.p3program.laugin_project_planner.controllers;
 
 import com.p3program.laugin_project_planner.repositories.AppUserRepository;
 import com.p3program.laugin_project_planner.users.AppUser;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,7 @@ public class UsersController {
         this.appUserRepository = appUserRepository;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/users")
     public String users(Model model) {
         List<AppUser> users = appUserRepository.findAll();
@@ -35,6 +37,7 @@ public class UsersController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/users/create")
     public String createUser(@RequestParam String name,
                              @RequestParam String username,
@@ -71,6 +74,8 @@ public class UsersController {
 
         return "redirect:/users";
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("users/edit/{id}")
     public String editUserForm(@PathVariable Long id, Model model) {
         AppUser user = appUserRepository.findById(id)
@@ -80,6 +85,7 @@ public class UsersController {
         return "edit-user";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/users/edit/{id}")
     public String editUser(@PathVariable Long id,
                            @RequestParam String name,
@@ -112,8 +118,19 @@ public class UsersController {
 
         appUserRepository.save(user);
 
-        redirectAttributes.addFlashAttribute("User updated successfully!");
+        redirectAttributes.addFlashAttribute("message" ,"User updated successfully!");
         redirectAttributes.addFlashAttribute("messageType", "success");
+        return "redirect:/users";
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/users/delete")
+    public String deleteUser(@RequestParam Long userId,
+                             RedirectAttributes redirectAttributes) {
+        appUserRepository.deleteById(userId);
+        redirectAttributes.addFlashAttribute("message", "User deleted successfully!");
+        redirectAttributes.addFlashAttribute("messageType", "success");
+
         return "redirect:/users";
     }
 }
