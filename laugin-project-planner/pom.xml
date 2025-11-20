@@ -12,7 +12,7 @@
 	<artifactId>laugin-project-planner</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Laugin Project Planner</name>
-	<description>A project planner to give Laugin a overview and make sure task aren&apos;t forgotten.</description>
+	<description>A project planner to give Laugin an overview and make sure task aren&apos;t forgotten.</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -31,10 +31,10 @@
 	</properties>
 	<dependencies>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
