@@ -115,3 +115,22 @@ nav a.active {
     background-color: rgba(0, 191, 255, 0.3);
     color: white;
 }
+/* Needed for the profile dropdown button */
+.dropdown-menu a.dropdown-item {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 10px 15px;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.dropdown-menu a.dropdown-item:hover {
+    background-color: rgba(0, 191, 255, 0.3);
+    color: white;
+}
