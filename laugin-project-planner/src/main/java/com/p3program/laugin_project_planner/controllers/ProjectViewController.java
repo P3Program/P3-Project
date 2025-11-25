@@ -1,19 +1,25 @@
 package com.p3program.laugin_project_planner.controllers;
 
-import com.p3program.laugin_project_planner.projects.Note;
-import com.p3program.laugin_project_planner.projects.Project;
-import com.p3program.laugin_project_planner.repositories.NoteRepository;
-import com.p3program.laugin_project_planner.repositories.ProjectRepository;
-import com.p3program.laugin_project_planner.services.ProjectService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
+import com.p3program.laugin_project_planner.projects.Note;
+import com.p3program.laugin_project_planner.projects.Project;
+import com.p3program.laugin_project_planner.repositories.NoteRepository;
+import com.p3program.laugin_project_planner.repositories.ProjectRepository;
+import com.p3program.laugin_project_planner.services.ProjectService;
 
 @Controller
 public class ProjectViewController {
@@ -50,17 +56,18 @@ public class ProjectViewController {
         if ("priority".equalsIgnoreCase(sortBy)) {
             boolean asc = !"desc".equalsIgnoreCase(dir);
 
-            allProjects = asc ? projectRepository.findAllOrderByPriorityCustomAsc()
-                    : projectRepository.findAllOrderByPriorityCustomDesc();
+            allProjects = asc ? projectRepository.findAllActiveOrderByPriorityCustomAsc()
+                            : projectRepository.findAllActiveOrderByPriorityCustomDesc();
 
-            underReview = asc ? projectRepository.findByStatusOrderByPriorityCustomAsc("underReview")
-                    : projectRepository.findByStatusOrderByPriorityCustomDesc("underReview");
+            underReview = asc ? projectRepository.findActiveByStatusOrderByPriorityCustomAsc("underReview")
+                            : projectRepository.findActiveByStatusOrderByPriorityCustomDesc("underReview");
 
-            inProgress  = asc ? projectRepository.findByStatusOrderByPriorityCustomAsc("inProgress")
-                    : projectRepository.findByStatusOrderByPriorityCustomDesc("inProgress");
+            inProgress = asc ? projectRepository.findActiveByStatusOrderByPriorityCustomAsc("inProgress")
+                            : projectRepository.findActiveByStatusOrderByPriorityCustomDesc("inProgress");
 
-            billing     = asc ? projectRepository.findByStatusOrderByPriorityCustomAsc("billing")
-                    : projectRepository.findByStatusOrderByPriorityCustomDesc("billing");
+            billing = asc ? projectRepository.findActiveByStatusOrderByPriorityCustomAsc("billing")
+                            : projectRepository.findActiveByStatusOrderByPriorityCustomDesc("billing");
+
 
         } else {
             Sort.Direction direction = "desc".equalsIgnoreCase(dir) ? Sort.Direction.DESC : Sort.Direction.ASC;
@@ -69,10 +76,11 @@ public class ProjectViewController {
                     .and(Sort.by(Sort.Direction.ASC, "date"))
                     .and(Sort.by(Sort.Direction.ASC, "id"));
 
-            allProjects = projectRepository.findAll(sort);
-            underReview = projectRepository.findByStatus("underReview", sort);
-            inProgress  = projectRepository.findByStatus("inProgress",  sort);
-            billing     = projectRepository.findByStatus("billing",     sort);
+            allProjects = projectRepository.findByEndDateIsNull(sort);
+            underReview = projectRepository.findByStatusAndEndDateIsNull("underReview", sort);
+            inProgress = projectRepository.findByStatusAndEndDateIsNull("inProgress", sort);
+            billing = projectRepository.findByStatusAndEndDateIsNull("billing", sort);
+
         }
 
         model.addAttribute("project", new Project());
