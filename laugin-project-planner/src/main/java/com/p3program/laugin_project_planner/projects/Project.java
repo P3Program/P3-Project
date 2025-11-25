@@ -1,13 +1,22 @@
 package com.p3program.laugin_project_planner.projects;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "projects_test")
@@ -60,6 +69,9 @@ public class Project {
     @Column
     private String status;
 
+    @Column 
+    private Date endDate;
+
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference // Prevents infinite loop when converting to JSON (Note->Project->Notes->Project...)
     // list array to store all the notes that belong to the selected project
@@ -75,7 +87,7 @@ public class Project {
         }
     }
 
-    public Project(long id, String title, String name, LocalDate date, boolean caldera, boolean warranty, String ssn, String phoneNum, String address, String email, int hours, Date estDueDate, String priority, String description, String status) {
+    public Project(long id, String title, String name, LocalDate date, boolean caldera, boolean warranty, String ssn, String phoneNum, String address, String email, int hours, Date estDueDate, String priority, String description, String status, Date endDate) {
         this.id = id;
         this.title = title;
         this.name = name;
@@ -91,6 +103,7 @@ public class Project {
         this.priority = priority;
         this.description = description;
         this.status = status;
+        this.endDate = endDate;
     }
 
     // Getters and setters
@@ -228,5 +241,13 @@ public class Project {
 
     public void setNotes(List<Note> notes) {
         this.notes = notes;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }

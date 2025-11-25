@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <title>Archive</title>
+    <link rel="stylesheet" th:href="@{/styles/archive.css}">
+    <link rel="stylesheet" th:href="@{/styles/navbar.css}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+
+
+<div class="container">
+    <header>
+        <h1>Project Archive</h1>
+        <p>View all completed projects</p>
+    </header>
+
+    <section class="stats">
+        <div class="stat-card">
+            <h2 th:text="${totalCompleted}">0</h2>
+            <p>Total Completed</p>
+        </div>
+        <div class="stat-card">
+            <h2 th:text="${completedThisMonth}">0</h2>
+            <p>This Month</p>
+        </div>
+        <div class="stat-card">
+            <h2 th:text="${completedThisWeek}">0</h2>
+            <p>This Week</p>
+        </div>
+    </section>
+
+    <section class="filters">
+        <form method="get" action="/archive">
+            <div class="filter-group">
+                <label for="search">Search Projects</label>
+                <input type="text" id="search" name="search" placeholder="Search by title or description..." th:value="${search}">
+            </div>
+
+            <div class="filter-group">
+                <label for="dateFrom">From Date</label>
+                <input type="date" id="dateFrom" name="dateFrom" th:value="${dateFrom}">
+            </div>
+
+            <div class="filter-group">
+                <label for="dateTo">To Date</label>
+                <input type="date" id="dateTo" name="dateTo" th:value="${dateTo}">
+            </div>
+
+            <div class="button-group">
+                <button type="submit">Apply Filters</button>
+                <a href="/archive" class="btn-reset">Reset</a>
+            </div>
+        </form>
+    </section>
+
+    <section class="task-list">
+        <div th:if="${#lists.isEmpty(projects)}" class="no-tasks">
+            <p>No completed projects found</p>
+        </div>
+
+        <article th:each="project : ${projects}" class="task-card">
+            <header class="task-header">
+                <h3 th:text="${project.title}">Project Title</h3>
+                <span class="task-status">Completed</span>
+            </header>
+
+            <p class="task-description" th:text="${project.description} ?: 'No description'">Project description goes here</p>
+
+            <div class="task-meta">
+                <div class="meta-item">
+                    <strong>Name:</strong>
+                    <span th:text="${project.name} ?: 'N/A'">Project Name</span>
+                </div>
+
+                <div class="meta-item" th:if="${project.endDate != null}">
+                    <strong>End Date:</strong>
+                    <span th:text="${#dates.format(project.endDate, 'MMM dd, yyyy')}">Nov. 15, 2025</span>
+                </div>
+
+                <div class="meta-item" th:if="${project.address}">
+                    <strong>Address:</strong>
+                    <span th:text="${project.address}">Address</span>
+                </div>
+
+                <div class="meta-item" th:if="${project.phoneNum}">
+                    <strong>Phone:</strong>
+                    <span th:text="${project.phoneNum}">Phone</span>
+                </div>
+
+                <div class="meta-item" th:if="${project.email}">
+                    <strong>Email:</strong>
+                    <span th:text="${project.email}">Email</span>
+                </div>
+
+                <div class="meta-item" th:if="${project.estDueDate}">
+                    <strong>Est. Due Date:</strong>
+                    <span th:text="${#dates.format(project.estDueDate, 'MMM dd, yyyy')}">Nov 10, 2024</span>
+                </div>
+
+                <div class="meta-item" th:if="${project.hours}">
+                    <strong>Hours:</strong>
+                    <span th:text="${project.hours}">0</span>
+                </div>
+
+                <div class="meta-item">
+                    <strong>Caldera:</strong>
+                    <span th:text="${project.caldera ? 'Yes' : 'No'}">No</span>
+                </div>
+
+                <div class="meta-item">
+                    <strong>Warranty:</strong>
+                    <span th:text="${project.warranty ? 'Yes' : 'No'}">No</span>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>
+
+</body>
+</html>
