@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.p3program.laugin_project_planner.projects.Note;
 import com.p3program.laugin_project_planner.projects.Project;
@@ -106,8 +109,15 @@ public class ProjectViewController {
     }
 
     @PostMapping("/projects/save")
-    public String saveProject(@ModelAttribute("project") Project project) {
-        projectService.createProject(project);
+    public String saveProject(@ModelAttribute("project") Project project, RedirectAttributes redirectAttributes) {
+        try {
+            projectService.createProject(project);
+            redirectAttributes.addFlashAttribute("message", "Project created successfully now in All and under Review!");
+            redirectAttributes.addFlashAttribute("messageType", "success");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("message", "Failed to create project: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("messageType", "error");
+        }
         return "redirect:/";
     }
 

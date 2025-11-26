@@ -10,7 +10,7 @@
     <link rel="stylesheet" th:href="@{/styles/formStyle.css}">
     <link rel="stylesheet" th:href="@{/styles/navbar.css}">
 </head>
-<body>
+<body th:data-message="${message}" th:data-message-type="${messageType}">
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
 
@@ -122,6 +122,14 @@
                        placeholder="Address of the repair"
                        required />
 
+                <label for="posCode">Post Code:</label>
+                <input type="text" id="posCode" th:field="*{address}"
+                       placeholder="Post Code the customer is under"
+                       oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                       maxlength="3"
+                       pattern="\d{3}"
+                       required />
+
                 <label for="email">Email:</label>
                 <input type="email" id="email" th:field="*{email}"
                        placeholder="Customers Email"
@@ -180,18 +188,23 @@
 
                 <label for="hours">Estimated Time In Hours:</label>
                 <input type="number" id="hours" th:field="*{hours}"
+                       oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                        placeholder="Hours it could take"
                 />
 
                 <label for="estDueDate">To be done by:</label>
-                <input type="date" id="estDueDate" th:field="*{estDueDate}" required />
+                <input type="date" id="estDueDate" th:field="*{estDueDate}"
+                       th:min="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}"
+                       required />
             </div>
 
             <!-- Page 3: Description -->
             <div id="page-3" class="form-page hidden">
                 <label for="task-desc">Description of the problem:</label>
                 <textarea id="task-desc" th:field="*{description}" rows="8"
-                          placeholder="Describe the project in detail..." required></textarea>
+                          placeholder="Describe the project in detail..."
+                          maxlength="1800"
+                          required></textarea>
             </div>
 
             <!-- Hidden fields -->
