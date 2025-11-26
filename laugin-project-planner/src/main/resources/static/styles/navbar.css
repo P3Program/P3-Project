@@ -53,7 +53,6 @@ nav a.active {
     font-weight: bold;
     font-size: x-large;
 }
-
 /* --- DROPDOWN LOGOUT CSS --- */
 
 .user-dropdown {
@@ -99,23 +98,8 @@ nav a.active {
     display: block;
 }
 
-.dropdown-menu button {
-    width: 100%;
-    background: none;
-    border: none;
-    text-align: left;
-    padding: 10px 15px;
-    cursor: pointer;
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.dropdown-menu button:hover {
-    background-color: rgba(0, 191, 255, 0.3);
-    color: white;
-}
-/* Needed for the profile dropdown button */
+/* Unified styling for both button and link */
+.dropdown-menu button,
 .dropdown-menu a.dropdown-item {
     display: block;
     width: 100%;
@@ -128,8 +112,11 @@ nav a.active {
     font-size: 16px;
     font-weight: 600;
     text-decoration: none;
+    font-family: inherit; /* Ensures same font */
+    box-sizing: border-box;
 }
 
+.dropdown-menu button:hover,
 .dropdown-menu a.dropdown-item:hover {
     background-color: rgba(0, 191, 255, 0.3);
     color: white;

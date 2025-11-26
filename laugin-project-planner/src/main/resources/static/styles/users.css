@@ -102,10 +102,6 @@ h2 {
     background-color: #f8f9fa;
 }
 
-#usertable tr:hover {
-    background-color: #eaf2ff;
-    transition: background 0.2s ease;
-}
 
 /* OPTIONAL: Make it responsive */
 @media (max-width: 768px) {
