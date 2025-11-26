@@ -12,6 +12,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import java.util.List;
 
@@ -98,8 +100,15 @@ public class ProjectViewController {
     }
 
     @PostMapping("/projects/save")
-    public String saveProject(@ModelAttribute("project") Project project) {
-        projectService.createProject(project);
+    public String saveProject(@ModelAttribute("project") Project project, RedirectAttributes redirectAttributes) {
+        try {
+            projectService.createProject(project);
+            redirectAttributes.addFlashAttribute("message", "Project created successfully now in All and under Review!");
+            redirectAttributes.addFlashAttribute("messageType", "success");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("message", "Failed to create project: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("messageType", "error");
+        }
         return "redirect:/";
     }
 

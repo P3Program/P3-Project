@@ -1,3 +1,10 @@
+const msg = document.body.dataset.message;
+const type = document.body.dataset.messageType || 'success';
+
+if (msg) {
+    showToast(msg, type);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // Modal Elements
@@ -129,3 +136,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
+function showToast(message, type) {
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(() => toast.remove(), 3000);
+}

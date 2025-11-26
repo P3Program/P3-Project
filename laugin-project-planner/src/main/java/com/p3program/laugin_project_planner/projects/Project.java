@@ -42,6 +42,9 @@ public class Project {
     @Column(length = 45)
     private String address;
 
+    @Column(length = 3)
+    private int postCode;
+
     @Column
     private String email;
 
@@ -54,7 +57,7 @@ public class Project {
     @Column
     private String priority;
 
-    @Column
+    @Column (length = 2000)
     private String description;
 
     @Column
@@ -71,11 +74,11 @@ public class Project {
     public Project() {
         // Make sure the default status value is allProjects
         if (this.status == null) {
-            this.status = "allProjects";
+            this.status = "underReview";
         }
     }
 
-    public Project(long id, String title, String name, LocalDate date, boolean caldera, boolean warranty, String ssn, String phoneNum, String address, String email, int hours, Date estDueDate, String priority, String description, String status) {
+    public Project(long id, String title, String name, LocalDate date, boolean caldera, boolean warranty, String ssn, String phoneNum, String address, int postCode, String email, int hours, Date estDueDate, String priority, String description, String status) {
         this.id = id;
         this.title = title;
         this.name = name;
@@ -85,6 +88,7 @@ public class Project {
         this.ssn = ssn;
         this.phoneNum = phoneNum;
         this.address = address;
+        this.postCode = postCode;
         this.email = email;
         this.hours = hours;
         this.estDueDate = estDueDate;
@@ -164,6 +168,14 @@ public class Project {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public int getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(int postCode) {
+        this.postCode = postCode;
     }
 
     public String getEmail() {
