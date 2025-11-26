@@ -216,4 +216,48 @@ input[type="email"]):focus:invalid {
     border-color: red;
 }
 
+/* Toast message for user creation */
+
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 30px 30px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    z-index: 1000;
+    animation: slideIn 0.3s, fadeOut 0.5s 2.5s;
+    min-width: 250px;
+}
+
+.toast.success {
+    background-color: #4CAF50;
+}
+
+.toast.error {
+    background-color: #f44336;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
 
