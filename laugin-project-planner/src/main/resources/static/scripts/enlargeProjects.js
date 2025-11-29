@@ -23,7 +23,8 @@ function openProjectDetail(element) {
 
     // Store current project ID
     currentProjectId = id;
-    // Set complete form action so the form posts to the correct endpoint
+
+    // Set complete form action
     const completeForm = document.getElementById('complete-form');
     if (completeForm) {
         completeForm.action = `/projects/${id}/complete`;

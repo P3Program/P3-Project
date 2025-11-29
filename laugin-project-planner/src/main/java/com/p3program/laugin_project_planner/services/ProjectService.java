@@ -66,7 +66,7 @@ public class ProjectService {
             projectRepository.save(p);
         }
     }
-
+    // Complete task
     @Transactional
     public void markCompleted(Long projectId) {
         Project p = projectRepository.findById(projectId).orElseThrow();

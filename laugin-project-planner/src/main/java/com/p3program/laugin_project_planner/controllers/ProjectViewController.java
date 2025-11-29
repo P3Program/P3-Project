@@ -146,7 +146,7 @@ public class ProjectViewController {
         note = new Note(project, noteText, username);
         return noteRepository.save(note);
     }
-
+    // Complete task
     @PostMapping("/projects/{id}/complete")
     public String completeProject(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
