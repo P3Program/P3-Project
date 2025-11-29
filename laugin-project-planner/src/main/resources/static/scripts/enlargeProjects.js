@@ -23,8 +23,16 @@ function openProjectDetail(element) {
 
     // Store current project ID
     currentProjectId = id;
-
-    // Text content for the modal
+    // Set complete form action so the form posts to the correct endpoint
+    const completeForm = document.getElementById('complete-form');
+    if (completeForm) {
+        completeForm.action = `/projects/${id}/complete`;
+        console.log('Set complete form action to:', completeForm.action);
+    } else {
+        console.error('Could not find complete-form element');
+    }
+    
+        // Text content for the modal
     document.getElementById('detail-title').textContent = title;
     document.getElementById('detail-name').textContent = name;
     document.getElementById('detail-date').textContent = date;
@@ -48,13 +56,6 @@ function openProjectDetail(element) {
 
     // Show the modal
     document.getElementById('project-detail-modal').style.display = 'flex';
-    /* Close modal by clicking outside
-    window.onclick = function(event) {
-        const detailModal = document.getElementById('project-detail-modal');
-        if (event.target === detailModal) {
-            detailModal.style.display = 'none';
-        }
-    }*/
 }
 
 // Get notes from the database and display them
@@ -160,7 +161,4 @@ window.onclick = function(event) {
     if (event.target === detailModal) {
         detailModal.style.display = 'none';
     }
-    /*if (event.target === noteModal) {
-        noteModal.style.display = 'none';
-    }*/
 }

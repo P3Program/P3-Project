@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 
 import com.p3program.laugin_project_planner.projects.Note;
 import com.p3program.laugin_project_planner.projects.Project;
@@ -148,4 +146,18 @@ public class ProjectViewController {
         note = new Note(project, noteText, username);
         return noteRepository.save(note);
     }
+
+    @PostMapping("/projects/{id}/complete")
+    public String completeProject(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        try {
+            projectService.markCompleted(id);
+            redirectAttributes.addFlashAttribute("message", "Project marked completed");
+            redirectAttributes.addFlashAttribute("messageType", "success");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("message", "Failed to complete project: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("messageType", "error");
+        }
+        return "redirect:/";
+    }
 }
+

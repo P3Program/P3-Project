@@ -1,13 +1,15 @@
 package com.p3program.laugin_project_planner.services;
 
-import com.p3program.laugin_project_planner.projects.Project;
-import com.p3program.laugin_project_planner.repositories.ProjectRepository;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.List;
+import com.p3program.laugin_project_planner.projects.Project;
+import com.p3program.laugin_project_planner.repositories.ProjectRepository;
 
 @Service
 public class ProjectService {
@@ -64,4 +66,17 @@ public class ProjectService {
             projectRepository.save(p);
         }
     }
+
+    @Transactional
+    public void markCompleted(Long projectId) {
+        Project p = projectRepository.findById(projectId).orElseThrow();
+        if (!Objects.equals(p.getStatus(), "closed")) {
+            int max = projectRepository.findMaxSortIndexByStatus("closed");
+            p.setStatus("closed");
+            p.setSortIndex(max + 1);
+            p.setEndDate(java.sql.Date.valueOf(java.time.LocalDate.now()));
+            projectRepository.save(p);
+        }
+    }
 }
+
