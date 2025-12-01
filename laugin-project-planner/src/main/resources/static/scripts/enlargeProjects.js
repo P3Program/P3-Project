@@ -77,6 +77,7 @@ function loadNotesFromDatabase(projectId) {
     fetch(`/projects/${projectId}/notes`)
         .then(response => response.json())
         .then(notes => {
+            notesContainer.innerHTML = "";
             // If no notes exist, show message
             if (notes.length === 0) {
                 notesContainer.innerHTML = '<em>No notes yet</em>';
