@@ -1,0 +1,441 @@
+/* Modal Overlay */
+.detail-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+/* Modal Content Container */
+.project-detail-modal-content {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    max-width: 1400px;
+    width: 100%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Header with project title */
+#detail-title {
+    background: #144A96;
+    color: white;
+    margin: 0;
+    padding: 1.5rem;
+    padding-right: 4rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+/* Close button */
+#close-detail-modal {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.5rem;
+    background: #dc3545;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    z-index: 10;
+}
+
+#close-detail-modal:hover {
+    background-color: #c82333;
+}
+
+/* Content grid container */
+.project-detail-modal-content > div[style*="display: flex"] {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    display: grid !important;
+    grid-template-columns: 1.5fr 1fr 1.5fr;
+    grid-template-rows: auto auto;
+    gap: 1.5rem;
+    background-color: #f5f5f5;
+}
+
+/* All detail sections */
+.detail-section {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Personal Information - Top Left - WIDER (spans 2 columns) */
+.detail-section:nth-child(1) {
+    grid-column: 1 / 3;
+    grid-row: 1;
+}
+
+/* Description - Bottom Left - narrower (1 column) */
+.detail-section:nth-child(2) {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+/* Job Information - Top Right - narrower (1 column) */
+.detail-section:nth-child(3) {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+/* Notes - Bottom Right - WIDER (spans 2 columns) */
+.detail-section:nth-child(4),
+.notes-section {
+    grid-column: 2 / 4 !important;
+    grid-row: 2 !important;
+    background-color: #eff6ff !important;
+    border: 1px solid #93c5fd !important;
+    position: relative;
+}
+
+/* Section Headers */
+.detail-section h3 {
+    color: #2563eb;
+    margin: 0 0 1.25rem 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: none;
+}
+
+.notes-section h3 {
+    color: #2563eb;
+    margin: 0;
+}
+
+/* Notes section header - container for title and button */
+.notes-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.notes-section > h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+/* 2-column grid for Personal Info and Job Info fields */
+.detail-section:nth-child(1) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1.5rem;
+    grid-auto-rows: max-content;
+}
+
+.detail-section:nth-child(1) h3 {
+    grid-column: 1 / -1;
+}
+
+/* Name field - full width */
+.detail-section:nth-child(1) p:nth-of-type(1) {
+    grid-column: 1 / -1;
+    order: 1;
+}
+
+/* Phone field - left column, order 2 */
+.detail-section:nth-child(1) p:nth-of-type(2) {
+    grid-column: 1;
+    order: 2;
+}
+
+/* Address field - becomes Email on right, order 3 */
+.detail-section:nth-child(1) p:nth-of-type(3) {
+    grid-column: 1;
+    order: 4;
+}
+
+/* Email field - right column next to phone, order 3 */
+.detail-section:nth-child(1) p:nth-of-type(4) {
+    grid-column: 2;
+    order: 3;
+}
+
+/* SSN field - right column, order 5 */
+.detail-section:nth-child(1) p:nth-of-type(5) {
+    grid-column: 2;
+    order: 5;
+}
+
+.detail-section:nth-child(3) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1.5rem;
+    grid-auto-rows: max-content;
+}
+
+.detail-section:nth-child(3) h3 {
+    grid-column: 1 / -1;
+}
+
+/* Paragraph styling - stacked layout */
+.detail-section p {
+    margin: 0 0 1.25rem 0;
+    line-height: 1.3;
+    font-size: 0.875rem;
+    color: #1f2937;
+    display: block;
+}
+
+/* Labels (strong tags) */
+.detail-section p strong {
+    display: block;
+    font-size: 0.688rem;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    color: #6b7280;
+    font-weight: 500;
+    margin-bottom: 0.375rem;
+}
+
+/* Values (span tags) */
+.detail-section p span {
+    display: block;
+    color: #1f2937;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+/* Description section */
+.detail-section:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Description text */
+#detail-desc {
+    color: #374151;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Notes container */
+#detail-notes {
+    margin-top: 0;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    flex: 1;
+}
+
+/* Individual note styling */
+#detail-notes > div {
+    background: white;
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+#detail-notes > div:last-child {
+    margin-bottom: 0;
+}
+
+/* Note metadata (date/author) */
+#detail-notes > div > div:first-child {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+}
+
+/* Note content */
+#detail-notes > div > div:last-child {
+    color: #1f2937;
+    line-height: 1.5;
+    font-size: 0.875rem;
+}
+
+/* Add Note button inside notes section */
+.notes-section button[onclick*="openAddNoteModal"],
+.notes-section button,
+.modal-footer button[onclick*="openAddNoteModal"] {
+    position: static;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.813rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.notes-section button[onclick*="openAddNoteModal"]:hover,
+.notes-section button:hover,
+.modal-footer button[onclick*="openAddNoteModal"]:hover {
+    background-color: #1d4ed8;
+}
+/* Button colors for create note modal */
+
+.cancel-note {
+    background-color: #ef4444;
+    color: white;
+}
+
+.cancel-note:hover {
+    background-color: #dc2626;
+}
+
+.submit-note {
+    background-color: #16a34a;
+    color: white;
+}
+
+.submit-note:hover {
+    background-color: #15803d;
+}
+
+/* Modal Footer */
+.modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+/* Left button group in footer */
+.button-group {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+/* Footer buttons */
+.modal-footer button,
+.modal-footer .btn {
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Buttons in footer */
+.modal-footer .button-group button:first-child {
+    background-color: #2563eb;
+    color: white;
+}
+
+.modal-footer .button-group button:first-child:hover {
+    background-color: #1d4ed8;
+}
+
+/* Edit Project button */
+.modal-footer button[onclick*="edit"],
+.btn-edit {
+    background-color: #2563eb;
+    color: white;
+}
+
+.modal-footer button[onclick*="edit"]:hover,
+.btn-edit:hover {
+    background-color: #1d4ed8;
+}
+
+/* Delete Project button */
+.modal-footer button[onclick*="delete"],
+.btn-delete {
+    background-color: #ef4444;
+    color: white;
+}
+
+.modal-footer button[onclick*="delete"]:hover,
+.btn-delete:hover {
+    background-color: #dc2626;
+}
+
+/* Complete Task button */
+#complete-task-btn,
+.btn-success {
+    background-color: #16a34a;
+    color: white;
+    padding: 0.75rem 1.5rem;
+}
+
+#complete-task-btn:hover,
+.btn-success:hover {
+    background-color: #15803d;
+}
+
+/* Form styling */
+.modal-footer form {
+    margin: 0;
+    display: inline;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .project-detail-modal-content > div[style*="display: flex"] {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .detail-section:nth-child(1),
+    .detail-section:nth-child(2),
+    .detail-section:nth-child(3),
+    .detail-section:nth-child(4),
+    .notes-section {
+        grid-column: 1 !important;
+        grid-row: auto !important;
+    }
+
+    .detail-section:nth-child(1),
+    .detail-section:nth-child(3) {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Scrollbar styling */
+.detail-section::-webkit-scrollbar,
+#detail-notes::-webkit-scrollbar {
+    width: 6px;
+}
+
+.detail-section::-webkit-scrollbar-track,
+#detail-notes::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+.detail-section::-webkit-scrollbar-thumb,
+#detail-notes::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.detail-section::-webkit-scrollbar-thumb:hover,
+#detail-notes::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
