@@ -51,6 +51,7 @@ body {
 .main-header {
     border-radius: 0;
     width: -webkit-fill-available;
+    margin-bottom: 0px;
 }
 
 .container-column {
@@ -64,7 +65,7 @@ body {
     flex-direction: column;
     gap: 10px;
     width: 300px;
-    height: calc(100vh - 220px);
+    height: calc(100vh - 200px);
     background-color: lightblue;
     border-radius: 10px;
     padding: 15px;
@@ -72,7 +73,7 @@ body {
 }
 
 .main-container{
-    height: calc(100vh - 320px);
+    height: calc(100vh - 200px);
 }
 .main-column{
     border: 1px solid black;
@@ -99,6 +100,7 @@ body {
 }
 #addtask {
     margin-top: 15px;
+    margin-bottom: 10px;
     background: linear-gradient(135deg, #00bfff 0%, #0099cc 100%);
     color: white;
     padding: 15px 24px;
@@ -496,12 +498,11 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 8px 14px;
-    margin: 12px 16px 20px 16px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    background: transparent;
+    border: none;
+    border-radius: 50px;
+    margin: 0;
+    padding: 12px 10px;
 }
 
 .sort-toolbar label {
@@ -578,32 +579,34 @@ body {
    ======================================== */
 
 .filter-panel {
-    position: fixed;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+    position: static;
+    transform: none;
+    right: auto;
+    top: auto;
+
     background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    padding: 15px;
+    border-radius: 999px;
+    padding: 6px 10px;
+
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 12px;
-    z-index: 1000;
-    width: 60px;
+    gap: 8px;
+    z-index: 1;
+    width: auto;
 }
+
 
 .filter-help {
     position: relative;
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     background: #f0f0f0;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     color: #666;
     cursor: help;
@@ -618,16 +621,16 @@ body {
 
 .filter-tooltip {
     position: absolute;
-    right: calc(100% + 15px);
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 120%;      /* show above the ? button */
+    left: 50%;
+    transform: translateX(-50%);
     background: #333;
     color: white;
-    padding: 12px 16px;
+    padding: 10px 14px;
     border-radius: 8px;
-    font-size: 13px;
-    line-height: 1.5;
-    width: 250px;
+    font-size: 12px;
+    line-height: 1.4;
+    width: 220px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -637,11 +640,11 @@ body {
 .filter-tooltip::after {
     content: '';
     position: absolute;
-    left: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    border: 8px solid transparent;
-    border-left-color: #333;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #333;
 }
 
 .filter-help:hover .filter-tooltip {
@@ -649,10 +652,14 @@ body {
 }
 
 .filter-divider {
-    width: 100%;
-    height: 2px;
+    width: 1px;
+    height: 24px;
     background: #e0e0e0;
-    margin: 4px 0;
+    margin: 0 4px;
+}
+.big-divider {
+    width: 3px;
+    height: 36px;
 }
 
 .filter-button {
@@ -691,4 +698,27 @@ body {
 
 .project-box.hidden {
     display: none;
+}
+.project-board-footer {
+    position: fixed;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+
+    background: #ffffff;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    padding: 8px 16px;
+    height: auto;
+    width: auto;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    z-index: 900;
 }

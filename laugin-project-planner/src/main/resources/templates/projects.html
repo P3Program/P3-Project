@@ -19,30 +19,11 @@
     <!-- All Projects -->
     <div class="container-column main-column">
         <div class="column-header main-header">All projects</div>
-        <form th:action="@{/}" method="get" class="sort-toolbar"
-              style="display:flex; gap:8px; align-items:center; margin: 10px 16px;">
-            <label for="sortBy"><strong>Sort by:</strong></label>
-            <select id="sortBy" name="sortBy" th:value="${sortBy}">
-                <option value="priority" th:selected="${sortBy=='priority'}">Priority</option>
-                <option value="due"      th:selected="${sortBy=='due'}">Due date</option>
-                <option value="created"  th:selected="${sortBy=='created'}">Date created</option>
-                <option value="customer" th:selected="${sortBy=='customer'}">Costumer</option>
-                <option value="hours"    th:selected="${sortBy=='hours'}">Hours</option>
-            </select>
-
-            <input type="hidden" id="dirInput" name="dir" th:value="${dir}">
-            <button type="button" id="dirBtn" title="Invert sorting"
-                    style="width:36px;height:32px;display:flex;align-items:center;justify-content:center;">
-                <span th:text="${dir=='asc' ? '↑' : '↓'}">↑</span>
-            </button>
-
-            <button type="submit">Submit</button>
-        </form>
+        <button id="addtask" class="addtask">⊕ ADD Project</button>
         <div id="project-container" class="container main-container">
             <div th:each="project : ${allProjects}"
                  th:insert="~{fragments/project-box :: projectBox(${project})}"></div>
         </div>
-        <button id="addtask" class="addtask">⊕ ADD Project</button>
     </div>
     <div class="container-wrapper">
         <!-- Under Review -->
@@ -73,22 +54,45 @@
         </div>
     </div>
 </div>
+<div class="project-board-footer">
+    <form th:action="@{/}" method="get" class="sort-toolbar"
+          style="display:flex; gap:8px; align-items:center;">
+        <label for="sortBy"><strong>Sort by:</strong></label>
+        <select id="sortBy" name="sortBy" th:value="${sortBy}">
+            <option value="priority" th:selected="${sortBy=='priority'}">Priority</option>
+            <option value="due"      th:selected="${sortBy=='due'}">Due date</option>
+            <option value="created"  th:selected="${sortBy=='created'}">Date created</option>
+            <option value="customer" th:selected="${sortBy=='customer'}">Costumer</option>
+            <option value="hours"    th:selected="${sortBy=='hours'}">Hours</option>
+        </select>
 
-<!-- Priority Filter Panel -->
-<div class="filter-panel">
-    <div class="filter-help">
-        ?
-        <div class="filter-tooltip">
-            Filter the projects by priority by picking a color. All columns will then show only the selected color. To return to the neutral view, click the same color again.
+        <input type="hidden" id="dirInput" name="dir" th:value="${dir}">
+        <button type="button" id="dirBtn" title="Invert sorting"
+                style="width:36px;height:32px;display:flex;align-items:center;justify-content:center;">
+            <span th:text="${dir=='asc' ? '↑' : '↓'}">↑</span>
+        </button>
+
+        <button type="submit">Submit</button>
+    </form>
+    <div class="filter-divider big-divider"></div>
+    <!-- Priority Filter Panel -->
+    <div class="filter-panel">
+        <div class="filter-help">
+            ?
+            <div class="filter-tooltip">
+                Filter the projects by priority by picking a color. All columns will then show only the selected color. To return to the neutral view, click the same color again.
+            </div>
         </div>
+
+        <div class="filter-divider"></div>
+
+        <button class="filter-button filter-button-red" data-priority="red" title="Filter by Red priority"></button>
+        <button class="filter-button filter-button-yellow" data-priority="yellow" title="Filter by Yellow priority"></button>
+        <button class="filter-button filter-button-green" data-priority="green" title="Filter by Green priority"></button>
     </div>
-
-    <div class="filter-divider"></div>
-
-    <button class="filter-button filter-button-red" data-priority="red" title="Filter by Red priority"></button>
-    <button class="filter-button filter-button-yellow" data-priority="yellow" title="Filter by Yellow priority"></button>
-    <button class="filter-button filter-button-green" data-priority="green" title="Filter by Green priority"></button>
 </div>
+
+
 
 <!-- Modal: Create Project -->
 <div id="task-form-modal" class="modal" style="display: none;">
