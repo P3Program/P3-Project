@@ -5,6 +5,7 @@ import com.p3program.laugin_project_planner.repositories.AppUserRepository;
 import com.p3program.laugin_project_planner.users.AppUser;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,11 +19,13 @@ import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @WebMvcTest(UsersController.class)
 @Import(SecurityConfig.class)
+@AutoConfigureMockMvc(addFilters = true)
 @ActiveProfiles("prod")
     class UsersControllerTest {
 
@@ -99,7 +102,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
             verify(appUserRepository, never()).save(any(AppUser.class));
         }
         @Test
-        @WithMockUser(roles = "{USER}")
+        @WithMockUser(roles = "USER")
         public void rejectNonAdminUserWhenCreatingNewUser() throws Exception {
             when(appUserRepository.existsByUsername("testuser")).thenReturn(false);
             when(passwordEncoder.encode("password123")).thenReturn("${encoded}$");
@@ -110,8 +113,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                     .param("username", "testuser")
                     .param("password", "password123")
                     .param("role", "ADMIN"))
-                    .andExpect(status().is3xxRedirection())
-                    .andExpect(redirectedUrlPattern("**/login**")
-            );
+                    .andExpect(status().isForbidden())
+                    .andDo(print())
+                    .andExpect(forwardedUrl("/access-denied")
+                    );
         }
     }
