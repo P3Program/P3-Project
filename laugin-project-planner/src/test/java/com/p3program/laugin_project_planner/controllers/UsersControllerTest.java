@@ -98,7 +98,4 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
             verify(appUserRepository).existsByUsername("testuser");
             verify(appUserRepository, never()).save(any(AppUser.class));
         }
-
-        @Test
-
-}
+    }
