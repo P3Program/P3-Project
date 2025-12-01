@@ -96,7 +96,7 @@
     <form class="task-form" th:action="@{/projects/save}" th:object="${project}" method="post">
         <div class="modal-content">
             <button type="button" id="close-form">X</button>
-            <h2>Create Task</h2>
+            <h2>Create Project</h2>
 
             <!-- Progress indicator -->
             <div class="form-progress">
@@ -145,7 +145,6 @@
 
             <!-- Page 2: Job Information -->
             <div id="page-2" class="form-page hidden">
-                <h3>Job Information</h3>
 
                 <label for="title">Task Title:</label>
                 <input type="text" id="title" th:field="*{title}" placeholder="Short title for the project" required />
@@ -285,8 +284,8 @@
         <textarea id="note-textarea" rows="6" placeholder="Enter your note here..."></textarea>
 
         <div class="modal-footer">
-            <button type="button" onclick="closeAddNoteModal()">Cancel</button>
-            <button type="button" onclick="submitNote()">Submit</button>
+            <button class="cancel-note" type="button" onclick="closeAddNoteModal()">Cancel</button>
+            <button class="submit-note" type="button" onclick="submitNote()">Submit</button>
         </div>
     </div>
 </div>
