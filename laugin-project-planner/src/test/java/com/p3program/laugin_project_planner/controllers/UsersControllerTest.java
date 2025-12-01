@@ -98,4 +98,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
             verify(appUserRepository).existsByUsername("testuser");
             verify(appUserRepository, never()).save(any(AppUser.class));
         }
+        @Test
+        @WithMockUser(roles = "{USER}")
+        public void rejectNonAdminUserWhenCreatingNewUser() throws Exception {
+            when(appUserRepository.existsByUsername("testuser")).thenReturn(false);
+            when(passwordEncoder.encode("password123")).thenReturn("${encoded}$");
+
+            mockMvc.perform(post("/users/create")
+                    .with(csrf())
+                    .param("name", "Test Name")
+                    .param("username", "testuser")
+                    .param("password", "password123")
+                    .param("role", "ADMIN"))
+                    .andExpect(status().is3xxRedirection())
+                    .andExpect(redirectedUrlPattern("**/login**")
+            );
+        }
     }

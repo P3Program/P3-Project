@@ -1,5 +1,7 @@
 const projectNotes = {};
 let currentProjectId = null;
+const token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+const header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
 
 
 function openProjectDetail(element) {
@@ -160,7 +162,8 @@ function submitNote() {
     fetch(`/projects/${currentProjectId}/addNote`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded',
+                [header]: token
         },
         body: `noteText=${encodeURIComponent(noteText)}`
     })

@@ -43,25 +43,6 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login")
                 )
-                .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/projects/*/addNote", "/projects/*/notes")
-                )
                 .build();
     }
-
-    /*
-    Seems to be deprecated and not needed. Let it sit for now
-    - Peter
-     */
-
-    /*@Bean
-    public DaoAuthenticationProvider authenticationProvider(
-            AppUserDetailsService userDetailsService,
-            PasswordEncoder passwordEncoder) {
-
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(passwordEncoder);
-        return provider;
-    }*/
 }
