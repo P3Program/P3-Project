@@ -1,5 +1,7 @@
 const projectNotes = {};
 let currentProjectId = null;
+const token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+const header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
 
 
 function openProjectDetail(element) {
@@ -58,6 +60,15 @@ function openProjectDetail(element) {
     // Show the modal
     document.getElementById('project-detail-modal').style.display = 'flex';
 }
+// Escapes the rendered note to avoid code injection
+function escapeHtml(str) {
+    return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
 
 // Get notes from the database and display them
 function loadNotesFromDatabase(projectId) {
@@ -68,14 +79,40 @@ function loadNotesFromDatabase(projectId) {
     fetch(`/projects/${projectId}/notes`)
         .then(response => response.json())
         .then(notes => {
+            notesContainer.innerHTML = "";
             // If no notes exist, show message
             if (notes.length === 0) {
                 notesContainer.innerHTML = '<em>No notes yet</em>';
                 return;
             }
 
+            notes.forEach(note => {
+                const div = document.createElement("div");
+                div.classList.add("note-item");
+
+                const timestamp = new Date(note.timestamp).toLocaleString('is-IS', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                // Header remains HTML (safe because server-generated)
+                const header = document.createElement("p");
+                header.innerHTML = `<strong>${timestamp} - ${note.user}</strong>`;
+
+                // NOTE TEXT SAFE
+                const text = document.createElement("p");
+                text.textContent = note.text; // ← Browser escapes everything
+
+                div.appendChild(header);
+                div.appendChild(text);
+
+                notesContainer.appendChild(div);
+            });
             // Create HTML for each note
-            notesContainer.innerHTML = notes.map(note => {
+            /* notesContainer.innerHTML = notes.map(note => {
                 const timestamp = new Date(note.timestamp).toLocaleString('is-IS', {
                     year: 'numeric',
                     month: 'short',
@@ -87,10 +124,11 @@ function loadNotesFromDatabase(projectId) {
                 return `
                     <div class="note-item">
                         <p><strong>${timestamp} - ${note.user}</strong></p>
-                        <p>${note.text}</p>
+                        <p>${escapeHtml(note.text)}</p>
                     </div>
                 `;
-            }).join('');
+            }).join(''); */
+
         })
         .catch(error => {
             console.error('Error loading notes:', error);
@@ -124,7 +162,8 @@ function submitNote() {
     fetch(`/projects/${currentProjectId}/addNote`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded',
+                [header]: token
         },
         body: `noteText=${encodeURIComponent(noteText)}`
     })
