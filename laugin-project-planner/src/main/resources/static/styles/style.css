@@ -9,11 +9,17 @@ body {
 
 .container-wrapper {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
     padding: 20px 20px;
     width: 100%;
     box-sizing: border-box;
+}
+.status-columns {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
 }
 
 .column-header {
@@ -65,7 +71,7 @@ body {
     flex-direction: column;
     gap: 10px;
     width: 300px;
-    height: calc(100vh - 200px);
+    height: calc(100vh - 280px);
     background-color: lightblue;
     border-radius: 10px;
     padding: 15px;
@@ -700,25 +706,20 @@ body {
     display: none;
 }
 .project-board-footer {
-    position: fixed;
-    left: 50%;
-    bottom: 10px;
-    transform: translateX(-50%);
-
-    background: #ffffff;
-    border-radius: 50px;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
-    padding: 8px 16px;
-    height: auto;
-    width: auto;
+    position: static;
+    margin-top: 16px;
 
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 16px;
 
-    z-index: 900;
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+
+    /* fit-content so that we can add more to the "footer" if needed and width will adjust*/
+    width: fit-content;
 }
