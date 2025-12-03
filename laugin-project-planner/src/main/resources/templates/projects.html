@@ -27,7 +27,7 @@
                 <option value="priority" th:selected="${sortBy=='priority'}">Priority</option>
                 <option value="due"      th:selected="${sortBy=='due'}">Due date</option>
                 <option value="created"  th:selected="${sortBy=='created'}">Date created</option>
-                <option value="customer" th:selected="${sortBy=='customer'}">Costumer</option>
+                <option value="customer" th:selected="${sortBy=='customer'}">Customer</option>
                 <option value="hours"    th:selected="${sortBy=='hours'}">Hours</option>
             </select>
 
@@ -39,12 +39,41 @@
 
             <button type="submit">Submit</button>
         </form>
+
+        <div class="sort-toolbar" style="margin: 0 16px 10px; position: relative;">
+            <label><strong>Filter by postcode:</strong></label>
+
+            <div id="zipDropdown" class="zip-dropdown">
+                <div class="zip-dropdown-selected">Select postcode(s)</div>
+
+                <div class="zip-dropdown-list">
+                    <div class="zip-dropdown-actions">
+                        <button type="button" class="zip-select-all">Select all</button>
+                        <button type="button" class="zip-clear-all">Clear</button>
+                    </div>
+
+                    <div th:each="zip : ${zipCodes}">
+                        <label class="zip-option">
+                            <input type="checkbox" class="zip-checkbox" th:value="${zip}">
+                            <span th:text="${zip}"></span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
         <div id="project-container" class="container main-container">
             <div th:each="project : ${allProjects}"
                  th:insert="~{fragments/project-box :: projectBox(${project})}"></div>
         </div>
+
         <button id="addtask" class="addtask">⊕ ADD Project</button>
     </div>
+
     <div class="container-wrapper">
         <!-- Under Review -->
         <div class="container-column">
@@ -123,8 +152,8 @@
                        placeholder="Address of the repair"
                        required />
 
-                <label for="posCode">Post Code:</label>
-                <input type="text" id="posCode" th:field="*{address}"
+                <label for="postCode">Post Code:</label>
+                <input type="text" id="postCode" th:field="*{postCode}"
                        placeholder="Post Code the customer is under"
                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                        maxlength="3"
