@@ -78,5 +78,16 @@ public class ProjectService {
             projectRepository.save(p);
         }
     }
-}
 
+    // Reopen task
+    @Transactional
+    public void reopenProject(Long projectId, String newStatus) {
+        Project p = projectRepository.findById(projectId).orElseThrow();
+        p.setEndDate(null);
+        String statusToSet = (newStatus == null || newStatus.isEmpty()) ? "underReview" : newStatus;
+        p.setStatus(statusToSet);
+        int max = projectRepository.findMaxSortIndexByStatus(statusToSet);
+        p.setSortIndex(max + 1);
+        projectRepository.save(p);
+    }
+}

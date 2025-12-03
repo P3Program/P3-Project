@@ -159,5 +159,19 @@ public class ProjectViewController {
         }
         return "redirect:/";
     }
-}
 
+    @PostMapping("/projects/{id}/reopen")
+    public String reopenProject(@PathVariable Long id,
+                                @RequestParam(name = "newStatus", required = false) String newStatus,
+                                RedirectAttributes redirectAttributes) {
+        try {
+            projectService.reopenProject(id, newStatus);
+            redirectAttributes.addFlashAttribute("message", "Project re-opened");
+            redirectAttributes.addFlashAttribute("messageType", "success");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("message", "Failed to re-open project: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("messageType", "error");
+        }
+        return "redirect:/archive";
+    }
+}

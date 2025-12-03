@@ -119,6 +119,21 @@
                     <span th:text="${project.warranty ? 'Yes' : 'No'}">No</span>
                 </div>
             </div>
+
+            <!-- Re-open button placed bottom-right inside card -->
+            <div class="reopen-container">
+                <form th:action="@{/projects/{id}/reopen(id=${project.id})}" method="post" class="reopen-form">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <label th:for="${'reopen-status-' + project.id}" style="display:none;">Re-open as</label>
+                    <select th:id="${'reopen-status-' + project.id}" name="newStatus" class="reopen-select">
+                        <option value="underReview">Under Review</option>
+                        <option value="inProgress">In Progress</option>
+                        <option value="billing">Billing</option>
+                        <option value="allProjects">All Projects</option>
+                    </select>
+                    <button type="submit" class="reopen-btn">Re-open</button>
+                </form>
+            </div>
         </article>
     </section>
 </div>
