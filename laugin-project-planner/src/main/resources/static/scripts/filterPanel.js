@@ -47,4 +47,30 @@ document.addEventListener('DOMContentLoaded', () => {
             box.classList.remove('hidden');
         });
     }
+    function updatePriorityFilterCounts() {
+        const count = {
+            red: 0,
+            yellow: 0,
+            green: 0
+        };
+
+        document.querySelectorAll('.project-box').forEach(box => {
+            if (box.classList.contains('priority-red')) {
+                count.red++;
+            } else if (box.classList.contains('priority-yellow')) {
+                count.yellow++;
+            } else if (box.classList.contains('priority-green')) {
+                count.green++;
+            }
+        });
+
+        const redSpan = document.getElementById('filter-count-red');
+        const yellowSpan = document.getElementById('filter-count-yellow');
+        const greenSpan = document.getElementById('filter-count-green');
+
+        if (redSpan)   redSpan.textContent   = `| ${(count.red)/2}`;
+        if (yellowSpan) yellowSpan.textContent = `| ${(count.yellow)/2}`;
+        if (greenSpan) greenSpan.textContent  = `| ${(count.green)/2}`;
+    }
+    updatePriorityFilterCounts();
 });
