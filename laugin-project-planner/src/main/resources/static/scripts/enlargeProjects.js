@@ -268,6 +268,18 @@ function submitNote() {
         });
 }
 
+// Delete project
+function deleteProject() {
+    if (!currentProjectId) {
+        alert('No project selected to delete');
+        return;
+    }
+
+    if (confirm('Are you sure you want to delete this project? This action cannot be undone.')) {
+        window.location.href = `/projects/delete/${currentProjectId}`;
+    }
+}
+
 // Close modals when clicking outside them
 window.onclick = function(event) {
     const detailModal = document.getElementById('project-detail-modal');
