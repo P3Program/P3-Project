@@ -114,4 +114,7 @@ long countCompletedThisWeek();
 @Query("SELECT DISTINCT p.name FROM Project p WHERE p.name IS NOT NULL")
 List<String> findDistinctProjects();
 
+@Query("SELECT DISTINCT p.postCode FROM Project p WHERE p.postCode IS NOT NULL ORDER BY p.postCode ASC")
+List<Integer> findDistinctPostCodes();
+
 }

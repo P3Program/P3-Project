@@ -102,7 +102,7 @@ const csrfHeader = document.querySelector('input[name="_csrf_header"]')?.value |
                         },
                     });
                 } catch (err) {
-                    console.error('Kunne ikke flytte projekt', err);
+                    console.error('Unable to move project', err);
                 }
             }
 
@@ -117,7 +117,7 @@ const csrfHeader = document.querySelector('input[name="_csrf_header"]')?.value |
                     body: JSON.stringify(orderedIds)
                 });
             } catch (err) {
-                console.error('Kunne ikke gemme rækkefølge', err);
+                console.error('Unable to save order', err);
             }
         });
     });

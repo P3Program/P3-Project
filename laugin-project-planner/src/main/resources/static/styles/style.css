@@ -623,3 +623,106 @@ body {
     /* fit-content so that we can add more to the "footer" if needed and width will adjust*/
     width: fit-content;
 }
+.zip-dropdown {
+    width: 160px;
+    position: relative;
+    user-select: none;
+    cursor: pointer;
+}
+
+.zip-dropdown-selected {
+    padding: 6px 8px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.zip-dropdown-list {
+    display: none;
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 2px;
+    padding: 4px;
+    z-index: 20;
+    max-height: 180px;
+    overflow-y: auto;
+    width: 160px;
+}
+
+.zip-dropdown.open .zip-dropdown-list {
+    display: block;
+}
+
+.zip-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 2px;
+}
+.zip-dropdown-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.zip-dropdown-actions button {
+    flex: 1;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+}
+
+/* SELECT ALL = grøn */
+.zip-select-all {
+    background: #27ae60;
+    border: 1px solid #1e8c4d;
+}
+
+.zip-select-all:hover {
+    background: #1e8c4d;
+}
+
+/* CLEAR = rød */
+.zip-clear-all {
+    background: #e74c3c;
+    border: 1px solid #c0392b;
+}
+
+.zip-clear-all:hover {
+    background: #c0392b;
+}
+.zip-dropdown-actions button {
+    flex: 1;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+}
+
+
+.zip-select-all {
+    background: #27ae60;
+    border: 1px solid #1e8c4d;
+}
+
+.zip-select-all:hover {
+    background: #1e8c4d;
+}
+
+
+.zip-clear-all {
+    background: #e74c3c;
+    border: 1px solid #c0392b;
+}
+
+.zip-clear-all:hover {
+    background: #c0392b;
+}
