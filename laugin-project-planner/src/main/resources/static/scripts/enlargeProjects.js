@@ -60,6 +60,81 @@ function openProjectDetail(element) {
     // Show the modal
     document.getElementById('project-detail-modal').style.display = 'flex';
 }
+
+// Open the create/edit form modal prefilled for editing
+function editProject() {
+    if (!currentProjectId) {
+        alert('No project selected to edit');
+        return;
+    }
+
+    // Set form title and action
+    const formTitle = document.getElementById('task-form-title');
+    if (formTitle) formTitle.textContent = 'Edit Project';
+
+    const taskForm = document.querySelector('.task-form');
+    if (taskForm) {
+        taskForm.action = `/projects/edit/${currentProjectId}`;
+    }
+
+    const idInput = document.getElementById('project-id');
+    if (idInput) idInput.value = currentProjectId;
+
+    // copy data from detail modal into the form fields
+    const copyIfExists = (fromId, toId) => {
+        const from = document.getElementById(fromId);
+        const to = document.getElementById(toId);
+        if (from && to) to.value = from.textContent.trim();
+    };
+
+    copyIfExists('detail-name', 'name');
+    copyIfExists('detail-phone', 'phoneNum');
+    copyIfExists('detail-address', 'address');
+    copyIfExists('detail-email', 'email');
+    copyIfExists('detail-ssn', 'ssn');
+    copyIfExists('detail-title', 'title');
+
+    const hoursEl = document.getElementById('detail-est-time');
+    const hoursInput = document.getElementById('hours');
+    if (hoursEl && hoursInput) {
+        const txt = hoursEl.textContent.trim();
+        hoursInput.value = txt.replace(/\s*hours?$/,'') || '';
+    }
+    copyIfExists('detail-due-date', 'estDueDate');
+    copyIfExists('detail-desc', 'task-desc');
+
+    const calderaVal = (document.getElementById('detail-caldera')?.textContent.trim() === 'Yes') ? '1' : '0';
+    const calderaRadio = document.querySelector(`input[name='caldera'][value='${calderaVal}']`);
+    if (calderaRadio) calderaRadio.checked = true;
+
+    const warrantyVal = (document.getElementById('detail-warranty')?.textContent.trim() === 'Yes') ? '1' : '0';
+    const warrantyRadio = document.querySelector(`input[name='warranty'][value='${warrantyVal}']`);
+    if (warrantyRadio) warrantyRadio.checked = true;
+
+    const box = document.querySelector(`.project-box[data-id='${currentProjectId}']`);
+    if (box) {
+        const pr = box.getAttribute('data-priority') || box.getAttribute('data-priority');
+        const prioritySelect = document.getElementById('priority');
+        if (prioritySelect && pr) prioritySelect.value = pr;
+    }
+
+    // hide detail modal and show the task form modal
+    const detailModal = document.getElementById('project-detail-modal');
+    const formModal = document.getElementById('task-form-modal');
+    if (detailModal) detailModal.style.display = 'none';
+    if (formModal) formModal.style.display = 'flex';
+
+    // reset multi-step form
+    document.getElementById('page-1')?.classList.remove('hidden');
+    document.getElementById('page-2')?.classList.add('hidden');
+    document.getElementById('page-3')?.classList.add('hidden');
+    document.querySelectorAll('.form-progress .step').forEach(s => s.classList.remove('active'));
+    document.querySelector('.form-progress .step[data-step="1"]')?.classList.add('active');
+
+    // Change submit button text to match edit mode
+    const submitBtn = document.getElementById('submit-btn');
+    if (submitBtn) submitBtn.textContent = 'Edit Task';
+}
 // Escapes the rendered note to avoid code injection
 function escapeHtml(str) {
     return str

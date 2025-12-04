@@ -160,6 +160,19 @@ public class ProjectViewController {
         return "redirect:/";
     }
 
+    @PostMapping("/projects/edit/{id}")
+    public String editProject(@PathVariable Long id, @ModelAttribute("project") Project project, RedirectAttributes redirectAttributes) {
+        try {
+            projectService.updateProject(id, project);
+            redirectAttributes.addFlashAttribute("message", "Project updated");
+            redirectAttributes.addFlashAttribute("messageType", "success");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("message", "Failed to update project: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("messageType", "error");
+        }
+        return "redirect:/";
+    }
+
     @PostMapping("/projects/{id}/reopen")
     public String reopenProject(@PathVariable Long id,
                                 @RequestParam(name = "newStatus", required = false) String newStatus,
