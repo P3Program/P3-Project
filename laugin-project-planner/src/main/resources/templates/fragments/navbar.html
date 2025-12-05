@@ -1,5 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<script src="https://kit.fontawesome.com/0f1092df9d.js" crossorigin="anonymous"></script>
 
 <nav th:fragment="navbar" class="navbar">
     <a class="logo" th:href="@{/}">LAUGIN</a>
@@ -12,7 +13,7 @@
     <div class="nav-right" th:if="${#authentication != null}">
         <div class="user-dropdown">
             <button class="dropdown-toggle" type="button">
-                <span th:text="${#authentication.name}">Username</span> ▼
+                <span th:text="${#authentication.name}">Username</span> <i class="fa-solid fa-user"></i> ▼
             </button>
             <div class="dropdown-menu">
                 <a th:href="@{/profile}" class="dropdown-item">Profile</a>

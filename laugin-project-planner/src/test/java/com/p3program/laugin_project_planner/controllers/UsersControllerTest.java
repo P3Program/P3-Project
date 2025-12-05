@@ -42,6 +42,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
         // This ensures that security context is parsed
         // purely debugging the test (because Spring Security makes testing hard)
+
         /*
         @Test
         void checkSecurityContext() {
