@@ -27,6 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
+    // Prevent Enter key from submitting the form on text inputs
+    const taskForm = document.querySelector('.task-form');
+    taskForm.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) {
+            e.preventDefault();
+        }
+    });
+
     // Listen for changes on Caldera and Warranty radio buttons
     document.querySelectorAll('input[name="caldera"], input[name="warranty"]').forEach(radio => {
         radio.addEventListener('change', updatePriorityImmediately);

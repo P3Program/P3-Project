@@ -150,7 +150,10 @@
     <form class="task-form" th:action="@{/projects/save}" th:object="${project}" method="post">
         <div class="modal-content">
             <button type="button" id="close-form">X</button>
-            <h2>Create Project</h2>
+            <h2 id="task-form-title">Create Project</h2>
+
+            <!-- Hidden id for editing -->
+            <input type="hidden" id="project-id" th:field="*{id}" />
 
             <!-- Progress indicator -->
             <div class="form-progress">
@@ -356,7 +359,7 @@
         }
     })();
 </script>
-
+<script src="/scripts/toast.js"></script>
 <script th:src="@{/scripts/script.js}"></script>
 <script th:src="@{/scripts/formFunction.js}"></script>
 <script th:src="@{/scripts/enlargeProjects.js}"></script>

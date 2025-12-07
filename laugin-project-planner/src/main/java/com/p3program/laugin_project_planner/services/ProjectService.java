@@ -90,4 +90,25 @@ public class ProjectService {
         p.setSortIndex(max + 1);
         projectRepository.save(p);
     }
+
+    // Update task
+    @Transactional
+    public void updateProject(Long projectId, Project updated) {
+        Project p = projectRepository.findById(projectId).orElseThrow();
+
+        p.setName(updated.getName());
+        p.setPhoneNum(updated.getPhoneNum());
+        p.setAddress(updated.getAddress());
+        p.setSsn(updated.getSsn());
+        p.setEmail(updated.getEmail());
+        p.setTitle(updated.getTitle());
+        p.setHours(updated.getHours());
+        p.setEstDueDate(updated.getEstDueDate());
+        p.setDescription(updated.getDescription());
+        p.setCaldera(updated.isCaldera());
+        p.setWarranty(updated.isWarranty());
+        p.setPriority(updated.getPriority());
+
+        projectRepository.save(p);
+    }
 }
