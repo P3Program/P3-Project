@@ -24,7 +24,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
         // Animate total tasks
         const totalElement = document.getElementById('totalTasks');
-        animateValue(totalElement, 0, total, 1500);
+        totalElement.textContent = total;
+
 
         // Animate completion rate
         const rateElement = document.getElementById('completionRate');
