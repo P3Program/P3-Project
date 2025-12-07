@@ -20,60 +20,15 @@
     <!-- All Projects -->
     <div class="container-column main-column">
         <div class="column-header main-header">All projects</div>
+
         <button id="addtask" class="addtask">⊕ ADD Project</button>
-        <form th:action="@{/}" method="get" class="sort-toolbar"
-              style="display:flex; gap:8px; align-items:center; margin: 10px 16px;">
-            <label for="sortBy"><strong>Sort by:</strong></label>
-            <select id="sortBy" name="sortBy" th:value="${sortBy}">
-                <option value="priority" th:selected="${sortBy=='priority'}">Priority</option>
-                <option value="due"      th:selected="${sortBy=='due'}">Due date</option>
-                <option value="created"  th:selected="${sortBy=='created'}">Date created</option>
-                <option value="customer" th:selected="${sortBy=='customer'}">Customer</option>
-                <option value="hours"    th:selected="${sortBy=='hours'}">Hours</option>
-            </select>
-
-            <input type="hidden" id="dirInput" name="dir" th:value="${dir}">
-            <button type="button" id="dirBtn" title="Invert sorting"
-                    style="width:36px;height:32px;display:flex;align-items:center;justify-content:center;">
-                <span th:text="${dir=='asc' ? '↑' : '↓'}">↑</span>
-            </button>
-
-            <button type="submit">Submit</button>
-        </form>
-
-        <div class="sort-toolbar" style="margin: 0 16px 10px; position: relative;">
-            <label><strong>Filter by postcode:</strong></label>
-
-            <div id="zipDropdown" class="zip-dropdown">
-                <div class="zip-dropdown-selected">Select postcode(s)</div>
-
-                <div class="zip-dropdown-list">
-                    <div class="zip-dropdown-actions">
-                        <button type="button" class="zip-select-all">Select all</button>
-                        <button type="button" class="zip-clear-all">Clear</button>
-                    </div>
-
-                    <div th:each="zip : ${zipCodes}">
-                        <label class="zip-option">
-                            <input type="checkbox" class="zip-checkbox" th:value="${zip}">
-                            <span th:text="${zip}"></span>
-                        </label>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-
 
         <div id="project-container" class="container main-container">
             <div th:each="project : ${allProjects}"
                  th:insert="~{fragments/project-box :: projectBox(${project})}"></div>
         </div>
-
-        <button id="addtask" class="addtask">⊕ ADD Project</button>
     </div>
+
 
     <div class="container-wrapper">
         <div class="status-columns">
@@ -105,14 +60,15 @@
             </div>
         </div>
         <div class="project-board-footer">
-            <form th:action="@{/}" method="get" class="sort-toolbar"
+            <!-- SORT BY -->
+            <form th:action="@{/}" method="get" class="sort-toolbar footer-sort"
                   style="display:flex; gap:8px; align-items:center;">
                 <label for="sortBy"><strong>Sort by:</strong></label>
                 <select id="sortBy" name="sortBy" th:value="${sortBy}">
                     <option value="priority" th:selected="${sortBy=='priority'}">Priority</option>
                     <option value="due"      th:selected="${sortBy=='due'}">Due date</option>
                     <option value="created"  th:selected="${sortBy=='created'}">Date created</option>
-                    <option value="customer" th:selected="${sortBy=='customer'}">Costumer</option>
+                    <option value="customer" th:selected="${sortBy=='customer'}">Customer</option>
                     <option value="hours"    th:selected="${sortBy=='hours'}">Hours</option>
                 </select>
 
@@ -124,8 +80,34 @@
 
                 <button type="submit">Submit</button>
             </form>
+
             <div class="filter-divider big-divider"></div>
-            <!-- Priority Filter Panel -->
+
+            <!-- POSTCODE FILTER -->
+            <div class="sort-toolbar footer-zip" style="position: relative;">
+                <label><strong>Filter by postcode:</strong></label>
+
+                <div id="zipDropdown" class="zip-dropdown">
+                    <div class="zip-dropdown-selected">Select postcode(s)</div>
+
+                    <div class="zip-dropdown-list">
+                        <div class="zip-dropdown-actions">
+                            <button type="button" class="zip-select-all">Select all</button>
+                            <button type="button" class="zip-clear-all">Clear</button>
+                        </div>
+
+                        <div th:each="zip : ${zipCodes}">
+                            <label class="zip-option">
+                                <input type="checkbox" class="zip-checkbox" th:value="${zip}">
+                                <span th:text="${zip}"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-divider big-divider"></div>
+
             <div class="filter-panel">
                 <div class="filter-help">
                     ?
@@ -156,7 +138,6 @@
                     <span class="filter-label">Normal</span>
                     <span class="filter-count" id="filter-count-green">| 0</span>
                 </button>
-
             </div>
         </div>
     </div>

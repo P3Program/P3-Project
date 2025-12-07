@@ -462,10 +462,6 @@ body {
     display: flex;
 }
 
-/* ========================================
-   PRIORITY FILTER PANEL
-   ======================================== */
-
 .filter-panel {
     position: static;
     transform: none;
@@ -509,7 +505,7 @@ body {
 
 .filter-tooltip {
     position: absolute;
-    bottom: 120%;      /* show above the ? button */
+    bottom: 120%;
     left: 50%;
     transform: translateX(-50%);
     background: #333;
@@ -605,6 +601,7 @@ body {
 .project-box.hidden {
     display: none;
 }
+
 .project-board-footer {
     position: static;
     margin-top: 16px;
@@ -612,19 +609,57 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 24px;
 
-    padding: 8px 16px;
+    padding: 10px 24px;
     border-radius: 50px;
     border: 1px solid #ddd;
     background: #ffffff;
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 
-    /* fit-content so that we can add more to the "footer" if needed and width will adjust*/
     width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+
+    transform: scale(0.9);
+    transform-origin: center bottom;
 }
+
+.project-board-footer .sort-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+    margin: 0;
+    background: transparent;
+    border: none;
+}
+
+.project-board-footer select#sortBy {
+    max-width: 130px;
+}
+
+.project-board-footer .footer-zip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: auto;
+}
+
+.project-board-footer .big-divider {
+    width: 1px;
+    height: 26px;
+    background-color: #ccc;
+}
+
+.project-board-footer .filter-panel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .zip-dropdown {
-    width: 160px;
+    width: 170px;
     position: relative;
     user-select: none;
     cursor: pointer;
@@ -640,16 +675,21 @@ body {
 .zip-dropdown-list {
     display: none;
     position: absolute;
+    bottom: 100%;
+    left: 0;
+
     background: white;
     border: 1px solid #ccc;
     border-radius: 6px;
-    margin-top: 2px;
+    margin-bottom: 4px;
     padding: 4px;
     z-index: 20;
+
+    width: 100%;
     max-height: 180px;
     overflow-y: auto;
-    width: 160px;
 }
+
 
 .zip-dropdown.open .zip-dropdown-list {
     display: block;
@@ -661,6 +701,7 @@ body {
     gap: 6px;
     padding: 3px 2px;
 }
+
 .zip-dropdown-actions {
     display: flex;
     justify-content: space-between;
@@ -678,51 +719,26 @@ body {
     color: white;
 }
 
-/* SELECT ALL = grøn */
-.zip-select-all {
-    background: #27ae60;
-    border: 1px solid #1e8c4d;
-}
 
-.zip-select-all:hover {
-    background: #1e8c4d;
-}
-
-/* CLEAR = rød */
-.zip-clear-all {
-    background: #e74c3c;
-    border: 1px solid #c0392b;
-}
-
-.zip-clear-all:hover {
-    background: #c0392b;
-}
-.zip-dropdown-actions button {
-    flex: 1;
-    padding: 6px 8px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
+.project-board-footer .zip-dropdown-actions button {
     color: white;
+    font-weight: 600;
 }
 
-
-.zip-select-all {
-    background: #27ae60;
+.project-board-footer .zip-select-all {
+    background: #27ae60 !important;
     border: 1px solid #1e8c4d;
 }
 
-.zip-select-all:hover {
-    background: #1e8c4d;
+.project-board-footer .zip-select-all:hover {
+    background: #1e8c4d !important;
 }
 
-
-.zip-clear-all {
-    background: #e74c3c;
+.project-board-footer .zip-clear-all {
+    background: #e74c3c !important;
     border: 1px solid #c0392b;
 }
 
-.zip-clear-all:hover {
-    background: #c0392b;
+.project-board-footer .zip-clear-all:hover {
+    background: #c0392b !important;
 }
