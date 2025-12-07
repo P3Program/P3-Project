@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         },
                     });
                 } catch (err) {
-                    console.error('Kunne ikke flytte projekt', err);
+                    console.error('Unable to move project', err);
                 }
             }
 
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify(orderedIds)
                 });
             } catch (err) {
-                console.error('Kunne ikke gemme rækkefølge', err);
+                console.error('Unable to save order', err);
             }
         });
     });

@@ -422,10 +422,6 @@ body {
     display: flex;
 }
 
-/* ========================================
-   PRIORITY FILTER PANEL
-   ======================================== */
-
 .filter-panel {
     position: static;
     transform: none;

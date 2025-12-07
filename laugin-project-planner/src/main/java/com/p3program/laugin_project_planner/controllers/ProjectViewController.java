@@ -90,6 +90,9 @@ public class ProjectViewController {
         model.addAttribute("inProgress", inProgress);
         model.addAttribute("billing", billing);
 
+        List<Integer> zipCodes = projectRepository.findDistinctPostCodes();
+        model.addAttribute("zipCodes", zipCodes);
+
         model.addAttribute("activePage", "projects");
         System.out.println("DEBUG: Fetched " + projects.size() + " projects");
         return "projects";
