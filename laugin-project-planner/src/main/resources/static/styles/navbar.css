@@ -67,7 +67,6 @@ nav a.active {
     font-weight: bold;
     font-size: x-large;
     cursor: pointer;
-    padding: 6px 10px;
 }
 
 .dropdown-toggle:hover {

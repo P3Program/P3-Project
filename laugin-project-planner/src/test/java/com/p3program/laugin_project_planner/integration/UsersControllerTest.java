@@ -1,6 +1,7 @@
-package com.p3program.laugin_project_planner.controllers;
+package com.p3program.laugin_project_planner.integration;
 
 import com.p3program.laugin_project_planner.config.SecurityConfig;
+import com.p3program.laugin_project_planner.controllers.UsersController;
 import com.p3program.laugin_project_planner.repositories.AppUserRepository;
 import com.p3program.laugin_project_planner.users.AppUser;
 import org.junit.jupiter.api.Test;
@@ -42,6 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
         // This ensures that security context is parsed
         // purely debugging the test (because Spring Security makes testing hard)
+
         /*
         @Test
         void checkSecurityContext() {

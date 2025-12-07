@@ -12,7 +12,7 @@
     <div class="nav-right" th:if="${#authentication != null}">
         <div class="user-dropdown">
             <button class="dropdown-toggle" type="button">
-                <span th:text="${#authentication.name}">Username</span> ▼
+                <span th:text="${#authentication.name}">Username</span> <i class="fa-solid fa-user"></i> ▼
             </button>
             <div class="dropdown-menu">
                 <a th:href="@{/profile}" class="dropdown-item">Profile</a>
