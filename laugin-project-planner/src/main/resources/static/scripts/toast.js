@@ -75,12 +75,6 @@ function createToast(message, type = 'success') {
 
 // Update changeProjectStatus to use new toast
 async function changeProjectStatus(projectId, newStatus, statusLabel) {
-    const modal = document.getElementById('project-detail-modal');
-    const modalContent = modal.querySelector('.project-detail-modal-content');
-
-    modalContent.style.transition = 'opacity 0.3s ease';
-    modalContent.style.opacity = '0';
-
     try {
         const csrfToken = document.querySelector('input[name="_csrf"]')?.value ||
             document.querySelector('meta[name="_csrf"]')?.content;
@@ -112,10 +106,8 @@ async function changeProjectStatus(projectId, newStatus, statusLabel) {
             // Show success toast
             createToast(`Moved to ${statusLabel}`, 'success');
 
-            setTimeout(() => {
-                renderStatusButtons(newStatus, projectId);
-                modalContent.style.opacity = '1';
-            }, 300);
+            // Update status buttons immediately
+            renderStatusButtons(newStatus, projectId);
 
         } else {
             throw new Error('Failed to update status');
@@ -123,7 +115,6 @@ async function changeProjectStatus(projectId, newStatus, statusLabel) {
     } catch (error) {
         console.error('Error changing status:', error);
         createToast('Failed to change status', 'error');
-        modalContent.style.opacity = '1';
     }
 }
 
