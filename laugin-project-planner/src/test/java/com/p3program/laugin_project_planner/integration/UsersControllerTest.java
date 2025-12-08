@@ -57,7 +57,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         @WithMockUser(username = "admin", roles = {"ADMIN"}) // <-- needed because of @PreAuthorize in UserController
         void shouldCreateAdminSuccessfully() throws Exception {
 
-            // Within the test, setup the mocks (that is, what the program SHOULD do if real life, but this is all play-pretend)
+            // Within the test, set up the mocks (that is, what the program SHOULD do if real life, but this is all play-pretend)
             when(appUserRepository.existsByUsername("testuser")).thenReturn(false); // Mocks the duplicate check in UserController
             when(passwordEncoder.encode("password123")).thenReturn("$encoded$"); // Mocks the encoded password
 
