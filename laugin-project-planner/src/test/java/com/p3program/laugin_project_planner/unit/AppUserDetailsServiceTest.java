@@ -69,7 +69,7 @@ public class AppUserDetailsServiceTest {
         assertEquals("john", result.getUsername());
         assertEquals("secret", result.getPassword());
             // Complex assert, since the roles are kept in an unordered Collection, we must call it
-            // using contains method, and the Spring Security method assigning a user a role.
+            // using contains method, and the Spring Security object SimpleGrantedAuthority, assigning a user a role.
         assertTrue(result.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN")),
                 "Expected ROLE_ADMIN to be present in authorities");
 
@@ -98,6 +98,5 @@ public class AppUserDetailsServiceTest {
             // Here we verify that the repo is only called once, in order to maintain
             // database efficiency.
         verify(repository, times(1)).findByUsername("missing");
-
     }
 }
