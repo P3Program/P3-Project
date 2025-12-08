@@ -63,15 +63,14 @@ public class UsersController {
         redirectAttributes.addFlashAttribute("message", "user created successfully!");
         redirectAttributes.addFlashAttribute("messageType", "success");
 
+        // DEBUG ----------------
         System.out.println("User succesfully created: " + username);
-
-
         System.out.println(name);
         System.out.println(username);
         System.out.println(password);
         System.out.println(encryptedPassword);
         System.out.println(role);
-
+        // ----------------- DEBUG
         return "redirect:/users";
     }
 
@@ -111,7 +110,6 @@ public class UsersController {
         // Only update password if provided
         // TODO dont think this is the way, keeping it here for now. Would maybe rather set a default PW and let the
         // TODO user change it upon login, and let the user request/set a new password, and not the admin.
-        // TODO must create some profile page then... * sigh *...
         /* if (password != null && !password.isEmpty()) {
             user.setPassword(passwordEncoder.encode(password));
         }*/

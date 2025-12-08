@@ -1,26 +1,20 @@
 package com.p3program.laugin_project_planner.controllers;
 
-import java.util.List;
-
+import com.p3program.laugin_project_planner.projects.Note;
+import com.p3program.laugin_project_planner.projects.Project;
+import com.p3program.laugin_project_planner.repositories.NoteRepository;
+import com.p3program.laugin_project_planner.repositories.ProjectRepository;
+import com.p3program.laugin_project_planner.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.p3program.laugin_project_planner.projects.Note;
-import com.p3program.laugin_project_planner.projects.Project;
-import com.p3program.laugin_project_planner.repositories.NoteRepository;
-import com.p3program.laugin_project_planner.repositories.ProjectRepository;
-import com.p3program.laugin_project_planner.services.ProjectService;
+import java.util.List;
 
 @Controller
 public class ProjectViewController {
@@ -127,6 +121,9 @@ public class ProjectViewController {
         projectService.deleteProject(id);
         return "redirect:/";
     }
+
+    // Notes sanitization is handled in the frontend, should not pose any security risks here,
+    // even though Intellij points it out
 
     // Get all notes for a project
     @GetMapping("/projects/{id}/notes")
