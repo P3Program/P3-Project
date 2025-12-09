@@ -84,7 +84,7 @@ public class Project {
     private int sortIndex = 0;
 
     public Project() {
-        // Make sure the default status value is allProjects
+        // Make sure the default status value is underReview
         if (this.status == null) {
             this.status = "underReview";
         }

@@ -20,11 +20,15 @@ public class ProjectService {
         this.projectRepository = projectRepository;
     }
 
+    // Refactored code for testing, since project.status is ALWAYS "underReview" when constructed,
+    // the ternary operator and status setter was redundant.
+
     public Project createProject(Project project) {
-        String status = project.getStatus() != null ? project.getStatus() : "allProjects";
+        String status = project.getStatus(); // != null ? project.getStatus() : "allProjects";
         int max = projectRepository.findMaxSortIndexByStatus(status);
-        project.setStatus(status);
+        // project.setStatus(status);
         project.setSortIndex(max + 1);
+
         return projectRepository.save(project);
     }
 
