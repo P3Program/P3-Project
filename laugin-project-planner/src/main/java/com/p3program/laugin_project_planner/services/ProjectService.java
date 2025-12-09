@@ -21,7 +21,7 @@ public class ProjectService {
     }
 
     // Refactored code for testing, since project.status is ALWAYS "underReview" when constructed,
-    // the terniary operator and status setter was redundant.
+    // the ternary operator and status setter was redundant.
 
     public Project createProject(Project project) {
         String status = project.getStatus(); // != null ? project.getStatus() : "allProjects";
