@@ -1,5 +1,4 @@
-// Global variables
-let currentProjectId = null;
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const csrfToken = document.querySelector('input[name="_csrf"]').value;

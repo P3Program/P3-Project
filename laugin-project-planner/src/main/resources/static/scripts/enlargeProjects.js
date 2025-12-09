@@ -15,6 +15,7 @@ function openProjectDetail(element) {
     const ssn = element.getAttribute('data-ssn');
     const phone = element.getAttribute('data-phone');
     const address = element.getAttribute('data-address');
+    const postCode = (element.dataset && element.dataset.postcode) || element.getAttribute('data-postcode') || element.getAttribute('data-post-code') || '';
     const email = element.getAttribute('data-email');
     const hours = element.getAttribute('data-hours');
     const dueDate = element.getAttribute('data-due-date');
@@ -49,6 +50,7 @@ function openProjectDetail(element) {
     document.getElementById('detail-ssn').textContent = ssn;
     document.getElementById('detail-phone').textContent = phone;
     document.getElementById('detail-address').textContent = address;
+    document.getElementById('detail-post-code').textContent = postCode || 'N/A';
     document.getElementById('detail-email').textContent = email;
     document.getElementById('detail-est-time').textContent = (hours || '0') + ' hours';
     document.getElementById('detail-due-date').textContent = dueDate;
@@ -90,6 +92,7 @@ function editProject() {
     copyIfExists('detail-name', 'name');
     copyIfExists('detail-phone', 'phoneNum');
     copyIfExists('detail-address', 'address');
+    copyIfExists('detail-post-code', 'postCode');
     copyIfExists('detail-email', 'email');
     copyIfExists('detail-ssn', 'ssn');
     copyIfExists('detail-title', 'title');
