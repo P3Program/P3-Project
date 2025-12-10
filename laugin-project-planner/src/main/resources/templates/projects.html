@@ -23,6 +23,18 @@
 
         <button id="addtask" class="addtask">⊕ ADD Project</button>
 
+        <!-- Search bar (two-row layout) -->
+        <form method="get" action="/" class="project-search two-row" style="margin:10px 0;">
+            <div class="search-row">
+                <input type="text" id="search" name="search" aria-label="Search projects" placeholder="Search by title or description..." th:value="${search}" />
+            </div>
+
+            <div class="search-actions">
+                <button type="submit" class="action-btn search-btn">Search</button>
+                <button type="button" class="action-btn reset-btn" onclick="location.href='/'">Reset</button>
+            </div>
+        </form>
+
         <div id="project-container" class="container main-container">
             <div th:each="project : ${allProjects}"
                  th:insert="~{fragments/project-box :: projectBox(${project})}"></div>

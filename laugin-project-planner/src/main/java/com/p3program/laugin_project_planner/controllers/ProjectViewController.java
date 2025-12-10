@@ -1,20 +1,26 @@
 package com.p3program.laugin_project_planner.controllers;
 
-import com.p3program.laugin_project_planner.projects.Note;
-import com.p3program.laugin_project_planner.projects.Project;
-import com.p3program.laugin_project_planner.repositories.NoteRepository;
-import com.p3program.laugin_project_planner.repositories.ProjectRepository;
-import com.p3program.laugin_project_planner.services.ProjectService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
+import com.p3program.laugin_project_planner.projects.Note;
+import com.p3program.laugin_project_planner.projects.Project;
+import com.p3program.laugin_project_planner.repositories.NoteRepository;
+import com.p3program.laugin_project_planner.repositories.ProjectRepository;
+import com.p3program.laugin_project_planner.services.ProjectService;
 
 @Controller
 public class ProjectViewController {
@@ -29,12 +35,13 @@ public class ProjectViewController {
     private NoteRepository noteRepository;
 
     @GetMapping("/")
-    public String viewProjects(
+        public String viewProjects(
             @RequestParam(defaultValue = "priority") String sortBy,
             @RequestParam(defaultValue = "asc") String dir,
+            @RequestParam(required = false) String search,
             Model model
 
-    ) {
+        ) {
         List<Project> projects = projectService.getAllProjects();
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -42,6 +49,7 @@ public class ProjectViewController {
 
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("dir", dir);
+        model.addAttribute("search", search);
 
         List<Project> allProjects;
         List<Project> underReview;
@@ -79,6 +87,30 @@ public class ProjectViewController {
         }
 
         model.addAttribute("project", new Project());
+        // If a search term is provided, filter each list by title or description (case-insensitive)
+        if (search != null && !search.trim().isEmpty()) {
+            String q = search.trim().toLowerCase();
+            allProjects = allProjects.stream()
+                .filter(p -> (p.getTitle() != null && p.getTitle().toLowerCase().contains(q))
+                    || (p.getDescription() != null && p.getDescription().toLowerCase().contains(q)))
+                .toList();
+
+            underReview = underReview.stream()
+                .filter(p -> (p.getTitle() != null && p.getTitle().toLowerCase().contains(q))
+                    || (p.getDescription() != null && p.getDescription().toLowerCase().contains(q)))
+                .toList();
+
+            inProgress = inProgress.stream()
+                .filter(p -> (p.getTitle() != null && p.getTitle().toLowerCase().contains(q))
+                    || (p.getDescription() != null && p.getDescription().toLowerCase().contains(q)))
+                .toList();
+
+            billing = billing.stream()
+                .filter(p -> (p.getTitle() != null && p.getTitle().toLowerCase().contains(q))
+                    || (p.getDescription() != null && p.getDescription().toLowerCase().contains(q)))
+                .toList();
+        }
+
         model.addAttribute("allProjects", allProjects);
         model.addAttribute("underReview", underReview);
         model.addAttribute("inProgress", inProgress);
