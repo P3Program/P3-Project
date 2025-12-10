@@ -131,7 +131,7 @@ body {
     border: none;
     cursor: pointer;
     width: 100%;
-    max-width: 300px; /* match search max-width */
+    max-width: 300px; 
     margin-left: auto;
     margin-right: auto;
     box-sizing: border-box;
@@ -177,7 +177,7 @@ body {
     max-width: 300px;
     box-sizing: border-box;
     margin: 8px 0 12px;
-    padding: 0; /* rely on column padding so edges match Add button */
+    padding: 0; 
     border-radius: 10px;
 }
 .project-search label {
@@ -213,7 +213,6 @@ body {
     background: linear-gradient(135deg, #00bfff 0%, #0099cc 100%);
 }
 
-/* Reset button: same size and font/color, slightly different background */
 .project-search .reset-btn {
     background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
 }
@@ -221,32 +220,31 @@ body {
     filter: brightness(0.95);
 }
 
-/* Two-row layout adjustments */
 .project-search.two-row {
     display: flex;
     flex-direction: column;
     gap: 8px;
     width: 100%;
     max-width: 300px;
-    padding: 0; /* match single-row behavior */
+    padding: 0; 
 }
 .project-search.two-row .search-row {
     width: 100%;
 }
 .project-search.two-row .search-actions {
     display: flex;
-    flex-direction: row; /* side-by-side buttons */
+    flex-direction: row; 
     gap: 8px;
     width: 100%;
-    padding: 4px 0; /* small vertical padding inside action row */
+    padding: 4px 0; 
 }
 .project-search.two-row .search-actions .action-btn {
-    flex: 1 1 0; /* equal halves */
+    flex: 1 1 0; 
     box-sizing: border-box;
-    padding: 12px 12px; /* match Add button vertical padding more closely */
+    padding: 12px 12px; 
 }
 
-/* Make sure flex children can shrink properly inside narrow columns */
+
 .project-search .search-row,
 .project-search .search-actions {
     min-width: 0;
