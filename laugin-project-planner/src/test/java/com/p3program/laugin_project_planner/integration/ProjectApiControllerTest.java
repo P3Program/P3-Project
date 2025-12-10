@@ -42,7 +42,7 @@ public class ProjectApiControllerTest {
 
         // Act
             // We do the mock call to move the test, with enabled security (csrf), since 'patch' requires authentication.
-            // Projectid is injected in the url below: "5"
+            // ProjectId is injected in the url below: "5"
             // It is used in the verification under Assert
         mockMvc.perform(
                 patch("/api/projects/5/move")
@@ -62,7 +62,7 @@ public class ProjectApiControllerTest {
 
         // Arrange
             // Since the method takes a list of ids, we need to make one. Furthermore, the reorder method expects
-            // the orderedids as a @RequestBody, so it has to be parsed as a json string in the mock, else the test fails.
+            // the orderedIds as a @RequestBody, so it has to be parsed as a json string in the mock, else the test fails.
         List<Long> ids = List.of(1L, 2L, 5L, 9L, 20L);
         String requestJsonBody = "[1, 2, 5, 9, 20]";
 
