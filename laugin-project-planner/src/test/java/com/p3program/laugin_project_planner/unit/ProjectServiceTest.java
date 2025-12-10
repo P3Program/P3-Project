@@ -5,7 +5,6 @@ import com.p3program.laugin_project_planner.repositories.ProjectRepository;
 import com.p3program.laugin_project_planner.services.ProjectService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.security.core.parameters.P;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -109,9 +108,31 @@ public class ProjectServiceTest {
         assertThrows(NoSuchElementException.class, () ->
                 service.moveToStatus(999L, "newStatus")
         );
-            // Since the an exception is thrown and the corresponding if statement is never executed,
+            // Since an exception is thrown and the corresponding if statement is never executed,
             // no further methods are called, we check for that
         verify(repository, never()).findMaxSortIndexByStatus(any());
         verify(repository, never()).save(any());
     }
+
+    @Test
+    void moveToStatus_AlreadyInStatus_NoChangesAndNoSave() {
+        // Arrange
+            // Initiate project object with required fields for testing
+        Project project = new Project();
+        project.setId(1L);
+        project.setStatus("sameStatus");
+
+        when(repository.findById(1L)).thenReturn(Optional.of(project));
+
+        // Act
+            // Call method with required arguments from Arrange
+        service.moveToStatus(1L, "sameStatus");
+
+        // Assert
+            // Make sure no changes are made, since the project already had the correct status
+        assertEquals("sameStatus", project.getStatus());
+        verify(repository, never()).findMaxSortIndexByStatus(any());
+        verify(repository, never()).save(any());
+    }
+
 }
