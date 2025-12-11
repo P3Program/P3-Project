@@ -149,6 +149,132 @@ body, html {
     color: #7f8c8d;
 }
 
+/* NEW: Workload Distribution Styles */
+.hours-section {
+    background: white;
+    border-radius: 20px;
+    padding: 45px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    margin: 40px auto;
+    max-width: 1200px;
+    animation: fadeInUp 1s ease;
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.section-subtitle {
+    font-size: 18px;
+    color: #34495e;
+    margin-bottom: 40px;
+    font-weight: 500;
+}
+
+.hours-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.hours-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.hour-bar-item {
+    position: relative;
+}
+
+.bar-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.bar-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #34495e;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.bar-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.bar-container {
+    height: 50px;
+    background: #ecf0f1;
+    border-radius: 25px;
+    overflow: hidden;
+    position: relative;
+}
+
+.bar-fill {
+    height: 100%;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20px;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0;
+}
+
+.bar-fill.critical {
+    background: linear-gradient(90deg, #e74c3c, #c0392b);
+}
+
+.bar-fill.important {
+    background: linear-gradient(90deg, #f39c12, #e67e22);
+}
+
+.bar-fill.normal {
+    background: linear-gradient(90deg, #27ae60, #229954);
+}
+
+.chart-container {
+    position: relative;
+    height: 350px;
+}
+
+.chart-center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+}
+
+.center-label {
+    font-size: 14px;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.center-value {
+    font-size: 48px;
+    font-weight: 800;
+    color: #2c3e50;
+    line-height: 1;
+}
+
 @keyframes fadeInDown {
     from {
         opacity: 0;
@@ -190,6 +316,12 @@ body, html {
     to {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+@media (max-width: 968px) {
+    .hours-visual {
+        grid-template-columns: 1fr;
     }
 }
 

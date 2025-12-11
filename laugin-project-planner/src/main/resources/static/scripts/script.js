@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', () => {
     const csrfToken = document.querySelector('input[name="_csrf"]').value;
     const csrfHeader = document.querySelector('input[name="_csrf_header"]')?.value || 'X-CSRF-TOKEN';
@@ -231,15 +229,24 @@ function renderStatusButtons(currentStatus, projectId) {
         { key: 'billing', label: 'Billing', class: 'status-btn-billing' }
     ];
 
-    // Create buttons for statuses that are NOT current
+    // Create buttons for ALL statuses
     statuses.forEach(status => {
-        if (status.key !== currentStatus) {
-            const btn = document.createElement('button');
-            btn.className = `status-transition-btn ${status.class}`;
-            btn.textContent = status.label;
+        const btn = document.createElement('button');
+        const isCurrent = status.key === currentStatus;
+
+        // Add classes - include 'current' class if this is the active status
+        btn.className = `status-transition-btn ${status.class}${isCurrent ? ' current-status' : ''}`;
+
+        // Add "In" prefix and different text for current status
+        if (isCurrent) {
+            btn.textContent = `In ${status.label}`;
+            btn.disabled = true; // Optionally disable the current status button
+        } else {
+            btn.textContent = `Move To ${status.label}`;
             btn.onclick = () => changeProjectStatus(projectId, status.key, status.label);
-            statusButtons.appendChild(btn);
         }
+
+        statusButtons.appendChild(btn);
     });
 
     statusContainer.appendChild(statusButtons);
