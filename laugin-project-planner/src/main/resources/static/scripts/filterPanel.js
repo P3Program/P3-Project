@@ -132,9 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const yellowSpan = document.getElementById('filter-count-yellow');
         const greenSpan = document.getElementById('filter-count-green');
 
-        if (redSpan)   redSpan.textContent   = `| ${(count.red)/2}`;
-        if (yellowSpan) yellowSpan.textContent = `| ${(count.yellow)/2}`;
-        if (greenSpan) greenSpan.textContent  = `| ${(count.green)/2}`;
+        if (redSpan)   redSpan.textContent   = ` ${(count.red)/2}`;
+        if (yellowSpan) yellowSpan.textContent = ` ${(count.yellow)/2}`;
+        if (greenSpan) greenSpan.textContent  = ` ${(count.green)/2}`;
     }
     updatePriorityFilterCounts();
 });
