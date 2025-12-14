@@ -28,20 +28,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("prod")
 class UsersControllerTest {
 
-    // So basically we have returned to Spring doing magic behind the scenes with these initiations:
-    // Spring sends us the objects we need for the test.
+    // MockMvc lets us fake HTTP requests to test the controller
     @Autowired
     private MockMvc mockMvc;
 
-    // Now we mock the UserService instead of repository and passwordEncoder
-    // This is better because the controller only talks to the service, not the repo directly
+    // Now we mock the UserService with a Mockito bean, strictly scoped for testing only.
     @MockitoBean
     private UserService userService;
 
-    // This ensures that security context is parsed
-    // purely debugging the test (because Spring Security makes testing hard)
+    /* This ensures that security context is parsed. Purely for debugging the test
+       (because Spring Security makes testing hard)
 
-    /*
     @Test
     void checkSecurityContext() {
     SecurityContext context = SecurityContextHolder.getContext();
