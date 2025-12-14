@@ -10,6 +10,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+/**
+ * Controller for user management.
+ * Handles HTTP requests for creating, reading, updating, and deleting users.
+ * All endpoints require ADMIN role.
+ */
 @Controller
 public class UsersController {
 
@@ -22,6 +27,7 @@ public class UsersController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/users")
     public String users(Model model) {
+        // Get all users from database via service
         List<AppUser> users = userService.getAllUsers();
         model.addAttribute("users", users);
         model.addAttribute("activePage", "users");
@@ -35,20 +41,26 @@ public class UsersController {
                              @RequestParam String password,
                              @RequestParam String role,
                              RedirectAttributes redirectAttributes) {
+
+        // Try to create the user
         try {
             userService.createUser(name, username, password, role);
+            // If successful, show success message
             redirectAttributes.addFlashAttribute("message", "User created successfully!");
             redirectAttributes.addFlashAttribute("messageType", "success");
         } catch (IllegalArgumentException e) {
+            // If error (like duplicate username), show error message
             redirectAttributes.addFlashAttribute("message", e.getMessage());
             redirectAttributes.addFlashAttribute("messageType", "error");
         }
+
         return "redirect:/users";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/users/edit/{id}")
     public String editUserForm(@PathVariable Long id, Model model) {
+        // Get user to edit and show edit form
         AppUser user = userService.getUserById(id);
         model.addAttribute("user", user);
         model.addAttribute("activePage", "users");
@@ -62,15 +74,23 @@ public class UsersController {
                            @RequestParam String username,
                            @RequestParam String role,
                            RedirectAttributes redirectAttributes) {
+
+        // TODO: Password update handling - maybe better to let users change their own password
+        // TODO: upon login, rather than letting admin set it. Or implement password reset flow.
+
+        // Try to update the user
         try {
             userService.updateUser(id, name, username, role);
+            // If successful, show success message
             redirectAttributes.addFlashAttribute("message", "User updated successfully!");
             redirectAttributes.addFlashAttribute("messageType", "success");
         } catch (IllegalArgumentException e) {
+            // If error (like duplicate username), show error message
             redirectAttributes.addFlashAttribute("message", e.getMessage());
             redirectAttributes.addFlashAttribute("messageType", "error");
             return "redirect:/users/edit/" + id;
         }
+
         return "redirect:/users";
     }
 
@@ -78,6 +98,7 @@ public class UsersController {
     @PostMapping("/users/delete")
     public String deleteUser(@RequestParam Long userId,
                              RedirectAttributes redirectAttributes) {
+        // Delete user and show confirmation
         userService.deleteUser(userId);
         redirectAttributes.addFlashAttribute("message", "User deleted successfully!");
         redirectAttributes.addFlashAttribute("messageType", "success");

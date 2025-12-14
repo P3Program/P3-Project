@@ -25,9 +25,9 @@ public class AppUserDetailsService implements UserDetailsService {
 }
 
 
-/*
-   This is some debugging code, which might be relevant when more users are implemented. Keep for now
-   -Peter
+/* TODO
+ * This is some debugging code, which might be relevant when more users are implemented. Keep for now
+ * -Peter
  */
 
 
