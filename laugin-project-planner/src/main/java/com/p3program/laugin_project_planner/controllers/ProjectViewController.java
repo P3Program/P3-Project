@@ -87,27 +87,34 @@ public class ProjectViewController {
         }
 
         model.addAttribute("project", new Project());
-        // If a search term is provided, filter each list by title or description (case-insensitive)
         if (search != null && !search.trim().isEmpty()) {
             String q = search.trim().toLowerCase();
             allProjects = allProjects.stream()
                 .filter(p -> (p.getTitle() != null && p.getTitle().toLowerCase().contains(q))
-                    || (p.getDescription() != null && p.getDescription().toLowerCase().contains(q)))
+                    || (p.getDescription() != null && p.getDescription().toLowerCase().contains(q))
+                    || (p.getPhoneNum() != null && p.getPhoneNum().toLowerCase().contains(q))
+                    || (p.getName() != null && p.getName().toLowerCase().contains(q)))
                 .toList();
 
             underReview = underReview.stream()
                 .filter(p -> (p.getTitle() != null && p.getTitle().toLowerCase().contains(q))
-                    || (p.getDescription() != null && p.getDescription().toLowerCase().contains(q)))
+                    || (p.getDescription() != null && p.getDescription().toLowerCase().contains(q))
+                    || (p.getPhoneNum() != null && p.getPhoneNum().toLowerCase().contains(q))
+                    || (p.getName() != null && p.getName().toLowerCase().contains(q)))
                 .toList();
 
             inProgress = inProgress.stream()
                 .filter(p -> (p.getTitle() != null && p.getTitle().toLowerCase().contains(q))
-                    || (p.getDescription() != null && p.getDescription().toLowerCase().contains(q)))
+                    || (p.getDescription() != null && p.getDescription().toLowerCase().contains(q))
+                    || (p.getPhoneNum() != null && p.getPhoneNum().toLowerCase().contains(q))
+                    || (p.getName() != null && p.getName().toLowerCase().contains(q)))
                 .toList();
 
             billing = billing.stream()
                 .filter(p -> (p.getTitle() != null && p.getTitle().toLowerCase().contains(q))
-                    || (p.getDescription() != null && p.getDescription().toLowerCase().contains(q)))
+                    || (p.getDescription() != null && p.getDescription().toLowerCase().contains(q))
+                    || (p.getPhoneNum() != null && p.getPhoneNum().toLowerCase().contains(q))
+                    || (p.getName() != null && p.getName().toLowerCase().contains(q)))
                 .toList();
         }
 

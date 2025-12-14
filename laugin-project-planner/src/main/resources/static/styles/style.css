@@ -4,7 +4,7 @@ body {
     font-family: sans-serif;
     padding-right: 0;
     height: 100vh;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .container-wrapper {
@@ -68,7 +68,6 @@ body {
     align-items: center;
 }
 
-/* Add horizontal padding so children (Add button, search) don't touch edges */
 .container-column {
     padding: 12px;
     box-sizing: border-box;
@@ -86,15 +85,16 @@ body {
     overflow-y: auto;
 }
 
-.main-container{
-    height: calc(100vh - 200px);
+.main-container {
+    max-height: calc(100vh - 320px); 
+    overflow-y: auto;
 }
 
 .main-column{
     border: 1px solid black;
     border-bottom: none;
     background-color: lightblue;
-    padding: 12px 12px 10px 12px; /* give the left column horizontal padding only */
+    padding: 12px 12px 10px 12px; 
     box-sizing: border-box;
 }
 
@@ -122,7 +122,7 @@ body {
 #addtask {
     margin-top: 15px;
     margin-bottom: 10px;
-    background: linear-gradient(135deg, #00bfff 0%, #0099cc 100%);
+    background: #16A34A;
     color: white;
     padding: 15px 24px;
     border-radius: 10px;
@@ -136,7 +136,7 @@ body {
     margin-right: auto;
     box-sizing: border-box;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 191, 255, 0.3);
+    box-shadow: 0 4px 6px rgba(22, 163, 74, 0.3);
     letter-spacing: 0.5px;
     text-transform: uppercase;
     position: relative;
@@ -156,12 +156,6 @@ body {
 
 #addtask:hover::before {
     left: 100%;
-}
-
-#addtask:hover {
-    background: linear-gradient(135deg, #009fcc 0%, #0088bb 100%);
-    box-shadow: 0 6px 10px rgba(0, 191, 255, 0.4);
-    transform: translateY(-2px);
 }
 
 #addtask:active {

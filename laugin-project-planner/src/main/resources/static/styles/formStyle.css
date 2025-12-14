@@ -205,8 +205,8 @@ input:is(
 input[type="text"],
 input[type="date"],
 input[type="email"]):focus:valid {
-    outline: 2px solid limegreen; /* Green when valid */
-    border-color: limegreen;
+    outline: 2px solid #00bfff; /* Blue when valid (match search button) */
+    border-color: #0099cc;
 }
 input:is(
 input[type="text"],
