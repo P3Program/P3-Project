@@ -143,24 +143,8 @@ body {
     overflow: hidden;
 }
 
-#addtask::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    transition: left 0.5s ease;
-}
-
-#addtask:hover::before {
-    left: 100%;
-}
-
-#addtask:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 191, 255, 0.3);
+#addtask:hover {
+    filter: brightness(0.90);
 }
 
 .project-search {
@@ -206,7 +190,9 @@ body {
 .project-search button[type="submit"] {
     background: linear-gradient(135deg, #00bfff 0%, #0099cc 100%);
 }
-
+.project-search button:hover {
+    filter: brightness(0.95);
+}
 .project-search .reset-btn {
     background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
 }
