@@ -48,42 +48,137 @@
     </div>
 </div>
 
-<div class="container-column" style="width: 80%; margin: 40px auto;">
-    <div class="column-header">Total Estimated Hours by Priority</div>
-    <canvas id="hoursChart" width="400" height="200"></canvas>
+<!-- NEW: Workload Distribution Section -->
+<div class="hours-section">
+    <div class="section-title">⏱️ Workload Distribution</div>
+    <div class="section-subtitle">Total estimated hours allocated across priority levels</div>
+
+    <div class="hours-visual">
+        <div class="hours-bars">
+            <div class="hour-bar-item">
+                <div class="bar-header">
+                    <span class="bar-label">🔴 Critical</span>
+                    <span class="bar-value" id="bar-red-value">0 hrs</span>
+                </div>
+                <div class="bar-container">
+                    <div class="bar-fill critical" id="bar-red"></div>
+                </div>
+            </div>
+
+            <div class="hour-bar-item">
+                <div class="bar-header">
+                    <span class="bar-label">🟡 Important</span>
+                    <span class="bar-value" id="bar-yellow-value">0 hrs</span>
+                </div>
+                <div class="bar-container">
+                    <div class="bar-fill important" id="bar-yellow"></div>
+                </div>
+            </div>
+
+            <div class="hour-bar-item">
+                <div class="bar-header">
+                    <span class="bar-label">🟢 Normal</span>
+                    <span class="bar-value" id="bar-green-value">0 hrs</span>
+                </div>
+                <div class="bar-container">
+                    <div class="bar-fill normal" id="bar-green"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="hoursChart"></canvas>
+            <div class="chart-center-text">
+                <div class="center-label">Total Hours</div>
+                <div class="center-value" id="centerTotalHours">0</div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
+    // NEW: Fetch and display workload distribution
     fetch('/api/data/hours-by-priority')
         .then(response => response.json())
         .then(data => {
+            // Debug: Log the data to see what we're getting
+            console.log('API Response:', data);
+            console.log('Red:', data.Red, 'Yellow:', data.Yellow, 'Green:', data.Green);
+
+            // Calculate total hours
+            const totalHours = (data.Red || 0) + (data.Yellow || 0) + (data.Green || 0);
+            console.log('Total Hours:', totalHours);
+            document.getElementById('centerTotalHours').textContent = totalHours;
+
+            // Animate progress bar, synes det er flot nok her og det ikke trip da den loader længere nede
+            setTimeout(() => {
+                const maxHours = Math.max(data.Red || 0, data.Yellow || 0, data.Green || 0);
+
+                const redBar = document.getElementById('bar-red');
+                const yellowBar = document.getElementById('bar-yellow');
+                const greenBar = document.getElementById('bar-green');
+
+                redBar.style.width = maxHours > 0 ? ((data.Red || 0) / maxHours * 100) + '%' : '0%';
+                yellowBar.style.width = maxHours > 0 ? ((data.Yellow || 0) / maxHours * 100) + '%' : '0%';
+                greenBar.style.width = maxHours > 0 ? ((data.Green || 0) / maxHours * 100) + '%' : '0%';
+
+                document.getElementById('bar-red-value').textContent = (data.Red || 0) + ' hrs';
+                document.getElementById('bar-yellow-value').textContent = (data.Yellow || 0) + ' hrs';
+                document.getElementById('bar-green-value').textContent = (data.Green || 0) + ' hrs';
+            }, 300);
+
+            // Create doughnut
             const ctx = document.getElementById('hoursChart');
             new Chart(ctx, {
-                type: 'bar',
+                type: 'doughnut',
                 data: {
-                    labels: Object.keys(data),
+                    labels: ['Critical', 'Important', 'Normal'],
                     datasets: [{
-                        label: 'Total Estimated Hours',
-                        data: Object.values(data),
-                        backgroundColor: ['#dc3545', '#ffc107', '#28a745'],
-                        borderWidth: 1
+                        data: [data.Red || 0, data.Yellow || 0, data.Green || 0],
+                        backgroundColor: [
+                            '#e74c3c',
+                            '#f39c12',
+                            '#27ae60'
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 15
                     }]
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
-                        legend: { display: false },
-                        title: {
-                            display: true,
-                            text: 'Estimate hours distributed based on priority'
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                font: { size: 14, weight: '600' },
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
+                                    return `${label}: ${value} hrs (${percentage}%)`;
+                                }
+                            },
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 12,
+                            titleFont: { size: 14, weight: 'bold' },
+                            bodyFont: { size: 13 }
                         }
                     },
-                    scales: {
-                        y: { beginAtZero: true, title: { display: true, text: 'Hours' } },
-                        x: { title: { display: true, text: 'Priority' } }
-                    }
+                    cutout: '65%'
                 }
             });
+        })
+        .catch(error => {
+            console.error('Error fetching hours data:', error);
         });
 </script>
 <script th:src="@{/scripts/kpi.js}"></script>

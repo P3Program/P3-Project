@@ -131,7 +131,7 @@ body {
     border: none;
     cursor: pointer;
     width: 100%;
-    max-width: 300px; 
+    max-width: 300px;
     margin-left: auto;
     margin-right: auto;
     box-sizing: border-box;
@@ -171,7 +171,7 @@ body {
     max-width: 300px;
     box-sizing: border-box;
     margin: 8px 0 12px;
-    padding: 0; 
+    padding: 0;
     border-radius: 10px;
 }
 .project-search label {
@@ -220,22 +220,22 @@ body {
     gap: 8px;
     width: 100%;
     max-width: 300px;
-    padding: 0; 
+    padding: 0;
 }
 .project-search.two-row .search-row {
     width: 100%;
 }
 .project-search.two-row .search-actions {
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     gap: 8px;
     width: 100%;
-    padding: 4px 0; 
+    padding: 4px 0;
 }
 .project-search.two-row .search-actions .action-btn {
-    flex: 1 1 0; 
+    flex: 1 1 0;
     box-sizing: border-box;
-    padding: 12px 12px; 
+    padding: 12px 12px;
 }
 
 
@@ -697,11 +697,14 @@ body {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     letter-spacing: 0.3px;
     text-transform: uppercase;
+    background: #144A96;
+    color: white;
 }
 
 .status-transition-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    background: #1a5bb8;
 }
 
 .status-transition-btn:active {
@@ -709,32 +712,36 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-.status-btn-review {
-    background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
-    color: #333;
-}
-
-.status-btn-review:hover {
-    background: linear-gradient(135deg, #ffb300 0%, #ffa000 100%);
-}
-
-.status-btn-progress {
-    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
-    color: white;
-}
-
-.status-btn-progress:hover {
-    background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
-}
-
+/* All status button classes use the same color */
+.status-btn-review,
+.status-btn-progress,
 .status-btn-billing {
-    background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+    background: #144A96;
     color: white;
 }
 
+.status-btn-review:hover,
+.status-btn-progress:hover,
 .status-btn-billing:hover {
-    background: linear-gradient(135deg, #7B1FA2 0%, #6A1B9A 100%);
+    background: #1a5bb8;
 }
+
+/* Current status button styling - highlighted version */
+.status-transition-btn.current-status {
+    font-weight: bold;
+    border: 3px solid #0d3166;
+    box-shadow: 0 0 15px rgba(20, 74, 150, 0.5);
+    cursor: default;
+    opacity: 1;
+    transform: scale(1.08);
+    background: linear-gradient(135deg, #144A96 0%, #1a5bb8 100%);
+}
+
+.status-transition-btn.current-status:hover {
+    transform: scale(1.08);
+    background: linear-gradient(135deg, #144A96 0%, #1a5bb8 100%);
+}
+
 /* ========================================
    TOAST NOTIFICATION - FIXED VERSION
    ======================================== */
@@ -864,4 +871,9 @@ body {
 
 .project-board-footer .zip-clear-all:hover {
     background: #c0392b;
+}
+
+.status-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
