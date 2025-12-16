@@ -9,8 +9,7 @@
     <link rel="stylesheet" th:href="@{/styles/style.css}">
     <link rel="stylesheet" th:href="@{/styles/formStyle.css}">
     <link rel="stylesheet" th:href="@{/styles/navbar.css}">
-
-</head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" /></head>
 <body th:data-message="${message}" th:data-message-type="${messageType}">
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
@@ -21,7 +20,12 @@
     <div class="container-column main-column">
         <div class="column-header main-header">All projects</div>
 
-        <button id="addtask" class="addtask">⊕ ADD Project</button>
+        <button id="addtask" class="addtask">
+            <span class="material-symbols-outlined">post_add</span>
+            ADD Project
+        </button>
+
+
 
         <!-- Search bar (two-row layout) -->
         <form method="get" action="/" class="project-search two-row" style="margin:10px 0;">

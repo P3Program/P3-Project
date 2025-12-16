@@ -52,6 +52,10 @@ nav a.active {
     color: white;
     font-weight: bold;
     font-size: x-large;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 /* --- DROPDOWN LOGOUT CSS --- */
 
@@ -67,6 +71,14 @@ nav a.active {
     font-weight: bold;
     font-size: x-large;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dropdown-toggle .material-symbols-outlined {
+    font-size: 1.75rem; /* Slightly larger than text */
+    line-height: 1;
 }
 
 .dropdown-toggle:hover {

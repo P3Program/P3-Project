@@ -124,7 +124,7 @@ body {
     margin-bottom: 10px;
     background: #16A34A;
     color: white;
-    padding: 15px 24px;
+    padding: 8px 26px;
     border-radius: 10px;
     font-weight: bold;
     font-size: 1.2rem;
@@ -141,6 +141,13 @@ body {
     text-transform: uppercase;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+#addtask .material-symbols-outlined {
+    font-size: 2rem; /* Match or slightly larger than button text */
 }
 
 #addtask:hover {
