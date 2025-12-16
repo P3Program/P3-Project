@@ -8,6 +8,7 @@
     <title>Laugin KPI</title>
     <link rel="stylesheet" th:href="@{/styles/data.css}">
     <link rel="stylesheet" th:href="@{/styles/navbar.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -50,14 +51,17 @@
 
 <!-- NEW: Workload Distribution Section -->
 <div class="hours-section">
-    <div class="section-title">⏱️ Workload Distribution</div>
+    <div class="section-title">️ Workload Distribution</div>
     <div class="section-subtitle">Total estimated hours allocated across priority levels</div>
 
     <div class="hours-visual">
         <div class="hours-bars">
             <div class="hour-bar-item">
                 <div class="bar-header">
-                    <span class="bar-label">🔴 Critical</span>
+                    <span class="bar-label">
+                        <span class="material-symbols-outlined"> assignment_late
+                    </span>
+                        Critical</span>
                     <span class="bar-value" id="bar-red-value">0 hrs</span>
                 </div>
                 <div class="bar-container">
@@ -67,7 +71,8 @@
 
             <div class="hour-bar-item">
                 <div class="bar-header">
-                    <span class="bar-label">🟡 Important</span>
+                    <span class="bar-label"><span class="material-symbols-outlined"> change_history
+                    </span> Important</span>
                     <span class="bar-value" id="bar-yellow-value">0 hrs</span>
                 </div>
                 <div class="bar-container">
@@ -77,7 +82,10 @@
 
             <div class="hour-bar-item">
                 <div class="bar-header">
-                    <span class="bar-label">🟢 Normal</span>
+                    <span class="bar-label">
+                        <span class="material-symbols-outlined"> attribution
+                            </span>
+                        Normal</span>
                     <span class="bar-value" id="bar-green-value">0 hrs</span>
                 </div>
                 <div class="bar-container">
