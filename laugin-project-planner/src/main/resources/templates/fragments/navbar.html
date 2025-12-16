@@ -8,6 +8,7 @@
         <li><a sec:authorize="hasRole('ADMIN')" th:href="@{/users}" th:classappend="${activePage == 'users'} ? 'active' : ''">Users</a></li>
         <li><a th:href="@{/data}" th:classappend="${activePage == 'data'} ? 'active' : ''">Data</a></li>
         <li><a th:href="@{/archive}" th:classappend="${activePage == 'archive'} ? 'active' : ''">Archive</a></li>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     </ul>
     <div class="nav-right" th:if="${#authentication != null}">
         <div class="user-dropdown">
