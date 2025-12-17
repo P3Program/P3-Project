@@ -52,13 +52,13 @@ public class Project {
     private String address;
 
     @Column(length = 3)
-    private int postCode;
+    private Integer postCode;
 
     @Column
     private String email;
 
     @Column
-    private int hours;
+    private Integer hours;
 
     @Column
     private Date estDueDate;
@@ -90,7 +90,7 @@ public class Project {
         }
     }
 
-    public Project(long id, String title, String name, LocalDate date, boolean caldera, boolean warranty, String ssn, String phoneNum, String address, int postCode, String email, int hours, Date estDueDate, String priority, String description, String status,Date endDate) {
+    public Project(long id, String title, String name, LocalDate date, boolean caldera, boolean warranty, String ssn, String phoneNum, String address, Integer postCode, String email, Integer hours, Date estDueDate, String priority, String description, String status,Date endDate) {
         this.id = id;
         this.title = title;
         this.name = name;
@@ -183,11 +183,11 @@ public class Project {
         this.address = address;
     }
 
-    public int getPostCode() {
+    public Integer getPostCode() {
         return postCode;
     }
 
-    public void setPostCode(int postCode) {
+    public void setPostCode(Integer postCode) {
         this.postCode = postCode;
     }
 
@@ -199,11 +199,11 @@ public class Project {
         this.email = email;
     }
 
-    public int getHours() {
+    public Integer getHours() {
         return hours;
     }
 
-    public void setHours(int hours) {
+    public void setHours(Integer hours) {
         this.hours = hours;
     }
 

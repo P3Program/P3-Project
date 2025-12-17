@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/styles/style.css}">
     <link rel="stylesheet" th:href="@{/styles/formStyle.css}">
     <link rel="stylesheet" th:href="@{/styles/navbar.css}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" /></head>
+    </head>
 <body th:data-message="${message}" th:data-message-type="${messageType}">
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
@@ -198,7 +198,7 @@
 
                 <label for="postCode">Post Code:</label>
                 <input type="text" id="postCode" th:field="*{postCode}"
-                       placeholder="Post Code the customer is under"
+                       placeholder="The post code the project is in"
                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                        maxlength="3"
                        pattern="\d{3}"

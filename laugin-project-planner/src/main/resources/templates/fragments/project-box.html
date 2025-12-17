@@ -21,13 +21,14 @@
      th:data-description="${project.description}"
      th:data-status="${project.status}"
      th:data-postcode="${project.postCode}"
-th:attr="draggable=${project.status != 'allProjects'}">
+     th:attr="draggable=${project.status != 'allProjects'}">
 
 <h3 th:text="${project.title}">Task Title</h3>
-<p><strong>Customer:</strong> <span th:text="${project.name}">Name</span></p>
-<p><strong>Phone:</strong> <span th:text="${project.phoneNum}">Phone</span></p>
-<p><strong>Addr:</strong> <span th:text="${project.address}">Address</span></p>
-<span class="priorityBorder" th:text="${project.priority}"></span>
+    <p><strong>Customer:</strong> <span th:text="${project.name}">Name</span></p>
+    <p><strong>Phone:</strong> <span th:text="${project.phoneNum}">Phone</span></p>
+    <p><strong>Date created:</strong> <span th:text="${project.date}">Creation date</span></p>
+    <p><strong>Due date:</strong> <span th:text="${project.estDueDate}">Due Date</span></p>
+    <p><strong>Postcode:</strong> <span th:text="${project.postCode}">Post code</span></p>
 </div>
 
 </body>
