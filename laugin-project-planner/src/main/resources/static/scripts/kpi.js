@@ -41,18 +41,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }, 500);
 });
 
-// Add subtle parallax effect on mouse move
-document.addEventListener('mousemove', (e) => {
-    const cards = document.querySelectorAll('.task-display > div');
-    const x = e.clientX / window.innerWidth - 0.5;
-    const y = e.clientY / window.innerHeight - 0.5;
-
-    cards.forEach((card, index) => {
-        const intensity = (index + 1) * 5;
-        card.style.transform = `translateY(-8px) perspective(1000px) rotateX(${y * intensity}deg) rotateY(${-x * intensity}deg)`;
-    });
-});
-
 // Reset transform when mouse leaves
 document.addEventListener('mouseleave', () => {
     const cards = document.querySelectorAll('.task-display > div');
