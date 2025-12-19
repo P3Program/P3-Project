@@ -41,7 +41,10 @@ public class ProjectViewController {
             @RequestParam(required = false) String search,
             Model model
 
-        ) {
+        )
+
+
+        {
         List<Project> projects = projectService.getAllProjects();
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -86,36 +89,15 @@ public class ProjectViewController {
 
         }
 
+
+
+
         model.addAttribute("project", new Project());
         if (search != null && !search.trim().isEmpty()) {
-            String q = search.trim().toLowerCase();
-            allProjects = allProjects.stream()
-                .filter(p -> (p.getTitle() != null && p.getTitle().toLowerCase().contains(q))
-                    || (p.getDescription() != null && p.getDescription().toLowerCase().contains(q))
-                    || (p.getPhoneNum() != null && p.getPhoneNum().toLowerCase().contains(q))
-                    || (p.getName() != null && p.getName().toLowerCase().contains(q)))
-                .toList();
-
-            underReview = underReview.stream()
-                .filter(p -> (p.getTitle() != null && p.getTitle().toLowerCase().contains(q))
-                    || (p.getDescription() != null && p.getDescription().toLowerCase().contains(q))
-                    || (p.getPhoneNum() != null && p.getPhoneNum().toLowerCase().contains(q))
-                    || (p.getName() != null && p.getName().toLowerCase().contains(q)))
-                .toList();
-
-            inProgress = inProgress.stream()
-                .filter(p -> (p.getTitle() != null && p.getTitle().toLowerCase().contains(q))
-                    || (p.getDescription() != null && p.getDescription().toLowerCase().contains(q))
-                    || (p.getPhoneNum() != null && p.getPhoneNum().toLowerCase().contains(q))
-                    || (p.getName() != null && p.getName().toLowerCase().contains(q)))
-                .toList();
-
-            billing = billing.stream()
-                .filter(p -> (p.getTitle() != null && p.getTitle().toLowerCase().contains(q))
-                    || (p.getDescription() != null && p.getDescription().toLowerCase().contains(q))
-                    || (p.getPhoneNum() != null && p.getPhoneNum().toLowerCase().contains(q))
-                    || (p.getName() != null && p.getName().toLowerCase().contains(q)))
-                .toList();
+            allProjects = filterProjects(allProjects, search);
+            underReview = filterProjects(underReview, search);
+            inProgress = filterProjects(inProgress, search);
+            billing = filterProjects(billing, search);
         }
 
         model.addAttribute("allProjects", allProjects);
@@ -140,6 +122,27 @@ public class ProjectViewController {
             case "priority"-> "priority";
             default        -> "estDueDate";
         };
+    }
+
+    private List<Project> filterProjects(List<Project> projects, String query) {
+        // If no search query, return all projects
+        if (query == null || query.trim().isEmpty()) {
+            return projects;
+        }
+
+        // Convert query to lowercase once for efficiency
+        String q = query.trim().toLowerCase();
+
+        // Filter projects that match the search query in any field
+        return projects.stream()
+                .filter(p ->
+                        (p.getTitle() != null && p.getTitle().toLowerCase().contains(q)) ||
+                        (p.getDescription() != null && p.getDescription().toLowerCase().contains(q)) ||
+                        (p.getPhoneNum() != null && p.getPhoneNum().toLowerCase().contains(q)) ||
+                        (p.getName() != null && p.getName().toLowerCase().contains(q)) ||
+                        (p.getEmail() != null && p.getEmail().toLowerCase().contains(q))
+                )
+                .toList();
     }
 
     @PostMapping("/projects/save")
