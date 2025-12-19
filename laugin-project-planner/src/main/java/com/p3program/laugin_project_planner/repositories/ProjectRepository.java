@@ -23,7 +23,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     @Query("SELECT COALESCE(SUM(p.hours), 0) FROM Project p WHERE p.priority = :priority")
     int sumHoursByPriority(@Param("priority") String priority);
 
-    List<Project> findByStatus(String status, Sort sort);
+    // List<Project> findByStatus(String status, Sort sort);
     List<Project> findAll(Sort sort);
     List<Project> findByEndDateIsNull(Sort sort);
     List<Project> findByStatusAndEndDateIsNull(String status, Sort sort);
@@ -111,8 +111,8 @@ long countCompletedThisMonth();
        "AND YEAR(p.endDate) = YEAR(CURRENT_DATE)")
 long countCompletedThisWeek();
 
-@Query("SELECT DISTINCT p.name FROM Project p WHERE p.name IS NOT NULL")
-List<String> findDistinctProjects();
+// @Query("SELECT DISTINCT p.name FROM Project p WHERE p.name IS NOT NULL")
+// List<String> findDistinctProjects();
 
 @Query("SELECT DISTINCT p.postCode FROM Project p WHERE p.postCode IS NOT NULL ORDER BY p.postCode ASC")
 List<Integer> findDistinctPostCodes();

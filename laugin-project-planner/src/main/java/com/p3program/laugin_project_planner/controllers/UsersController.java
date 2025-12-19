@@ -75,9 +75,6 @@ public class UsersController {
                            @RequestParam String role,
                            RedirectAttributes redirectAttributes) {
 
-        // TODO: Password update handling - maybe better to let users change their own password
-        // TODO: upon login, rather than letting admin set it. Or implement password reset flow.
-
         // Try to update the user
         try {
             userService.updateUser(id, name, username, role);

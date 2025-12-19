@@ -23,24 +23,3 @@ public class AppUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }
-
-
-/* TODO
- * This is some debugging code, which might be relevant when more users are implemented. Keep for now
- * -Peter
- */
-
-
-/* @Override
-   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-       return repository.findByUsername(username)
-               .map(user -> {
-                   System.out.println("DEBUG: Successfully loaded user from DB -> " + user.getUsername());
-                   return new SecurityUser(user);
-               })
-               .orElseThrow(() -> {
-                   System.out.println("DEBUG: User not found -> " + username);
-                   return new UsernameNotFoundException("User not found");
-               });
-   }
-} */
