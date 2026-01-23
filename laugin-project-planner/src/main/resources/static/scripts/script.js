@@ -276,8 +276,8 @@ function loadProjectNotes(projectId) {
                 const noteDiv = document.createElement('div');
                 noteDiv.className = 'note-item';
                 noteDiv.innerHTML = `
-                    <p><strong>${note.username || 'Unknown'}</strong> - ${new Date(note.timestamp).toLocaleString()}</p>
-                    <p>${note.noteText}</p>
+                    <p><strong>${note.user || 'Unknown'}</strong> - ${new Date(note.timestamp).toLocaleString()}</p>
+                    <p>${note.text}</p>
                 `;
                 notesContainer.appendChild(noteDiv);
             });
